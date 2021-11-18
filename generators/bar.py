@@ -1,21 +1,16 @@
 import numpy as np
 
 parameters = {
-    'size_range': (100, 1000),
-    'bins_range': (4, 100),
-    'mu_range': (0, 4),
-    'sigma_range': (0, 1),
-    'k_range': (1, 10),
-    'lambda_range': (0.5, 1.5),
-    'theta_range': (0.5, 2),
-    'low_range': (0, 1),
-    'high_range': (1, 2),
+    'x_range': (-5, 5),
+    'height_range': (0, 50),
+    # the 2nd argument of features_range should be 2 * x_range
+    'features_range': (4, 5 * 2)
 }
 
 def get_parameter(parameter):
     return parameters[parameter]
 
-def generate_bar_data():
+def generate_data():
     # get features
     features = np.random.randint(*get_parameter('features_range'))
 
@@ -29,7 +24,8 @@ def generate_bar_data():
     if (correlation == 'positive' or correlation == 'negative'):
         y = np.sort(y)
         if (correlation == "negative"):
-            y = y[::-1] # reverse sorted array
+            # reverse sorted array
+            y = y[::-1]
 
     return x, y
 
