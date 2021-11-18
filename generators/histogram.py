@@ -15,7 +15,7 @@ parameters = {
 def get_parameter(parameter):
     return parameters[parameter]
 
-def generate_histogram_data():
+def generate_data():
     # select a distribution type
     data_distributions = {
         'normal': generate_random_normal_distribution,

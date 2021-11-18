@@ -12,7 +12,7 @@ parameters = {
 def get_parameter(parameter):
     return parameters[parameter]
 
-def generate_scatter_data():
+def generate_data():
     # generate hyperparameters
     noise = np.random.uniform(*get_parameter('noise_range'))
     random_noise = np.random.uniform(*get_parameter('random_noise_range')) # for no correlation
