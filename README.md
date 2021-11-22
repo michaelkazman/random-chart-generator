@@ -7,7 +7,7 @@ These graphs will be used as input data for a Generative Adversarial Network tas
 ## Setup
 The `setup/setup.sh` script can be used to automatically setup the project environment. However, if a manual installation is preferred, the instructions below provide a step-by-step breakdown of the entire process. Both options assume you are in the projects root dir.
 
-**Note:** The setup instructions assume both [Anaconda](https://www.anaconda.com/products/individual) and [Jupyter](https://jupyter.org/install) are installed. If they are not already installed, please do so.
+**Note:** The setup instructions assume both [Anaconda](https://www.anaconda.com/products/individual) and [Jupyter](https://jupyter.org/install) are installed, and accessible through the command line. If they are not already installed, please do so.
 
 <br/>
 
