@@ -1,0 +1,15 @@
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - bokeh=2.3.2
+  - altair=4.1.0
+  - altair_saver=0.5.0
+  - plotnine=0.8.0
+  - ipykernel=6.4.1
+  - scikit-learn=1.0.1
+  - selenium=3.141.0
+  - geckodriver=0.30.0
+  - firefox=94.0.2
+  - notebook=6.4.6
