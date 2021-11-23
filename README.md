@@ -11,8 +11,8 @@ The `setup/setup.sh` script can be used to automatically setup the project envir
 
 **Note:** The setup instructions below assume both [Anaconda](https://www.anaconda.com/products/individual) and [Jupyter](https://jupyter.org/install) are installed, and accessible through the command line. If they are not already installed, please do so. Additionally, both sets of setup instructions assume you are in the projects root dir.
 
-<details>
-<summary><b>Automated</b></summary>
+<details open>
+<summary><b>Automated (Unix / MacOS)</b></summary>
     
 1. *Execute the `setup/setup.sh` script*
     ```
@@ -26,13 +26,13 @@ The `setup/setup.sh` script can be used to automatically setup the project envir
     ```
 </details>
 <details>
-<summary><b>Manual</b></summary>
+<summary><b>Manual (Windows / Unix / MacOS)</b></summary>
 
 1. *Create the conda environment using the `environment.yml` file included in the repository*
     ```
     conda env create -n random-graph-generator -f setup/environment.yml
     ```
-1. *Activate the conda environment you just created*
+1. *Activate the Anaconda environment you just created*
     ```
     conda activate random-graph-generator
     ```
@@ -40,7 +40,11 @@ The `setup/setup.sh` script can be used to automatically setup the project envir
     ```
     ipython kernel install --user --name=random-graph-generator-kernel 
     ```
-1. *Start Jupyter Notebook*
+1. *Deactivate the Anaconda environment*
+    ```
+    conda deactivate
+    ```
+1. *Start Jupyter (and open the generation notebook)*
     ```
     jupyter notebook random_graph_generator.ipynb
     ````
