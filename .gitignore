@@ -130,3 +130,7 @@ dmypy.json
 
 # Mac Cache Files
 .DS_store
+
+# Generated data
+data/
+logs/
