@@ -1,8 +1,8 @@
-def create_bokeh_graph():
+def create_bokeh_graph(graph_object):
     return {}
 
-def create_altair_graph():
+def create_altair_graph(graph_object):
     return {}
 
-def create_plotnine_graph():
+def create_plotnine_graph(graph_object):
     return {}
