@@ -1,6 +1,7 @@
 import sys
 from importlib import import_module
 from bokeh.io import export_png
+from altair_saver import save
 from styles.utils import get_bokeh_theme, set_bokeh_theme
 
 def create_graph(graph_type, library, graph_object):
@@ -40,8 +41,7 @@ def export_bokeh_graph(graph, filename):
     export_png(graph, filename=filename)
 
 def export_altair_graph(graph, filename):
-    return None
-    # graph.save(filename)
+    save(graph, filename)
 
 def export_plotnine_graph(graph, filename):
     return None

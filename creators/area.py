@@ -14,16 +14,13 @@ parameters = {
 def create_bokeh_graph(graph_object):
     #unpack data
     X, y = graph_object['data']
-
-    # make y a list
     y = y.tolist()
-
-    # format dict with x and y such that y layers is labelled with ['y1', 'y2', ...]
-    layers = {'x': X}
-    for index, layer in enumerate(y):
-        layers[str(index)] = layer
     num_layers = len(y)    
     layer_names = [str(i) for i in range(num_layers)]
+
+    # format dict with x and y such that y layers is labelled with ['y1', 'y2', ...]
+    layers = { 'x': X }
+    layers.update(dict([(str(index), layer) for index, layer in enumerate(y)]))
 
     # ensure each layer has a different colour
     layer_colours = parameters['colours'][:num_layers]
@@ -35,7 +32,6 @@ def create_bokeh_graph(graph_object):
     p = figure(width=parameters['width'], height=parameters['height'])
     p.varea_stack(layer_names, x='x', source=source, color=layer_colours)
 
-    show(p)
     return p
     
 def create_altair_graph(graph_object):
