@@ -56,7 +56,7 @@ def create_altair_graph(graph_object):
         'layer_names': layer_names
     })
 
-    # create histogram chart
+    # create area chart
     chart = alt.Chart(source).mark_area().encode(
         x = 'x:T',
         y = 'y:Q',
