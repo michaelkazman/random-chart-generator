@@ -11,10 +11,7 @@ def create_graph(graph_type, library, graph_object):
     return graph
 
 def create_bokeh_graph(graph_type, graph):
-    # generate and select bokeh theme
-    theme = get_bokeh_theme()
-    set_bokeh_theme(theme)
-    # create graph based on graph_type
+    set_bokeh_theme(get_bokeh_theme())
     generated_graph = [graph_type].create_bokeh_graph(graph)
     return generated_graph
 
