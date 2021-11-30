@@ -18,4 +18,4 @@ def generate_data():
     df = pd.DataFrame(dict(y=y, group=g))
     
     # X is needed to generate whiskers in certain visualization libraries
-    return (X, df)
+    return (df, )
