@@ -3,6 +3,8 @@ import pandas as pd
 from bokeh.plotting import show, figure
 from bokeh.models import ColumnDataSource
 
+import altair as alt
+
 parameters = {
     'width': 400,
     'height': 400,
@@ -42,7 +44,22 @@ def create_bokeh_graph(graph_object):
     return p
 
 def create_altair_graph(graph_object):
-    return {}
+    # format data
+    (X, y, bubble_size), style = unpack_graph_object(graph_object)
+    source = pd.DataFrame({
+        'x': X,
+        'y': y,
+        'size': bubble_size,
+    })
+
+    # create chart
+    chart = alt.Chart(source).mark_point().encode(
+        x='x',
+        y='y',
+        size='size'
+    )
+
+    return chart
 
 def create_plotnine_graph(graph_object):
     return {}
