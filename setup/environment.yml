@@ -1,6 +1,7 @@
 channels:
   - defaults
   - conda-forge
+  - pyviz
 dependencies:
   - python=3.9.1
   - bokeh=2.3.2
@@ -13,3 +14,4 @@ dependencies:
   - geckodriver=0.30.0
   - firefox=94.0.2
   - notebook=6.4.6
+  - holoviz=0.13.0

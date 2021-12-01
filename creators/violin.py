@@ -1,23 +1,47 @@
 import numpy as np
 import altair as alt
 import pandas as pd
+import hvplot.pandas
+import holoviews as hv
+from holoviews import opts
 from creators.utils import unpack_graph_object
+
+# set holoviews to use bokeh
+hv.extension('bokeh')
 
 parameters = {
     'color': 'black',
     'orientation': 'horizontal',
     'stack': 'center',
     'resolve_mode': 'independent',
+    'bokeh_height_min_threshold': 1.5,
+    'bokeh_height_max_threshold': 1.5,
     'height_min_threshold': 1,
     'height_max_threshold': 1,
     'padding': 20,
 }
 
 def create_bokeh_graph(graph_object):
-    return {}
+    # format data
+    (X, y), style = unpack_graph_object(graph_object)
+    data = pd.DataFrame({
+        'X': X,
+        'y': y,
+    })
+
+    plot = data.hvplot.violin(
+        y='y',
+        by='X',
+        c='X',
+        legend=False, 
+    ).opts(opts.Violin(
+        ylim=calculate_y_lim(y, ['bokeh_height_min_threshold', 'bokeh_height_max_threshold']),
+    ))
+
+    return plot
 
 def create_altair_graph(graph_object):
-    # format
+    # format data
     (X, y), style = unpack_graph_object(graph_object)
     
     # create boxplot
@@ -26,11 +50,11 @@ def create_altair_graph(graph_object):
     ).properties(width=200)
 
     # create violin
-    height_range = [np.min(y) * (1 + parameters['height_min_threshold']), np.max(y) * (1 + parameters['height_max_threshold'])]
+    y_limit = calculate_y_lim(y)
     violin = alt.Chart().transform_density(
         'y',
         as_=['y', 'density'],
-        extent=height_range,
+        extent=y_limit,
         groupby=['X']
     ).mark_area(orient='horizontal').encode(
         y='y:Q',
@@ -68,8 +92,13 @@ def create_altair_graph(graph_object):
     ).configure_view(
         stroke=None,
     )
-    
+
     return plot
 
 def create_plotnine_graph(graph_object):
     return {}
+
+def calculate_y_lim(y, threshold_names=['height_min_threshold', 'height_max_threshold']):
+    # create violin
+    height_range = (np.min(y) * (1 + parameters[threshold_names[0]]), np.max(y) * (1 + parameters[threshold_names[1]]))
+    return height_range

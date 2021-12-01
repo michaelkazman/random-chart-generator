@@ -2,6 +2,7 @@ import sys
 from importlib import import_module
 from bokeh.io import export_png
 from altair_saver import save
+import holoviews as hv
 from styles.utils import get_bokeh_theme, set_bokeh_theme
 
 def create_graph(graph_type, library, graph_object):
@@ -31,6 +32,11 @@ def unpack_graph_object(graph_object):
     return unpacked_object
 
 def export_graph(graph, library, filename, verbose=False):
+    # render using holoviews (instead of native renderer)
+    # used for libraries that don't support certain graph types
+    if ('holoviews' in str(type(graph))):
+        graph = hv.render(graph)
+    
     export_module = sys.modules[__name__]
     export_function_name = "export_{library}_graph".format(library=library)
     export_function = getattr(export_module, export_function_name)
