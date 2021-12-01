@@ -20,8 +20,8 @@ def generate_random_distribution(parameters):
     for _ in range (0, num_layers):
         # get layer's unique random values
         y_end = np.random.randint(*parameters['y_end_range'])
-        y_start = np.random.randint(parameters['y_end_range'][0], y_end+1)
-        if (y_start <= y_end): y = np.random.randint(y_start, y_end, num_samples)
+        y_start = np.random.randint(parameters['y_end_range'][0]+1, y_end)
+        if (y_start < y_end): y = np.random.randint(y_start, y_end, num_samples)
         else: y = np.random.randint(y_end, y_start, num_samples)
         y_layers = np.append(y_layers, y)
 
