@@ -2,7 +2,7 @@ import numpy as np
 
 parameters = {
     'start_range':  (0, 4),
-    'stop_range':  (4, 10), # min is based on start's max
+    'stop_range':  (4, 10), # min should be based on start's max
     'features_range':  (4, 100), 
     'z_constant_range':  (5, 10),
 }
