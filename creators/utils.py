@@ -64,11 +64,10 @@ def export_bokeh_graph(graph, filename):
     export_png(graph, filename=filename)
 
 def export_altair_graph(graph, filename):
-    save(graph, filename)
+    save(graph, filename=filename)
 
 def export_plotnine_graph(graph, filename):
-    return None
-    # graph.save(filename=filename)
+    graph.save(filename=filename, verbose=False)
 
 LOG_LEVEL = 50
 def log_message(message):
