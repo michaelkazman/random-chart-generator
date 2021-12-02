@@ -31,16 +31,16 @@ def create_altair_graph(graph_object):
     # for each layer, make data frame and store its line graph
     layered_lines = []
     for i in range(0, len(y)):
-        source = pd.DataFrame({"x": X, "y": y[i]})
-        lines = alt.Chart(source).mark_line().encode(
+        df = pd.DataFrame({"x": X, "y": y[i]})
+        lines = alt.Chart(df).mark_line().encode(
             x='x',
             y='y',
         )
         layered_lines.append(lines)
     
     # make final chart by layering
-    chart = alt.layer(*layered_lines)
-    return chart
+    p = alt.layer(*layered_lines)
+    return p
 
 def create_plotnine_graph(graph_object):
     # unpack data

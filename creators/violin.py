@@ -29,7 +29,7 @@ def create_bokeh_graph(graph_object):
         'y': y,
     })
 
-    plot = data.hvplot.violin(
+    p = data.hvplot.violin(
         y='y',
         by='X',
         c='X',
@@ -38,7 +38,7 @@ def create_bokeh_graph(graph_object):
         ylim=calculate_y_lim(y, ['bokeh_height_min_threshold', 'bokeh_height_max_threshold']),
     ))
 
-    return plot
+    return p
 
 def create_altair_graph(graph_object):
     # format data

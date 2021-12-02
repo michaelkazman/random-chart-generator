@@ -124,11 +124,12 @@ def create_altair_graph(graph_object):
     )
 
     # layer into main chart
-    chart = alt.layer(
-        box_plot, extremes,
+    p = alt.layer(
+        box_plot,
+        extremes,
     )
 
-    return chart
+    return p
 
 def create_plotnine_graph(graph_object):
     return {}

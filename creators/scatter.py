@@ -15,7 +15,7 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # format data
     (X, y), style = unpack_graph_object(graph_object)
-    source = ColumnDataSource(dict(x=X, y=y))
+    df = ColumnDataSource(dict(x=X, y=y))
 
     # create plot
     p = Plot(
@@ -27,7 +27,7 @@ def create_bokeh_graph(graph_object):
 
     # create glyph (symbol for plotting data points)
     glyph = Scatter(x="x", y="y", size=parameters['bokeh_size'], marker=parameters['marker_type'])
-    p.add_glyph(source, glyph)
+    p.add_glyph(df, glyph)
 
     # adjust axes
     xaxis, yaxis = LinearAxis(), LinearAxis()
@@ -43,13 +43,13 @@ def create_bokeh_graph(graph_object):
 def create_altair_graph(graph_object):
     # format data
     (X, y), style = unpack_graph_object(graph_object)
-    source = pd.DataFrame({
+    df = pd.DataFrame({
         'x': X,
         'y': y,
     })
 
     # create scatterplot
-    chart = alt.Chart(source).mark_circle(
+    p = alt.Chart(df).mark_circle(
         size=parameters['altair_size']
     ).encode(
         x='x',
@@ -59,7 +59,7 @@ def create_altair_graph(graph_object):
         height=parameters['height'],
     ) 
 
-    return chart
+    return p
 
 def create_plotnine_graph(graph_object):
     return {}

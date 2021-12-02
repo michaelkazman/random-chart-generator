@@ -13,7 +13,7 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # format data
     (X, y, is_vertical), style = unpack_graph_object(graph_object)
-    source = ColumnDataSource(dict(X=X, top=y))
+    df = ColumnDataSource(dict(X=X, top=y))
 
     # create plot
     p = Plot(
@@ -27,7 +27,7 @@ def create_bokeh_graph(graph_object):
     # create glyphs based on vertical or horizontal
     glyph = (VBar(x="X", top="top", bottom=0, width=parameters['bar_width']) if is_vertical
         else HBar(y="X", right="top", left=0, height=parameters['bar_width']))
-    p.add_glyph(source, glyph)
+    p.add_glyph(df, glyph)
 
     # adjust axes
     xaxis, yaxis = LinearAxis(), LinearAxis()
@@ -43,30 +43,20 @@ def create_bokeh_graph(graph_object):
 def create_altair_graph(graph_object):
     # format data
     (X, y, is_vertical), style = unpack_graph_object(graph_object)
-    source = pd.DataFrame({
+    df = pd.DataFrame({
         'x': X,
         'y': y,
     })
 
-    # create plot
-    if (is_vertical):
-        chart = alt.Chart(source).mark_bar().encode(
-            x = 'x:O',
-            y = 'y:Q',
-        ).properties(
-            width=parameters['width'],
-            height=parameters['height'],
-        )
-    else:
-        # horizontal forces x to take the y values as quantitive
-        chart = alt.Chart(source).mark_bar().encode(
-            x = 'y:Q',
-            y = 'x:O',
-        ).properties(
-            width=parameters['width'],
-            height=parameters['height'],
-        )  
+    # horizontal forces x to take the y values as quantitive
+    encodings = { 'x': 'x:O', 'y': 'y:Q' } if is_vertical else { 'x': 'y:Q', 'y': 'x:O' }
     
+    chart = alt.Chart(df).mark_bar().encode(
+        **encodings
+    ).properties(
+        width=parameters['width'],
+        height=parameters['height'],
+    )
     return chart
 
 def create_plotnine_graph(graph_object):

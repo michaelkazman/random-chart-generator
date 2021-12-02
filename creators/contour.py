@@ -11,7 +11,7 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # format data
     (X, y, z), style = unpack_graph_object(graph_object)
-    source = get_contour_source(X, y, z)
+    df = get_contour(X, y, z)
 
     # initialize figure
     p = figure(
@@ -25,12 +25,12 @@ def create_bokeh_graph(graph_object):
         xs='xs',
         ys='ys',
         line_color='line_color',
-        source=source
+        source=df
     )
 
     return p
 
-def get_contour_source(X, y, z):
+def get_contour(X, y, z):
     # format data
     plt.ioff()
     cs = plt.contour(X, y, z)
@@ -57,15 +57,14 @@ def get_contour_source(X, y, z):
             ys.append(y.tolist())
             col.append(thecol)
 
-    source = ColumnDataSource(
-        data={
+    df = ColumnDataSource({
             'xs': xs,
             'ys': ys,
             'line_color': col
         }
     )
 
-    return source
+    return df
 
 def create_altair_graph(graph_object):
     return {}

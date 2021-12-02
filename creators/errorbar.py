@@ -14,23 +14,23 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # format data
     (X, y, y_errors), style = unpack_graph_object(graph_object)
-    plot = figure(width=parameters['width'], height=parameters['height'])
+    p = figure(width=parameters['width'], height=parameters['height'])
 
     # plot each layer
     for index, y in enumerate(y):
         y_error = y_errors[index]
 
-        plot.circle(X, y)
-        plot.line(X, y)
+        p.circle(X, y)
+        p.line(X, y)
 
         if y_error[0] != None:
             y_err_x, y_err_y = [], []
             for px, py, err in zip(X, y, y_error):
                 y_err_x.append((px, px))
                 y_err_y.append((py - err, py + err))
-            plot.multi_line(y_err_x, y_err_y)
+            p.multi_line(y_err_x, y_err_y)
         
-    return plot
+    return p
 
 def create_altair_graph(graph_object):
     # format
@@ -40,10 +40,10 @@ def create_altair_graph(graph_object):
     layered_points, layered_errorbars, layered_lines = [], [], []
     for i in range(0, len(y)):
         # set up data frame
-        source = pd.DataFrame({"x": X, "y": y[i], "yerr": y_errors[i]})
+        df = pd.DataFrame({"x": X, "y": y[i], "yerr": y_errors[i]})
 
         # the base chart for other charts to build upon
-        base = alt.Chart(source).transform_calculate(
+        base = alt.Chart(df).transform_calculate(
             ymin="datum.y-datum.yerr",
             ymax="datum.y+datum.yerr"
         )
@@ -76,8 +76,8 @@ def create_altair_graph(graph_object):
         layered_lines.append(lines)
 
     # make final chart by layering
-    chart = alt.layer(*layered_points, *layered_errorbars, *layered_lines)
-    return chart
+    p = alt.layer(*layered_points, *layered_errorbars, *layered_lines)
+    return p
 
 def create_plotnine_graph(graph_object):
     return {}
