@@ -26,11 +26,11 @@ def create_bokeh_graph(graph_object):
     layer_colours = parameters['colours'][:num_layers]
     
     # create source
-    source = ColumnDataSource(data=layers)
+    df = ColumnDataSource(data=layers)
     
     # make figure
     p = figure(width=parameters['width'], height=parameters['height'])
-    p.varea_stack(layer_names, x='x', source=source, color=layer_colours)
+    p.varea_stack(layer_names, x='x', source=df, color=layer_colours)
 
     return p
     
@@ -50,14 +50,14 @@ def create_altair_graph(graph_object):
     layer_names = layer_names.flatten()
     
     # create data frame
-    source = pd.DataFrame({
+    df = pd.DataFrame({
         'x': X,
         'y': y,
         'layer_names': layer_names
     })
 
     # create area chart
-    chart = alt.Chart(source).mark_area().encode(
+    p = alt.Chart(df).mark_area().encode(
         x = 'x:T',
         y = 'y:Q',
         color = 'layer_names:N',
@@ -65,7 +65,7 @@ def create_altair_graph(graph_object):
         width=parameters['width'],
         height=parameters['height'],
     )
-    return chart
+    return p
 
 def create_plotnine_graph(graph_object):
     return {}

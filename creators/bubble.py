@@ -19,12 +19,11 @@ def create_bokeh_graph(graph_object):
     (X, y, bubble_size), style = unpack_graph_object(graph_object)
 
     # create dataframe  
-    df = pd.DataFrame(data={
+    df = ColumnDataSource({
         'x': X,
         'y': y,
         'bubble_size': bubble_size,
     })
-    source = ColumnDataSource(df)
     
     # plot data points
     p = figure(
@@ -38,7 +37,7 @@ def create_bokeh_graph(graph_object):
         fill_alpha=parameters['opacity'],
         fill_color= parameters['fill_color'],
         line_color=parameters['line_color'],
-        source=source
+        source=df
     )
     
     return p
@@ -46,20 +45,20 @@ def create_bokeh_graph(graph_object):
 def create_altair_graph(graph_object):
     # format data
     (X, y, bubble_size), style = unpack_graph_object(graph_object)
-    source = pd.DataFrame({
+    df = pd.DataFrame({
         'x': X,
         'y': y,
         'size': bubble_size,
     })
 
     # create chart
-    chart = alt.Chart(source).mark_point().encode(
+    p = alt.Chart(df).mark_point().encode(
         x='x',
         y='y',
         size='size'
     )
 
-    return chart
+    return p
 
 def create_plotnine_graph(graph_object):
     return {}

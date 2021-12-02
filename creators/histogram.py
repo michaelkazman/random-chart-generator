@@ -28,18 +28,18 @@ def create_altair_graph(graph_object):
     (X, y), style = unpack_graph_object(graph_object)
     
     # format data
-    source = pd.DataFrame({
+    df = pd.DataFrame({
         'X': y[1:],
         'y': X, # set edges to right
     })
 
     # create histogram chart
-    chart = alt.Chart(source).mark_bar().encode(
+    p = alt.Chart(df).mark_bar().encode(
         x='X',
         y='y',
     )
 
-    return chart
+    return p
 
 
 def create_plotnine_graph(graph_object):
