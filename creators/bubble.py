@@ -10,8 +10,8 @@ parameters = {
     'height': 400,
     'size': 10,
     'opacity': 0.5,
-    'fill_color': "#084594",
-    'line_color': "#084594",
+    'fill_color': '#084594',
+    'line_color': '#084594',
 }
 
 def create_bokeh_graph(graph_object):

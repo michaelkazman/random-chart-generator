@@ -8,7 +8,7 @@ parameters = {
     'width':    400,
     'height':   400,
     'matplot_marker': 'o',
-    'bokeh_marker': "dot",
+    'bokeh_marker': 'dot',
     'marker_size': 25,
 }
 
@@ -31,7 +31,7 @@ def create_altair_graph(graph_object):
     # for each layer, make data frame and store its line graph
     layered_lines = []
     for i in range(0, len(y)):
-        df = pd.DataFrame({"x": X, "y": y[i]})
+        df = pd.DataFrame({'x': X, 'y': y[i]})
         lines = alt.Chart(df).mark_line().encode(
             x='x',
             y='y',
