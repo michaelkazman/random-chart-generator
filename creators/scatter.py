@@ -26,7 +26,7 @@ def create_bokeh_graph(graph_object):
     )
 
     # create glyph (symbol for plotting data points)
-    glyph = Scatter(x="x", y="y", size=parameters['bokeh_size'], marker=parameters['marker_type'])
+    glyph = Scatter(x='x', y='y', size=parameters['bokeh_size'], marker=parameters['marker_type'])
     p.add_glyph(df, glyph)
 
     # adjust axes

@@ -25,8 +25,8 @@ def create_bokeh_graph(graph_object):
     )
 
     # create glyphs based on vertical or horizontal
-    glyph = (VBar(x="X", top="top", bottom=0, width=parameters['bar_width']) if is_vertical
-        else HBar(y="X", right="top", left=0, height=parameters['bar_width']))
+    glyph = (VBar(x='X', top='top', bottom=0, width=parameters['bar_width']) if is_vertical
+        else HBar(y='X', right='top', left=0, height=parameters['bar_width']))
     p.add_glyph(df, glyph)
 
     # adjust axes

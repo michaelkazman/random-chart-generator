@@ -20,7 +20,7 @@ def generate_data():
     
     if (correlation == 'positive' or correlation == 'negative'):
         y = np.sort(y)
-        if (correlation == "negative"):
+        if (correlation == 'negative'):
             # reverse sorted array
             y = y[::-1]
         

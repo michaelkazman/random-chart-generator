@@ -77,7 +77,7 @@ def create_altair_graph(graph_object):
     ).facet(
         column='X:N',
     ).resolve_scale(
-        x=alt.ResolveMode("independent")
+        x=alt.ResolveMode('independent')
     )
 
 

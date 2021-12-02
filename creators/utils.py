@@ -14,7 +14,7 @@ def create_graph(graph_type, library, graph_object):
     return graph
 
 def create_bokeh_graph(graph_type, graph):
-    print("LOL")
+    print('LOL')
     set_bokeh_theme(get_bokeh_theme())
     generated_graph = [graph_type].create_bokeh_graph(graph)
     return generated_graph
@@ -56,7 +56,7 @@ def export_graph_image(graph, library, file_path, verbose=True):
         graph = hv.render(graph)
     
     export_module = sys.modules[__name__]
-    export_function_name = "export_{library}_graph".format(library=library)
+    export_function_name = 'export_{library}_graph'.format(library=library)
     export_function = getattr(export_module, export_function_name)
     export_function(graph, file_path)
 
