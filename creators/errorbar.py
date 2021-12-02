@@ -1,6 +1,5 @@
 from creators.utils import unpack_graph_object
 from bokeh.plotting import figure
-
 import altair as alt
 import pandas as pd
 import numpy as np
@@ -17,65 +16,68 @@ def create_bokeh_graph(graph_object):
     p = figure(width=parameters['width'], height=parameters['height'])
 
     # plot each layer
-    for index, y in enumerate(y):
-        y_error = y_errors[index]
-
+    for y, y_error in zip(y, y_errors):
+        # plot points
         p.circle(X, y)
         p.line(X, y)
 
-        if y_error[0] != None:
-            y_err_x, y_err_y = [], []
-            for px, py, err in zip(X, y, y_error):
-                y_err_x.append((px, px))
-                y_err_y.append((py - err, py + err))
-            p.multi_line(y_err_x, y_err_y)
-        
+        # plot vertical error lines
+        y_err_x, y_err_y = [], []
+        for px, py, err in zip(X, y, y_error):
+            y_err_x.append((px, px))
+            y_err_y.append((py - err, py + err))
+        p.multi_line(y_err_x, y_err_y)
+
     return p
 
 def create_altair_graph(graph_object):
-    # format
+    # format data
     (X, y, y_errors), style = unpack_graph_object(graph_object)
-    
-    # make and store points, error bars, and lines for each layer
     layered_points, layered_errorbars, layered_lines = [], [], []
-    for i in range(0, len(y)):
+
+    # create each 'line' layer
+    for y_i, y_error in zip(y, y_errors):
         # set up data frame
-        df = pd.DataFrame({"x": X, "y": y[i], "yerr": y_errors[i]})
+        df = pd.DataFrame({
+            'X': X,
+            'y': y_i,
+            'yerr': y_error}
+        )
 
         # the base chart for other charts to build upon
         base = alt.Chart(df).transform_calculate(
-            ymin="datum.y-datum.yerr",
-            ymax="datum.y+datum.yerr"
+            ymin='datum.y-datum.yerr',
+            ymax='datum.y+datum.yerr'
         )
 
-        # make the points
+        # create points
         points = base.mark_point(
             filled=True,
             size=parameters['alt_point_size'],
         ).encode(
-            x=alt.X('x'),
-            y=alt.Y('y')
+            x='X',
+            y='y'
         )
 
-        # make the error bars
+        # create error bars
         errorbars = base.mark_errorbar().encode(
-            x="x",
-            y="ymin:Q",
-            y2="ymax:Q"
+            x='X',
+            y='ymin:Q',
+            y2='ymax:Q'
         )
 
-        # link the points with lines
+        # link the points and lines
         lines = base.mark_line().encode(
-            x='x',
+            x='X',
             y='y',
         )
 
-        # store, then move to next layer
+        # store that layers points, error bars, and lines
         layered_points.append(points)
         layered_errorbars.append(errorbars)
         layered_lines.append(lines)
 
-    # make final chart by layering
+    # combine layers
     p = alt.layer(*layered_points, *layered_errorbars, *layered_lines)
     return p
 
