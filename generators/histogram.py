@@ -27,8 +27,10 @@ def generate_data():
     size = np.random.randint(*parameters['size_range'])
     bins = np.random.randint(*parameters['bins_range'])
     
-    # return 
+    # get data distribution (and ensure no negative y values)
     X, y = data_distributions[distribution](size, bins)
+    y = y.clip(0)
+
     return X, y
 
 # generates a normal distribution (with random mu, sigma, and size)

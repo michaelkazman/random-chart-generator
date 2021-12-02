@@ -29,17 +29,14 @@ def create_altair_graph(graph_object):
     
     # format data
     source = pd.DataFrame({
-        'x': X[1:], # set edges to right
-        'y': y,
+        'X': y[1:],
+        'y': X, # set edges to right
     })
 
     # create histogram chart
     chart = alt.Chart(source).mark_bar().encode(
-        x = 'x:O',
-        y = 'y:Q',
-    ).properties(
-        width=parameters['width'],
-        height=parameters['height'],
+        x='X',
+        y='y',
     )
 
     return chart
