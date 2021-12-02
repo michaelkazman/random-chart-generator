@@ -26,18 +26,19 @@ def generate_data():
     noise = random_noise_level if correlation == 'none' else noise_level
     X, y = make_regression(n_samples=num_samples, n_features=num_features, noise=noise, tail_strength=tail_strength)
     
-    # log correlation uses different algorithm for y values 
+    # log correlation uses different algorithm for y values
+    # and can sometimes generate invalid values (which need to be filtered out)
     if (correlation == 'log_positive' or correlation == 'log_negative'):
-        
-        # remove and replace all invalid x data (where x <= 0)
-        X_valid, attempts = X[X > 0], 0
-        while (len(X_valid) != len(X)) or (attempts < parameters['max_generation_attempts']):
+        # remove and replace all invalid x data (i.e. values where x <= 0)
+        X_valid, attempts = filter_invalid_samples(X), 0
+        while (attempts < parameters['max_generation_attempts'] or len(X_valid) != len(X)):
+            # generate as many samples as needed
             num_invalid = len(X) - len(X_valid)
             X_new, _ = make_regression(n_samples=num_invalid, n_features=num_features, noise=noise, tail_strength=tail_strength)
-            X_new = X_new[X_new > 0]
+            # filter out the invalid ones and iterate
+            X_new = filter_invalid_samples(X_new)
             X_valid = np.concatenate((X_valid, X_new))
             attempts += 1
-        
         X = X_valid
         y = calculate_log_y(X) 
 
@@ -53,6 +54,9 @@ def generate_data():
     bubble_size = bubble_size.flatten()
 
     return (X, y, bubble_size)
+
+def filter_invalid_samples(X):
+    return  X[X > 0]
 
 def calculate_log_y(X):   
     # logarithmic with custom base (log_1.2(x) to log_2.0(x))
