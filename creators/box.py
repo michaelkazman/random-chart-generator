@@ -21,7 +21,8 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
     # unpackage and get bokeh-specific parameters
-    (df, ), style = unpack_graph_object(graph_object)
+    (X, y), style = unpack_graph_object(graph_object)
+    df = pd.DataFrame(dict(X=X, y=y))
     limits, quartiles, outliers = calc_params(df)
 
     # unpackage everything
@@ -31,7 +32,7 @@ def create_bokeh_graph(graph_object):
     line_color = parameters['line_color']
 
     # get X labels
-    X = np.unique(df.group)
+    X = np.unique(df.X)
 
     # define figure
     p = figure(x_range=X)
@@ -57,16 +58,16 @@ def create_bokeh_graph(graph_object):
     
 def create_altair_graph(graph_object):
     # unpack data
-    (df, ), style = unpack_graph_object(graph_object)
+    (X, y), style = unpack_graph_object(graph_object)
 
     # create data frame and declare local variables
-    source = df
+    df = pd.DataFrame(dict(X=X, y=y))
     width = parameters['width']
     height = parameters['height']
 
     # create box plot chart
-    box_plot = alt.Chart(source).mark_boxplot().encode(
-        x = 'group:O',
+    box_plot = alt.Chart(df).mark_boxplot().encode(
+        x = 'X:O',
         y = 'y:Q',
     ).properties(
         width=width,
@@ -74,13 +75,13 @@ def create_altair_graph(graph_object):
     )
 
     # get extremes for each box
-    df_list = [g for (_, g) in df.groupby('group')]
+    df_list = [g for (_, g) in df.groupby('X')]
     _, _, outliers = calc_params(df)
     extreme_values =[]
     extreme_groups = []
 
     for df_box in df_list:
-        group = df_box.group.values[0]
+        group = df_box.X.values[0]
         higher = None
         lower = None
         
@@ -100,7 +101,7 @@ def create_altair_graph(graph_object):
 
     # make dictionary from arrays
     extreme_dict = {
-        'group': extreme_groups,
+        'X': extreme_groups,
         'y': extreme_values,
     }
 
@@ -108,7 +109,7 @@ def create_altair_graph(graph_object):
     extreme_df = pd.DataFrame(data=extreme_dict)
 
     # create extremes chart
-    size = width*0.7 / (np.unique(df.group).size)
+    size = width*0.7 / (np.unique(df.X).size)
     mark_cap = alt.MarkDef(type='tick', size=size/6, opacity=1)
 
     extremes = alt.Chart(
@@ -117,7 +118,7 @@ def create_altair_graph(graph_object):
         height=height,
         mark=mark_cap,
     ).encode(
-        x='group',
+        x='X',
         y='y:Q',
         color=alt.value(parameters['alt_line_color'])
     )
@@ -136,7 +137,7 @@ def create_plotnine_graph(graph_object):
 # UTIL helper function
 def calc_params(df):
     # find the quartiles and IQR for each category
-    groups = df.groupby('group')
+    groups = df.groupby('X')
     q1 = groups.quantile(q=0.25)
     q2 = groups.quantile(q=0.5)
     q3 = groups.quantile(q=0.75)

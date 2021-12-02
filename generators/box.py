@@ -12,10 +12,9 @@ def generate_data():
     num_samples = np.random.randint(*parameters['num_samples_range'])
 
     # create df
-    X = list(map(str, range(num_boxes)))
+    groups = list(map(str, range(num_boxes)))
+    X = np.random.choice(groups, num_samples)
     y = np.random.randn(num_samples)
-    g = np.random.choice(X, num_samples)
-    df = pd.DataFrame(dict(y=y, group=g))
-    
+
     # X is needed to generate whiskers in certain visualization libraries
-    return (df, )
+    return (X, y)
