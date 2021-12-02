@@ -11,7 +11,8 @@ parameters = {
     'num_iterations_range': (2, 4),
     'num_samples_range': (4, 15),
     'layers_range':  (1, 4),
-    'error_bar_range': (5, 20),
+    'error_max_threshold': 0.15,
+    'error_min_threshold': 0.05,
 }
 
 def generate_data():
@@ -26,5 +27,12 @@ def generate_data():
     X, y = data_distributions[distribution](parameters)
 
     # generate error values for each datapoint
-    y_error = [np.random.uniform(*parameters['error_bar_range'], X.shape) for _ in range(len(y))]
+    error_bar_max = calculate_y_lim(y.flatten())
+    error_bar_min = calculate_y_lim(y.flatten(), threshold_name='error_min_threshold')
+    y_error = [np.random.uniform(error_bar_min, error_bar_max, size=X.shape) for _ in range(len(y))]
     return (X, y, y_error)
+
+def calculate_y_lim(y, threshold_name='error_max_threshold'):
+    # create violin
+    height_limit = (np.max(y) - np.min(y)) * parameters[threshold_name]
+    return height_limit
