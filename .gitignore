@@ -132,5 +132,6 @@ dmypy.json
 .DS_store
 
 # Generated data
-data/
+output/*/
+!output/*/__init__.py
 logs/
