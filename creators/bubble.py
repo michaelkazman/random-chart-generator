@@ -5,6 +5,7 @@ from bokeh.models import ColumnDataSource
 from creators.utils import unpack_graph_object
 
 import altair as alt
+import plotnine as p9
 
 parameters = {
     'width': 400,
@@ -62,4 +63,15 @@ def create_altair_graph(graph_object):
     return p
 
 def create_plotnine_graph(graph_object):
-    return {}
+    # format data
+    (X, y, bubble_size), style = unpack_graph_object(graph_object)
+    df = pd.DataFrame({
+        'x': X,
+        'y': y,
+        'size': bubble_size,
+    })
+
+    # create plot
+    p = p9.ggplot(data=df, mapping=p9.aes(x='X', y='y', size='size')) + p9.geom_point()
+    
+    return p
