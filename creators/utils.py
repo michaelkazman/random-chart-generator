@@ -60,14 +60,14 @@ def export_graph_image(graph, library, file_path, verbose=True):
     export_function = getattr(export_module, export_function_name)
     export_function(graph, file_path)
 
-def export_bokeh_graph(graph, filename):
-    export_png(graph, filename=filename)
+def export_bokeh_graph(graph, file_path):
+    export_png(graph, file_path)
 
-def export_altair_graph(graph, filename):
-    save(graph, filename=filename)
+def export_altair_graph(graph, file_path):
+    save(graph, file_path)
 
-def export_plotnine_graph(graph, filename):
-    graph.save(filename=filename, verbose=False)
+def export_plotnine_graph(graph, file_path):
+    graph.save(file_path, verbose=False)
 
 LOG_LEVEL = 50
 def log_message(message):
