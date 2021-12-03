@@ -1,9 +1,10 @@
 import numpy as np
+import pandas as pd
 import altair as alt
 import plotnine as p9
-import pandas as pd
-from bokeh.models import ColumnDataSource
+
 from bokeh.plotting import figure
+from bokeh.models import ColumnDataSource
 from creators.utils import unpack_graph_object
 
 parameters = {

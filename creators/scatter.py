@@ -1,9 +1,9 @@
-from bokeh.io import curdoc
-from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, Scatter
-from creators.utils import unpack_graph_object
-import altair as alt
 import pandas as pd
-import plotnine as p9
+import altair as alt
+
+from bokeh.io import curdoc
+from creators.utils import unpack_graph_object
+from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, Scatter
 
 parameters = {
     'width': 300,

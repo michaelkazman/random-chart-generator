@@ -1,7 +1,8 @@
-from creators.utils import unpack_graph_object
 import pandas as pd
+
 from bokeh.plotting import show, figure
 from bokeh.models import ColumnDataSource
+from creators.utils import unpack_graph_object
 
 import altair as alt
 
