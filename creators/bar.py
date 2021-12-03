@@ -3,6 +3,7 @@ from bokeh.io import curdoc
 from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, VBar, HBar
 import altair as alt
 import pandas as pd
+import plotnine as p9
 
 parameters = {
     'width': 300,
@@ -60,4 +61,15 @@ def create_altair_graph(graph_object):
     return chart
 
 def create_plotnine_graph(graph_object):
-    return {}
+    # format data
+    (X, y, is_vertical), style = unpack_graph_object(graph_object)
+    df = pd.DataFrame({
+        'X': X,
+        'y': y,
+    })
+
+    # create plot
+    p = p9.ggplot(df, p9.aes(x='X', y='y')) + p9.geom_bar(stat='identity') 
+    if not is_vertical: p += p9.coord_flip()
+
+    return p
