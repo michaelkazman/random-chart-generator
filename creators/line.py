@@ -60,14 +60,14 @@ def create_plotnine_graph(graph_object):
     layer_names = [chr(int(i)+65) for i in layer_names]
 
     # create data frame
-    data = pd.DataFrame({
+    df = pd.DataFrame({
         'X': X,
         'y': y_layers,
         'layer_names': layer_names
     })
     
     # make plot for each layer
-    p = p9.ggplot(data=data, mapping=p9.aes(x=X, y=y_layers, color=layer_names)) + p9.geom_line()
+    p = p9.ggplot(data=df, mapping=p9.aes(x=X, y=y_layers, color=layer_names)) + p9.geom_line()
 
 
 

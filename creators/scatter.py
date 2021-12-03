@@ -3,6 +3,7 @@ from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, Scatter
 from creators.utils import unpack_graph_object
 import altair as alt
 import pandas as pd
+import plotnine as p9
 
 parameters = {
     'width': 300,
@@ -44,7 +45,7 @@ def create_altair_graph(graph_object):
     # format data
     (X, y), style = unpack_graph_object(graph_object)
     df = pd.DataFrame({
-        'x': X,
+        'X': X,
         'y': y,
     })
 
@@ -52,7 +53,7 @@ def create_altair_graph(graph_object):
     p = alt.Chart(df).mark_circle(
         size=parameters['altair_size']
     ).encode(
-        x='x',
+        x='X',
         y='y',
     ).properties(
         width=parameters['width'],
@@ -62,4 +63,14 @@ def create_altair_graph(graph_object):
     return p
 
 def create_plotnine_graph(graph_object):
-    return {}
+    # format data
+    (X, y), style = unpack_graph_object(graph_object)
+    df = pd.DataFrame({
+        'X': X,
+        'y': y,
+    })
+
+    # create plot
+    p = p9.ggplot(data=df, mapping=p9.aes(x='X', y='y')) + p9.geom_point()
+    
+    return p
