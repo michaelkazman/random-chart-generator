@@ -14,4 +14,4 @@ dependencies:
   - geckodriver=0.30.0
   - firefox=94.0.2
   - notebook=6.4.6
-  - holoviz=0.13.0
+  - holoviews=1.14.6
