@@ -128,10 +128,17 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Mac Cache Files
+# Mac cache files
 .DS_store
 
-# Generated data
+# Generated output
 output/*/
 !output/*/__init__.py
+
+# Generated logs
 logs/
+!logs/__init__.py
+
+# Generated input
+input/*/
+!input/*/__init__.py
