@@ -1,10 +1,12 @@
 import sys
-from importlib import import_module
-from bokeh.io import export_png
-from altair_saver import save
-import holoviews as hv
-from styles.utils import get_bokeh_theme, set_bokeh_theme
+import json
 import logging
+import holoviews as hv
+
+from altair_saver import save
+from bokeh.io import export_png
+from importlib import import_module
+from styles.utils import get_bokeh_theme, set_bokeh_theme
 
 def create_graph(graph_type, library, graph_object):
     create_module = import_module('creators.{graph_type}'.format(graph_type=graph_type))
@@ -19,20 +21,6 @@ def create_bokeh_graph(graph_type, graph):
     generated_graph = [graph_type].create_bokeh_graph(graph)
     return generated_graph
 
-def get_file_name(graph_type, library, id):
-    return '{graph_type}_{library}_{id}'.format(
-        graph_type=graph_type,
-        library=library,
-        id=id
-    )
-
-def get_file_path(file_name, path, file_type):
-    return 'output/{path}/{file_name}.{file_type}'.format(
-        file_name=file_name,
-        path=path,
-        file_type=file_type
-    )
-
 def unpack_graph_object(graph_object):
     unpacked_object = (
         graph_object['data'],
@@ -42,14 +30,20 @@ def unpack_graph_object(graph_object):
 
 def export_graph_data(data, file_path):
     log_message('Exporting data {file_path}'.format(file_path=file_path))
-    # do stuff
+    export_json(data, file_path)
 
 def export_graph_styles(styles, file_path):
     log_message('Exporting styles {file_path}'.format(file_path=file_path))
-    # do stuff
+    export_json(styles, file_path)
 
-def export_graph_image(graph, library, file_path, verbose=True):
-    log_message('Exporting images {file_path}\n'.format(file_path=file_path))
+def export_json(content, file_path):
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(content, f, ensure_ascii=False, indent=4)
+
+def export_graph_image(graph, library, file_path, regeneration=False):
+    # provides a distinction in the logs between export and chart re-generation
+    verb = 'Regenerating' if regeneration else 'Exporting'
+    log_message('{verb} image {file_path}\n'.format(verb=verb, file_path=file_path))
     # render using holoviews (instead of native renderer)
     # used for libraries that don't support certain graph types
     if ('holoviews' in str(type(graph))):
@@ -61,7 +55,7 @@ def export_graph_image(graph, library, file_path, verbose=True):
     export_function(graph, file_path)
 
 def export_bokeh_graph(graph, file_path):
-    export_png(graph, file_path)
+    export_png(graph, filename=file_path)
 
 def export_altair_graph(graph, file_path):
     save(graph, file_path)
