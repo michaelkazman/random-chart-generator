@@ -1,9 +1,8 @@
-from bokeh.plotting import figure
-from creators.utils import unpack_graph_object
 import altair as alt
 import pandas as pd
-import numpy as np
-import plotnine as p9
+
+from bokeh.plotting import figure
+from creators.utils import unpack_graph_object
 
 parameters = {
     'width':    400,

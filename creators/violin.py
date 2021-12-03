@@ -1,8 +1,9 @@
 import numpy as np
-import altair as alt
 import pandas as pd
+import altair as alt
 import hvplot.pandas
 import holoviews as hv
+
 from holoviews import opts
 from creators.utils import unpack_graph_object
 

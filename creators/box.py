@@ -1,10 +1,9 @@
-from creators.utils import unpack_graph_object
+import numpy as np
+import pandas as pd
+import altair as alt
 
 from bokeh.plotting import figure
-import numpy as np
-
-import altair as alt
-import pandas as pd
+from creators.utils import unpack_graph_object
 
 # dictionary for creating graphs
 parameters = {
