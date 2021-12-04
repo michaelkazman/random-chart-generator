@@ -1,0 +1,14 @@
+{
+    "default": {
+
+    }, 
+    "bokeh": {
+
+    },
+    "altair": {
+
+    },
+    "plotnine": {
+        
+    }
+}
