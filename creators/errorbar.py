@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import altair as alt
+import plotnine as p9
 
 from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
@@ -83,4 +84,37 @@ def create_altair_graph(graph_object):
     return p
 
 def create_plotnine_graph(graph_object):
-    return {}
+     # format data
+    (X, y_layers, y_errors), style = unpack_graph_object(graph_object)
+    num_layers = len(y_layers)
+
+    # create labels to group layers by, and get max and min for error bars
+    layer_names = np.copy(y_layers)
+    y_err_min, y_err_max = np.copy(y_layers), np.copy(y_layers)
+    for i in range(num_layers):
+        layer_names[i, :] = i
+        for j in range(len(y_layers[i])):
+            y_err_min[i][j] = y_layers[i][j] - y_errors[i][j]
+            y_err_max[i][j] = y_layers[i][j] + y_errors[i][j]
+    
+    # format data to be appropriate for a data frame
+    X = np.append(X, [X] * (num_layers - 1))
+    y_layers = y_layers.flatten()
+    y_err_min = y_err_min.flatten()
+    y_err_max = y_err_max.flatten()
+    layer_names = layer_names.flatten()
+    layer_names = [chr(int(i)+65) for i in layer_names]
+
+    # create data frame
+    df = pd.DataFrame({
+        'X': X,
+        'y': y_layers,
+        'y_err_min': y_err_min,
+        'y_err_max': y_err_max,
+        'layer_names': layer_names
+    })
+
+    # create plot
+    p = p9.ggplot(data=df, mapping=p9.aes(x=X, y=y_layers, color=layer_names, ymax='y_err_max', ymin='y_err_min')) + p9.geom_line() + p9.geom_point() + p9.geom_errorbar()
+
+    return p
