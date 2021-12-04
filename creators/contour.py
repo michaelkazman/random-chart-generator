@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
-from creators.utils import unpack_graph_object
+from utils.creators import unpack_graph_object
 
 parameters = {
     'width': 400,

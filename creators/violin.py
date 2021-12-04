@@ -5,7 +5,7 @@ import hvplot.pandas
 import holoviews as hv
 
 from holoviews import opts
-from creators.utils import unpack_graph_object
+from utils.creators import unpack_graph_object
 
 # set holoviews to use bokeh
 hv.extension('bokeh')

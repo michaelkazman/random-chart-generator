@@ -1,4 +1,4 @@
-from generators.utils import generate_midpoint_displacement
+from utils.generators import generate_midpoint_displacement
 
 parameters = {
     'y_start_range':  (50, 400),
