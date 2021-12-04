@@ -2,7 +2,7 @@ import altair as alt
 import pandas as pd
 
 from bokeh.plotting import figure
-from creators.utils import unpack_graph_object
+from utils.creators import unpack_graph_object
 
 parameters = {
     'width':    400,

@@ -1,5 +1,5 @@
 import numpy as np
-from generators.utils import generate_random_distribution, generate_midpoint_displacement
+from utils.generators import generate_random_distribution, generate_midpoint_displacement
 
 parameters = {
     'y_start_range':  (50, 400),

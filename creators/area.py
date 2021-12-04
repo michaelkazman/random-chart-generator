@@ -5,7 +5,7 @@ import plotnine as p9
 
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
-from creators.utils import unpack_graph_object
+from utils.creators import unpack_graph_object
 
 parameters = {
     'width':    400,

@@ -2,7 +2,7 @@ import pandas as pd
 import altair as alt
 
 from bokeh.io import curdoc
-from creators.utils import unpack_graph_object
+from utils.creators import unpack_graph_object
 from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, Scatter
 
 parameters = {
