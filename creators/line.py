@@ -1,5 +1,7 @@
 import altair as alt
 import pandas as pd
+import numpy as np
+import plotnine as p9
 
 from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
@@ -67,7 +69,5 @@ def create_plotnine_graph(graph_object):
     
     # make plot for each layer
     p = p9.ggplot(data=df, mapping=p9.aes(x=X, y=y_layers, color=layer_names)) + p9.geom_line()
-
-
 
     return p
