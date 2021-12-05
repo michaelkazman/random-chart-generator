@@ -3,6 +3,7 @@ import pandas as pd
 import altair as alt
 import hvplot.pandas
 import holoviews as hv
+import plotnine as p9
 
 from holoviews import opts
 from utils.creators import unpack_graph_object
@@ -97,9 +98,21 @@ def create_altair_graph(graph_object):
     return plot
 
 def create_plotnine_graph(graph_object):
-    return {}
+    # unpack data
+    (X, y), style = unpack_graph_object(graph_object)
+
+    # create data frame
+    df = pd.DataFrame({
+        'X': X,
+        'y': y,
+    })
+
+    # create plot
+    p = p9.ggplot(df, p9.aes(x='X', y='y')) + p9.geom_violin() + p9.geom_boxplot(width=0.1)
+
+    return p
 
 def calculate_y_lim(y, threshold_names=['height_min_threshold', 'height_max_threshold']):
-    # create violin
+    # get height range
     height_range = (np.min(y) * (1 + parameters[threshold_names[0]]), np.max(y) * (1 + parameters[threshold_names[1]]))
     return height_range
