@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import altair as alt
+import plotnine as p9
 
 from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
@@ -19,7 +20,7 @@ parameters = {
 }
 
 def create_bokeh_graph(graph_object):
-    # unpackage and get bokeh-specific parameters
+    # unpackage and get parameters
     (X, y), style = unpack_graph_object(graph_object)
     df = pd.DataFrame(dict(X=X, y=y))
     limits, quartiles, outliers = calc_params(df)
@@ -131,7 +132,23 @@ def create_altair_graph(graph_object):
     return p
 
 def create_plotnine_graph(graph_object):
-    return {}
+    # unpack data
+    (X, y), style = unpack_graph_object(graph_object)
+
+    # format data for data frame
+    X = X.flatten()
+    y = y.flatten()
+
+    # create data frame
+    df = pd.DataFrame({
+        'X': X,
+        'y': y,
+    })
+
+    # create plot
+    p = p9.ggplot(df) + p9.geom_boxplot(p9.aes(x='X', y='y'))
+
+    return p
 
 
 # UTIL helper function
