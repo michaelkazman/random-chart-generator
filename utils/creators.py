@@ -9,7 +9,7 @@ def create_graph(graph_type, library, graph_object):
 
 def unpack_graph_object(graph_object):
     unpacked_object = (
-        graph_object['data'],
+        graph_object['data'].values(),
         graph_object['styles'], 
     )
     return unpacked_object

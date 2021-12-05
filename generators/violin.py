@@ -19,4 +19,7 @@ def generate_data():
     X = [np.random.choice(groups) for _ in range(num_samples)]
     y = [np.random.normal(*parameters['y_data_range']) for _ in range(num_samples)]
 
-    return (X, y)
+    return {
+        'X': X,
+        'y': y,
+    }

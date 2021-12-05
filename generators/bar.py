@@ -33,5 +33,9 @@ def generate_data():
     # random chance of graph being vertical/horizontal bar chart
     is_vertical = bool(np.random.randint(2))
 
-    return (X, y, is_vertical)
+    return {
+        'X': X,
+        'y': y,
+        'is_vertical': is_vertical
+    }
 

@@ -12,4 +12,8 @@ parameters = {
 }
 
 def generate_data():
-    return generate_midpoint_displacement(parameters)
+    (X, y) = generate_midpoint_displacement(parameters)
+    return {
+        'X': X,
+        'y': y,
+    }

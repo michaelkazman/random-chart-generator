@@ -30,17 +30,22 @@ def export_graph_styles(styles, file_path):
 def export_json(content, file_path):
     serializable_content = convert_to_serializable(content)
     with open(file_path, 'w', encoding='utf-8') as f:
-        json.dump(content, f, ensure_ascii=False, indent=4)
+        json.dump(serializable_content, f, ensure_ascii=False, indent=4)
 
 def convert_to_serializable(content):
     serialized_content = {}
     for key, value in content.items():
-        serialized_value, value_type = value, type(value)
-        if (value_type == 'numpy.ndarray'):
-            serialized_value = value.tolist()
-
+        serialized_value = serialize_value(value)
         serialized_content[key] = serialized_value
     return serialized_content
+
+def serialize_value(value):
+    serialized_value, value_type = value, type(value).__name__
+    if (value_type == 'ndarray'):
+        serialized_value = value.tolist()
+    elif (value_type == 'list'):
+        serialized_value = serialize_value(value)
+    return serialized_value
 
 LOG_LEVEL = 50
 def log_message(message):

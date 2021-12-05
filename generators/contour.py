@@ -24,4 +24,8 @@ def generate_data():
     constant = np.random.randint(*parameters['z_constant_range'])
     z = np.sin(X) ** constant + np.cos(constant + y * X) * np.cos(X)
 
-    return (X, y, z)
+    return {
+        'X': X,
+        'y': y,
+        'z': z,
+    }

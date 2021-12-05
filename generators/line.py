@@ -23,4 +23,7 @@ def generate_data():
 
     # get graph's unique random values
     X, y = data_distributions[distribution](parameters)
-    return (X, y)
+    return {
+        'X': X,
+        'y': y,
+    }
