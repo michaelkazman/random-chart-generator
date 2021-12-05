@@ -1,5 +1,6 @@
 import pandas as pd
 import altair as alt
+import plotnine as p9
 
 from bokeh.io import curdoc
 from utils.creators import unpack_graph_object

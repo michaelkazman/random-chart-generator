@@ -23,4 +23,7 @@ def generate_data():
     X = pd.Series(X_data)
     y = pd.Series(y_data)
 
-    return (X, y)
+    return {
+        'X': X,
+        'y': y,
+    }

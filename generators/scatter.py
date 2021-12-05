@@ -33,4 +33,7 @@ def generate_data():
     X = X.flatten()
     y = y.flatten()
 
-    return (X, y)
+    return {
+        'X': X,
+        'y': y,
+    }

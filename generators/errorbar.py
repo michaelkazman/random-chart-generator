@@ -30,7 +30,11 @@ def generate_data():
     error_bar_max = calculate_y_lim(y.flatten())
     error_bar_min = calculate_y_lim(y.flatten(), threshold_name='error_min_threshold')
     y_error = [np.random.uniform(error_bar_min, error_bar_max, size=X.shape) for _ in range(len(y))]
-    return (X, y, y_error)
+    return {
+        'X': X,
+        'y': y,
+        'y_error': y_error,
+    }
 
 def calculate_y_lim(y, threshold_name='error_max_threshold'):
     # create violin

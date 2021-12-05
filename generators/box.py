@@ -17,4 +17,7 @@ def generate_data():
     y = np.random.randn(num_samples)
 
     # X is needed to generate whiskers in certain visualization libraries
-    return (X, y)
+    return {
+        'X': X,
+        'y': y,
+    }

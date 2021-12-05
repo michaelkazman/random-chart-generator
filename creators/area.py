@@ -15,7 +15,7 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
     #unpack data
-    X, y = graph_object['data']
+    (X, y), style = unpack_graph_object(graph_object)
     y = y.tolist()
     num_layers = len(y)    
     layer_names = [str(i) for i in range(num_layers)]

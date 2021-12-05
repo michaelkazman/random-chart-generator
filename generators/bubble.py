@@ -53,7 +53,11 @@ def generate_data():
     y = y.flatten()
     bubble_size = bubble_size.flatten()
 
-    return (X, y, bubble_size)
+    return {
+        'X': X,
+        'y': y,
+        'bubble_size': bubble_size,
+    }
 
 def filter_invalid_samples(X):
     return  X[X > 0]

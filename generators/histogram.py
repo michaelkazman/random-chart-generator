@@ -31,7 +31,10 @@ def generate_data():
     X, y = data_distributions[distribution](size, bins)
     y = y.clip(0)
 
-    return X, y
+    return {
+        'X': X,
+        'y': y,
+    }
 
 # generates a normal distribution (with random mu, sigma, and size)
 def generate_random_normal_distribution(size, bins):
