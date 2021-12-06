@@ -44,7 +44,7 @@ def serialize_value(value):
     if (value_type == 'ndarray'):
         serialized_value = value.tolist()
     elif (value_type == 'list'):
-        serialized_value = serialize_value(value)
+        serialized_value = [serialize_value(val) for val in value]
     return serialized_value
 
 LOG_LEVEL = 50
