@@ -48,7 +48,7 @@ def create_altair_graph(graph_object):
     
     # create boxplot
     boxplot = alt.Chart().mark_boxplot(color='black').encode(
-        alt.Y(f'y:Q')
+        alt.Y('y:Q')
     ).properties(width=200)
 
     # create violin
