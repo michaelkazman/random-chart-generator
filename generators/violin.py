@@ -16,11 +16,7 @@ def generate_data():
     groups= [chr(65 + i) for i in range (0, num_violins)] 
 
     # select random normal values
-    X_data = [np.random.choice(groups) for _ in range(num_samples)]
-    y_data = [np.random.normal(*parameters['y_data_range']) for _ in range(num_samples)]
-
-    # add 
-    X = pd.Series(X_data)
-    y = pd.Series(y_data)
+    X = [np.random.choice(groups) for _ in range(num_samples)]
+    y = [np.random.normal(*parameters['y_data_range']) for _ in range(num_samples)]
 
     return (X, y)
