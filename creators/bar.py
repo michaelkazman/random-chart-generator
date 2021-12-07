@@ -6,29 +6,23 @@ from bokeh.io import curdoc
 from utils.creators import unpack_graph_object
 from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, VBar, HBar
 
-parameters = {
-    'width': 300,
-    'height': 300,
-    'bar_width': 0.5,
-}
-
 def create_bokeh_graph(graph_object):
     # format data
-    (X, y, is_vertical), style = unpack_graph_object(graph_object)
+    (X, y, is_vertical), styles = unpack_graph_object(graph_object)
     df = ColumnDataSource(dict(X=X, top=y))
 
     # create plot
     p = Plot(
         title=None,
-        width=parameters['width'],
-        height=parameters['height'],
+        width=styles.get('width'),
+        height=styles.get('height'),
         min_border=0,
         toolbar_location=None
     )
 
     # create glyphs based on vertical or horizontal
-    glyph = (VBar(x='X', top='top', bottom=0, width=parameters['bar_width']) if is_vertical
-        else HBar(y='X', right='top', left=0, height=parameters['bar_width']))
+    glyph = (VBar(x='X', top='top', bottom=0, width=styles.get('bar_width')) if is_vertical
+        else HBar(y='X', right='top', left=0, height=styles.get('bar_width')))
     p.add_glyph(df, glyph)
 
     # adjust axes
@@ -44,7 +38,7 @@ def create_bokeh_graph(graph_object):
 
 def create_altair_graph(graph_object):
     # format data
-    (X, y, is_vertical), style = unpack_graph_object(graph_object)
+    (X, y, is_vertical), styles = unpack_graph_object(graph_object)
     df = pd.DataFrame({
         'x': X,
         'y': y,
@@ -56,8 +50,8 @@ def create_altair_graph(graph_object):
     chart = alt.Chart(df).mark_bar().encode(
         **encodings
     ).properties(
-        width=parameters['width'],
-        height=parameters['height'],
+        width=styles.get('width'),
+        height=styles.get('height'),
     )
     return chart
 

@@ -20,7 +20,7 @@ def create_bokeh_graph(graph_object):
 
     # create plot
     p = figure(title=None, tools='')
-    p.quad(top=X, bottom=0, left=left_edges, right=right_edges, alpha=parameters['alpha'])
+    p.quad(top=X, bottom=0, left=left_edges, right=right_edges, alpha=parameters.get('alpha'))
 
     return p
 

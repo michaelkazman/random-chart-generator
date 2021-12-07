@@ -1,5 +1,6 @@
 import pandas as pd
 import altair as alt
+import plotnine as p9
 
 from bokeh.io import curdoc
 from utils.creators import unpack_graph_object
@@ -21,13 +22,19 @@ def create_bokeh_graph(graph_object):
     # create plot
     p = Plot(
         title=None,
-        width=parameters['width'],
-        height=parameters['height'],
-        min_border=0, toolbar_location=None
+        width=parameters.get('width'),
+        height=parameters.get('height'),
+        min_border=0,
+        toolbar_location=None
     )
 
     # create glyph (symbol for plotting data points)
-    glyph = Scatter(x='x', y='y', size=parameters['bokeh_size'], marker=parameters['marker_type'])
+    glyph = Scatter(
+        x='x',
+        y='y',
+        size=parameters.get('bokeh_size'),
+        marker=parameters.get('marker_type')
+    )
     p.add_glyph(df, glyph)
 
     # adjust axes
@@ -51,13 +58,13 @@ def create_altair_graph(graph_object):
 
     # create scatterplot
     p = alt.Chart(df).mark_circle(
-        size=parameters['altair_size']
+        size=parameters.get('altair_size')
     ).encode(
         x='X',
         y='y',
     ).properties(
-        width=parameters['width'],
-        height=parameters['height'],
+        width=parameters.get('width'),
+        height=parameters.get('height'),
     ) 
 
     return p

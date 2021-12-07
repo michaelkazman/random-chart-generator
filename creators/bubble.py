@@ -29,16 +29,16 @@ def create_bokeh_graph(graph_object):
     
     # plot data points
     p = figure(
-        width=parameters['width'],
-        height=parameters['height']
+        width=parameters.get('width'),
+        height=parameters.get('height')
     )
     p.scatter(
         x='x',
         y='y',
         size='bubble_size',
-        fill_alpha=parameters['opacity'],
-        fill_color= parameters['fill_color'],
-        line_color=parameters['line_color'],
+        fill_alpha=parameters.get('opacity'),
+        fill_color= parameters.get('fill_color'),
+        line_color=parameters.get('line_color'),
         source=df
     )
     
