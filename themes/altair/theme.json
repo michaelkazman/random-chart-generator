@@ -1,130 +1,122 @@
-def custom_theme():
-    markColor = "#282828"
-    axisColor = "#282828"
-    backgroundColor = "#FFFAFA"
-    font = "Lato"
-    labelfont = "Lato"
-    sourcefont = "Lato"
-    gridColor = "#C9C9C9"
-    return {
+{
         "width": 685,
-#        "height": 400,   
+        "height": 400,   
         "autosize": "fit",
         "config": {
            "padding": 10,
            "geoshape": {
-               "fill": "#C0C0C0",
+               "fill": "#C0C0C0"
            },
            "arc": {
-               "fill": markColor,
+               "fill": "#282828"
            },
            "area": {
-               "fill": markColor,
+               "fill": "#282828"
            },
            "axisBand": {
-               "grid": False,
+               "grid": false
            },
            "axisBottom": {
-               "domain": False,
+               "domain": false,
                "domainColor": "black",
                "domainWidth": 3,
-               "grid": True,
-               "gridColor": gridColor,
+               "grid": true,
+               "gridColor": "#C9C9C9",
                "gridWidth": 1,
                "labelFontSize": 20,
-               "labelFont": labelfont,
+               "labelFont": "Lato",
                "labelPadding": 8,
                "labelAngle": 0,
-               "tickColor": axisColor,
+               "tickColor": "#282828",
                "tickSize": 10,
                "titleFontSize": 16,
                "titlePadding": 10,
-               "titleFont": font,
-               "title": "",
+               "titleFont": "Lato",
+               "title": ""
            },
            "axisLeft": {
-               "domainColor": axisColor,
+               "domainColor": "#282828",
                "domainWidth": 1,
-               "gridColor": gridColor,
+               "gridColor": "#C9C9C9",
                "gridWidth": 1,
                "labelFontSize": 20,
-               "labelFont": labelfont,
+               "labelFont": "Lato",
                "labelPadding": 8,
-               "tickColor": axisColor,
+               "tickColor": "#282828",
                "tickSize": 10,
                "tickCount": 10,
-               "ticks": True,
+               "ticks": true,
                "titleFontSize": 18,
                "titlePadding": 10,
-               "titleFont": font,
+               "titleFont": "Lato"
            },
            "axisRight": {
-               "domainColor": axisColor,
+               "domainColor": "#282828",
                "domainWidth": 1,
-               "gridColor": gridColor,
+               "gridColor": "#C9C9C9",
                "gridWidth": 1,
                "labelFontSize": 12,
-               "labelFont": labelfont,
+               "labelFont": "Lato",
                "labelPadding": 4,
-               "tickColor": axisColor,
+               "tickColor": "#282828",
                "tickSize": 10,
-               "ticks": True,
+               "ticks": true,
                "titleFontSize": 14,
                "titlePadding": 10,
-               "titleFont": font,
+               "titleFont": "Lato"
            },
            "axisTop": {
-               "domain": False,
+               "domain": false,
                "domainColor": "black",
                "domainWidth": 3,
-               "grid": True,
-               "gridColor": gridColor,
+               "grid": true,
+               "gridColor": "#C9C9C9",
                "gridWidth": 1,
                "labelFontSize": 12,
-               "labelFont": labelfont,
+               "labelFont": "Lato",
                "labelPadding": 4,
-               "tickColor": axisColor,
+               "tickColor": "#282828",
                "tickSize": 10,
                "titleFontSize": 14,
                "titlePadding": 10,
-               "titleFont": font,
+               "titleFont": "Lato"
            },
-           "background": backgroundColor,
+           "background": "#FFFAFA",
            "group": {
-               "fill": backgroundColor,
+               "fill": "#FFFAFA"
            },
            "legend": {
                "labelFontSize": 30,
-               "labelFont": labelfont,
+               "labelFont": "Lato",
                "labelLimit": 500,
                "padding": 10,
                "symbolSize": 500,
                "symbolType": "square",
                "titleFontSize": 30,
                "titlePadding": 10,
-               "titleFont": font,
+               "titleFont": "Lato"
            },
            "line": {
-               "color": markColor,
-               "stroke": markColor,
-               "strokewidth": 5,
+               "color": "#282828",
+               "stroke": "#282828",
+               "strokewidth": 5
            },
            "trail": {
-               "color": markColor,
-               "stroke": markColor,
+               "color": "#282828",
+               "stroke": "#282828",
                "strokeWidth": 0,
-               "size": 5,
+               "size": 5
            },
            "path": {
-               "stroke": markColor,
-               "strokeWidth": 0.5,
+               "stroke": "#282828",
+               "strokeWidth": 0.5
            },
            "point": {
-               "filled": True,
+               "filled": true
            },
            "rect": {
                "fill": "#A20C4B",
-               "opacity": 0.3,
+               "opacity": 0.3
            },
            "range": {
                "category": ["#dc0d7a", "#02a3cd", "#e4a100", "#dc0d12", "#0DDC6F","#074a7e", "#e46800", "#aa3594", "#a20c4b"],
@@ -144,57 +136,52 @@ def custom_theme():
                    "#ee60ad",
                    "#eb409d",
                    "#e7208c",
-                   "#e4007c",
-               ],
+                   "#e4007c"
+               ]
            },
            "symbol": {
                "opacity": 1,
                "shape": "circle",
                "size": 40,
-               "strokeWidth": 1,
+               "strokeWidth": 1
            },
            "style": {
                "bar": {
                    "binSpacing": 2,
-                   "fill": markColor,
-                   "stroke": False,
+                   "fill": "#282828",
+                   "stroke": false
                },
                "text": {
-                   "font": sourcefont,
+                   "font": "Lato",
                    "fontSize": 10,
                    "align": "right",
                    "text": "Made by @ChekosWH",
                    "href": "https://twitter.com/ChekosWH",
                    "fontWeight": 100,
                    "size": 10,
-                   "dx": 300,
+                   "dx": 300
                }
            },
            "title":{
                "anchor": "start",
                "fontSize": 12,
                "fontWeight": 200,
-               "font": font,
-               "offset": 20,
+               "font": "Lato",
+               "offset": 20
            },
            "view": {
-               "stroke": False,
-               "padding": 15,
+               "stroke": false,
+               "padding": 15
            },
             "header": {
                 "fontWeight": 400,
                 "labelFontSize": 28,
-                "labelFont": labelfont,
+                "labelFont": "Lato",
                 "titleFontSize": 28,
-                "titleFont": font,
+                "titleFont": "Lato",
                 "title": " ",
                 "titleBaseline": "bottom",
-                "titleOffset": -30,
-            },
-       },
-    }
-    
-    
-import altair as alt
-alt.themes.register("my_theme", custom_theme)
-alt.themes.enable("my_theme")
+                "titleOffset": -30
+            }
+       }
+}
