@@ -15,7 +15,7 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # format data
     (X, y, y_errors), style = unpack_graph_object(graph_object)
-    p = figure(width=parameters['width'], height=parameters['height'])
+    p = figure(width=parameters.get('width'), height=parameters.get('height'))
 
     # plot each layer
     for y, y_error in zip(y, y_errors):
@@ -55,7 +55,7 @@ def create_altair_graph(graph_object):
         # create points
         points = base.mark_point(
             filled=True,
-            size=parameters['alt_point_size'],
+            size=parameters.get('alt_point_size'),
         ).encode(
             x='X',
             y='y'

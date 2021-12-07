@@ -27,7 +27,7 @@ def generate_data():
     X, y = data_distributions[distribution](parameters)
 
     # generate error values for each datapoint
-    error_bar_max = calculate_y_lim(y.flatten())
+    error_bar_max = calculate_y_lim(y.flatten(), threshold_name='error_max_threshold')
     error_bar_min = calculate_y_lim(y.flatten(), threshold_name='error_min_threshold')
     y_error = [np.random.uniform(error_bar_min, error_bar_max, size=X.shape) for _ in range(len(y))]
     return {
@@ -36,7 +36,7 @@ def generate_data():
         'y_error': y_error,
     }
 
-def calculate_y_lim(y, threshold_name='error_max_threshold'):
+def calculate_y_lim(y, threshold_name):
     # create violin
-    height_limit = (np.max(y) - np.min(y)) * parameters[threshold_name]
+    height_limit = (np.max(y) - np.min(y)) * parameters.get(threshold_name, 0)
     return height_limit

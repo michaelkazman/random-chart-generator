@@ -17,7 +17,7 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # unpack data and create plot
     (X, y), style = unpack_graph_object(graph_object)
-    p = figure(width=parameters['width'], height=parameters['height'])
+    p = figure(width=parameters.get('width'), height=parameters.get('height'))
     
     # draw each line individually
     for index, y_list in enumerate(y):

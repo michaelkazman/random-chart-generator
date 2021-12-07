@@ -7,15 +7,27 @@ from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from utils.creators import unpack_graph_object
 
-parameters = {
-    'width':    400,
-    'height':   400,
-    'colors': ['red', 'blue', 'green', 'orange', 'purple']
-}
+from bokeh.themes import Theme
+from bokeh.io import curdoc
+import json
+import os
+
+def setup_graph():
+    set_theme(get_theme())
+
+def get_theme():
+    theme_path = 'themes/{dir}'.format(dir='bokeh')
+    theme_name = np.random.choice(os.listdir(theme_path))
+    with open('{path}/{name}'.format(path=theme_path, name=theme_name)) as f:
+      return Theme(json=json.load(f))
+
+def set_theme(theme): 
+    print(theme)
+    curdoc().theme = theme
 
 def create_bokeh_graph(graph_object):
     #unpack data
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y), styles = unpack_graph_object(graph_object)
     y = y.tolist()
     num_layers = len(y)    
     layer_names = [str(i) for i in range(num_layers)]
@@ -23,22 +35,27 @@ def create_bokeh_graph(graph_object):
     # format dict with x and y such that y layers is labelled with ['y1', 'y2', ...]
     layers = { 'x': X }
     layers.update(dict([(str(index), layer) for index, layer in enumerate(y)]))
-
-    # ensure each layer has a different color
-    layer_colors = parameters['colors'][:num_layers]
     
     # create source
     df = ColumnDataSource(data=layers)
     
+    setup_graph()
     # make figure
-    p = figure(width=parameters['width'], height=parameters['height'])
-    p.varea_stack(layer_names, x='x', source=df, color=layer_colors)
+    p = figure(
+        width=styles.get('width'),
+        height=styles.get('height'),
+        x_axis_label='X',
+        y_axis_label='y',
+    )
+    p.varea_stack(layer_names, x='x', source=df, color=styles.get('color'))
+
+    curdoc().add_root(p)
 
     return p
     
 def create_altair_graph(graph_object):
     # unpack data
-    (X, y_layers), style = unpack_graph_object(graph_object)
+    (X, y_layers), styles = unpack_graph_object(graph_object)
     num_layers = len(y_layers)
 
     # create labels to group layers by
@@ -50,28 +67,28 @@ def create_altair_graph(graph_object):
     X = np.append(X, [X] * (num_layers - 1))
     y = y_layers.flatten()
     layer_names = layer_names.flatten()
-    
+
     # create data frame
     df = pd.DataFrame({
-        'x': X,
+        'X': X,
         'y': y,
         'layer_names': layer_names
     })
 
     # create area chart
     p = alt.Chart(df).mark_area().encode(
-        x = 'x:T',
+        x = 'X:T',
         y = 'y:Q',
-        color = 'layer_names:N',
+        color = alt.Color('layer_names:N', legend=None)
     ).properties(
-        width=parameters['width'],
-        height=parameters['height'],
+        width=styles.get('width'),
+        height=styles.get('height'),
     )
     return p
 
 def create_plotnine_graph(graph_object):
     # unpack data
-    (X, y_layers), style = unpack_graph_object(graph_object)
+    (X, y_layers), styles = unpack_graph_object(graph_object)
     num_layers = len(y_layers)
     
     # create labels to group layers by
@@ -93,6 +110,11 @@ def create_plotnine_graph(graph_object):
     })
     
     # make plot for each layer
-    p = p9.ggplot(data=data, mapping=p9.aes(x=X, y=y_layers, fill=layer_names)) + p9.geom_area()
-    
+    p = (
+        p9.ggplot(data=data, mapping=p9.aes(x=X, y=y_layers, fill=layer_names))
+        + p9.geom_area(show_legend=False)
+        + p9.labels.xlab('X')
+        + p9.labels.ylab('y')
+    )
+        
     return p

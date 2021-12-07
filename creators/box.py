@@ -29,7 +29,7 @@ def create_bokeh_graph(graph_object):
     upper, lower = limits
     q1, q2, q3 = quartiles
     outx, outy = outliers
-    line_color = parameters['line_color']
+    line_color = parameters.get('line_color')
 
     # get X labels
     X = np.unique(df.X)
@@ -51,7 +51,7 @@ def create_bokeh_graph(graph_object):
 
     # outliers
     if ((outx != None) and (outy != None)):
-        p.circle(outx, outy, size=parameters['outlier_size'], fill_alpha=parameters['outlier_fill_opacity'])
+        p.circle(outx, outy, size=parameters['outlier_size'], fill_alpha=parameters.get('outlier_fill_opacity'))
 
     return p
 
@@ -62,8 +62,8 @@ def create_altair_graph(graph_object):
 
     # create data frame and declare local variables
     df = pd.DataFrame(dict(X=X, y=y))
-    width = parameters['width']
-    height = parameters['height']
+    width = parameters.get('width', None)
+    height = parameters.get('height', None)
 
     # create box plot chart
     box_plot = alt.Chart(df).mark_boxplot().encode(
@@ -120,7 +120,7 @@ def create_altair_graph(graph_object):
     ).encode(
         x='X',
         y='y:Q',
-        color=alt.value(parameters['alt_line_color'])
+        color=alt.value(parameters.get('alt_line_color', None))
     )
 
     # layer into main chart

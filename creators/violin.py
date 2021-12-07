@@ -66,7 +66,7 @@ def create_altair_graph(graph_object):
             stack='center',
             impute=None,
             title=None,
-            scale=alt.Scale(nice=False, zero=False, padding=parameters['padding']),
+            scale=alt.Scale(nice=False, zero=False, padding=parameters.get('padding')),
             axis=alt.Axis(labels=False, values=[0], grid=False, ticks=True),
         ),
     )
@@ -114,5 +114,8 @@ def create_plotnine_graph(graph_object):
 
 def calculate_y_lim(y, threshold_names=['height_min_threshold', 'height_max_threshold']):
     # get height range
-    height_range = (np.min(y) * (1 + parameters[threshold_names[0]]), np.max(y) * (1 + parameters[threshold_names[1]]))
+    height_range = (
+        np.min(y) * (1 + parameters.get(threshold_names[0], 0)),
+        np.max(y) * (1 + parameters.get(threshold_names[1], 0))
+    )
     return height_range
