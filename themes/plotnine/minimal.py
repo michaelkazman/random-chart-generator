@@ -1,9 +1,6 @@
-from .elements import element_blank
-from .theme import theme
-from .theme_bw import theme_bw
+import plotnine as p9
 
-
-class theme_minimal(theme_bw):
+class Theme(p9.themes.theme_bw):
     """
     A minimalistic theme with no background annotations
 
@@ -17,14 +14,14 @@ class theme_minimal(theme_bw):
     """
 
     def __init__(self, base_size=11, base_family=None):
-        theme_bw.__init__(self, base_size, base_family)
+        p9.themes.theme_bw.__init__(self, base_size, base_family)
         self.add_theme(
-            theme(legend_background=element_blank(),
-                  legend_key=element_blank(),
-                  panel_background=element_blank(),
-                  panel_border=element_blank(),
-                  strip_background=element_blank(),
-                  plot_background=element_blank(),
-                  axis_ticks=element_blank(),
+            p9.themes.theme(legend_background=p9.themes.elements.element_blank(),
+                  legend_key=p9.themes.elements.element_blank(),
+                  panel_background=p9.themes.elements.element_blank(),
+                  panel_border=p9.themes.elements.element_blank(),
+                  strip_background=p9.themes.elements.element_blank(),
+                  plot_background=p9.themes.elements.element_blank(),
+                  axis_ticks=p9.themes.elements.element_blank(),
                   axis_ticks_length=12),
             inplace=True)

@@ -1,9 +1,6 @@
-from .elements import element_line, element_rect, element_blank
-from .theme import theme
-from .theme_bw import theme_bw
+import plotnine as p9
 
-
-class theme_classic(theme_bw):
+class Theme(p9.themes.theme_bw):
     """
     A classic-looking theme, with x & y axis lines and
     no gridlines.
@@ -18,17 +15,17 @@ class theme_classic(theme_bw):
     """
 
     def __init__(self, base_size=11, base_family=None):
-        theme_bw.__init__(self, base_size, base_family)
+        p9.themes.theme_bw.__init__(self, base_size, base_family)
         self.add_theme(
-            theme(panel_border=element_blank(),
-                  axis_line=element_line(color='black'),
-                  panel_grid_major=element_line(),
-                  panel_grid_major_x=element_blank(),
-                  panel_grid_major_y=element_blank(),
-                  panel_grid_minor=element_line(),
-                  panel_grid_minor_x=element_blank(),
-                  panel_grid_minor_y=element_blank(),
-                  strip_background=element_rect(
+            p9.themes.theme(panel_border=p9.themes.elements.element_blank(),
+                  axis_line=p9.themes.elements.element_line(color='black'),
+                  panel_grid_major=p9.themes.elements.element_line(),
+                  panel_grid_major_x=p9.themes.elements.element_blank(),
+                  panel_grid_major_y=p9.themes.elements.element_blank(),
+                  panel_grid_minor=p9.themes.elements.element_line(),
+                  panel_grid_minor_x=p9.themes.elements.element_blank(),
+                  panel_grid_minor_y=p9.themes.elements.element_blank(),
+                  strip_background=p9.themes.elements.element_rect(
                       colour='black', fill='None', size=1),
-                  legend_key=element_blank()),
+                  legend_key=p9.themes.elements.element_blank()),
             inplace=True)
