@@ -1,15 +1,28 @@
-from importlib import import_module
+from utils.utils import get_module_attr, get_library_class
 
 def create_graph(graph_type, library, graph_object):
-    create_module = import_module('creators.{graph_type}'.format(graph_type=graph_type))
-    creator_function_name = 'create_{library}_graph'.format(library=library)
-    creator_function = getattr(create_module, creator_function_name)
-    graph = creator_function(graph_object)
+    # set theme 
+    theme = graph_object.get('styles', {}).get('theme')
+    library_class = get_library_class(library)
+    library_class.set_theme(theme)
+
+    # graph creation
+    creator_function = get_module_attr(
+        'creators.{graph_type}'.format(graph_type=graph_type),
+        'create_{library}_graph'.format(library=library),
+    )
+    created_graph = creator_function(graph_object)
+
+    # run any post setup library-dependent steps 
+    # will return new graph (if applicable)
+    post_creation_graph = library_class.post_creation_hook(created_graph)
+    graph = created_graph if post_creation_graph == None else post_creation_graph 
+    
     return graph
 
 def unpack_graph_object(graph_object):
     unpacked_object = (
-        graph_object['data'].values(),
-        graph_object['styles'], 
+        graph_object.get('data', {}).values(),
+        graph_object.get('styles', {}), 
     )
     return unpacked_object

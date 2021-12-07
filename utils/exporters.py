@@ -1,9 +1,7 @@
-import sys
 import json
 import logging
 import holoviews as hv
-
-from importlib import import_module
+from utils.utils import get_library_class
 
 def export_graph_image(graph, library, file_path, regeneration=False):
     # provides a distinction in the logs between export and chart re-generation
@@ -14,10 +12,8 @@ def export_graph_image(graph, library, file_path, regeneration=False):
     if ('holoviews' in str(type(graph))):
         graph = hv.render(graph)
     
-    export_module = import_module('libraries.{library}'.format(library=library))
-    export_function_name = 'export_graph'.format(library=library)
-    export_function = getattr(export_module, export_function_name)
-    export_function(graph, file_path)
+    export_class = get_library_class(library)
+    export_class.export_graph(graph, file_path)
 
 def export_graph_data(data, file_path):
     log_message('Exporting data {file_path}'.format(file_path=file_path))
