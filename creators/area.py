@@ -12,19 +12,6 @@ from bokeh.io import curdoc
 import json
 import os
 
-def setup_graph():
-    set_theme(get_theme())
-
-def get_theme():
-    theme_path = 'themes/{dir}'.format(dir='bokeh')
-    theme_name = np.random.choice(os.listdir(theme_path))
-    with open('{path}/{name}'.format(path=theme_path, name=theme_name)) as f:
-      return Theme(json=json.load(f))
-
-def set_theme(theme): 
-    print(theme)
-    curdoc().theme = theme
-
 def create_bokeh_graph(graph_object):
     #unpack data
     (X, y), styles = unpack_graph_object(graph_object)
@@ -38,8 +25,7 @@ def create_bokeh_graph(graph_object):
     
     # create source
     df = ColumnDataSource(data=layers)
-    
-    setup_graph()
+
     # make figure
     p = figure(
         width=styles.get('width'),

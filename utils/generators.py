@@ -1,11 +1,9 @@
-from importlib import import_module
 import numpy as np
 import bisect 
+from utils.utils import get_module_attr
 
 def generate_data(graph_type):
-    generate_module = import_module('generators.{graph_type}'.format(graph_type=graph_type))
-    generate_function_name = 'generate_data'
-    generate_function = getattr(generate_module, generate_function_name)
+    generate_function = get_module_attr('generators.{graph_type}'.format(graph_type=graph_type), 'generate_data')
     data = generate_function()
     return data
 
