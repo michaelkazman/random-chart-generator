@@ -1,9 +1,6 @@
-from .elements import element_line, element_rect, element_text, element_blank
-from .theme import theme
-from .theme_gray import theme_gray
+import plotnine as p9
 
-
-class theme_dark(theme_gray):
+class Theme(p9.themes.theme_gray):
     """
     The dark cousin of :class:`theme_light`, with similar line
     sizes but a dark background. Useful to make thin colored
@@ -19,16 +16,16 @@ class theme_dark(theme_gray):
     """
 
     def __init__(self, base_size=11, base_family=None):
-        theme_gray.__init__(self, base_size, base_family)
-        self.add_theme(theme(
-            axis_ticks=element_line(color='#666666', size=0.5),
-            axis_ticks_minor=element_blank(),
-            legend_key=element_rect(
+        p9.theme_gray.__init__(self, base_size, base_family)
+        self.add_theme(p9.themes.theme(
+            axis_ticks=p9.themes.elements.element_line(color='#666666', size=0.5),
+            axis_ticks_minor=p9.themes.elements.element_blank(),
+            legend_key=p9.themes.elements.element_rect(
                 fill='#7F7F7F', color='#666666', size=0.5),
-            panel_background=element_rect(fill='#7F7F7F', color='None'),
-            panel_grid_major=element_line(color='#666666', size=0.5),
-            panel_grid_minor=element_line(color='#737373', size=0.25),
-            strip_background=element_rect(fill='#333333', color='None'),
-            strip_text_x=element_text(color='white'),
-            strip_text_y=element_text(color='white', angle=-90)
+            panel_background=p9.themes.elements.element_rect(fill='#7F7F7F', color='None'),
+            panel_grid_major=p9.themes.elements.element_line(color='#666666', size=0.5),
+            panel_grid_minor=p9.themes.elements.element_line(color='#737373', size=0.25),
+            strip_background=p9.themes.elements.element_rect(fill='#333333', color='None'),
+            strip_text_x=p9.themes.elements.element_text(color='white'),
+            strip_text_y=p9.themes.elements.element_text(color='white', angle=-90)
         ), inplace=True)

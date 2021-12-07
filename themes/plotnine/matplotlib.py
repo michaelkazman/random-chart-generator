@@ -1,11 +1,7 @@
+import plotnine as p9
 import matplotlib as mpl
 
-from ..options import get_option
-from .theme import theme
-from .elements import element_rect
-
-
-class theme_matplotlib(theme):
+class Theme(p9.themes.theme):
     """
     The default matplotlib look and feel.
 
@@ -25,15 +21,19 @@ class theme_matplotlib(theme):
     """
 
     def __init__(self, rc=None, fname=None, use_defaults=True):
-        theme.__init__(
+        p9.themes.theme.__init__(
             self,
-            aspect_ratio=get_option('aspect_ratio'),
-            dpi=get_option('dpi'),
-            figure_size=get_option('figure_size'),
-            legend_key=element_rect(fill='None', colour='None'),
+            aspect_ratio=p9.options.get_option('aspect_ratio'),
+            dpi=p9.options.get_option('dpi'),
+            figure_size=p9.options.get_option('figure_size'),
+            legend_key=p9.themes.elements.element_rect(fill='None', colour='None'),
             legend_key_size=16,
             panel_spacing=0.1,
-            strip_background=element_rect(
+            
+            panel_background=p9.themes.elements.element_rect(fill='#FFFFFF'),
+            plot_background=p9.themes.elements.element_rect(fill='#FFFFFF'),
+
+            strip_background=p9.themes.elements.element_rect(
                 fill='#D9D9D9', color='#D9D9D9', size=1),
             complete=True)
 
