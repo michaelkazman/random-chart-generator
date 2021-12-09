@@ -14,12 +14,12 @@ class Library():
         raise NotImplementedError
 
     # sets the theme 
-    def set_theme(theme):
+    def set_theme(graph_type, theme):
         raise NotImplementedError
 
     # occurs after the creation is run, passes in the graph
     # in case any modifications are needed
-    def post_creation_hook(graph):
+    def post_creation_hook(graph_type, graph):
         pass
 
     # exports the provided graph to the specified file path

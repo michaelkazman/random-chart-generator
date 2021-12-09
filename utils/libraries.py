@@ -1,7 +1,7 @@
 import os
 import json
 import numpy as np
-from utils.utils import get_files_from_dir, get_module_attr
+from utils.utils import json_from_file, get_files_from_dir, get_module_attr
 
 # get list of themes (excluding python system files)
 def get_themes(dir):
@@ -21,7 +21,7 @@ def get_theme_object(file_path, dir):
     theme = {}
     # json theme objects
     if file_extension == '.json':
-        theme =  json.load('themes/{dir}/{file_path}'.format(file_path=file_path, dir=dir))
+        theme =  json_from_file('themes/{dir}/{file_path}'.format(file_path=file_path, dir=dir))
     # class-based themes
     elif file_extension == '.py':
         theme_class = get_module_attr('themes.{dir}.{file_name}'.format(dir=dir, file_name=file_name), 'Theme')

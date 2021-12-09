@@ -16,7 +16,7 @@ class Library(BaseLibrary):
         theme_file_path = get_random_theme('altair')
         return theme_file_path
 
-    def set_theme(theme):
+    def set_theme(graph_type, theme):
         alt.themes.enable(theme)
 
     def export_graph(graph, file_path):

@@ -4,7 +4,7 @@ def create_graph(graph_type, library, graph_object):
     # set theme 
     theme = graph_object.get('styles', {}).get('theme')
     library_class = get_library_class(library)
-    library_class.set_theme(theme)
+    library_class.set_theme(graph_type, theme)
 
     # graph creation
     creator_function = get_module_attr(
@@ -15,7 +15,7 @@ def create_graph(graph_type, library, graph_object):
 
     # run any post setup library-dependent steps 
     # will return new graph (if applicable)
-    post_creation_graph = library_class.post_creation_hook(created_graph)
+    post_creation_graph = library_class.post_creation_hook(graph_type, created_graph)
     graph = created_graph if post_creation_graph == None else post_creation_graph 
     
     return graph

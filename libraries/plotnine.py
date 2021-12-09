@@ -8,7 +8,7 @@ class Library(BaseLibrary):
         theme_file_path = get_random_theme('plotnine')
         return theme_file_path
 
-    def set_theme(theme):
+    def set_theme(graph_type, theme):
         theme = get_theme_object(theme, 'plotnine')
         p9.theme_set(theme)
     
