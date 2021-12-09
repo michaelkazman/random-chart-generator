@@ -1,6 +1,17 @@
 {
     "default": {
-
+        "width": {
+            "type": "value",
+            "value": 400
+        },
+        "height": {
+            "type": "value",
+            "value": 400
+        },
+        "color": {
+            "type": "color",
+            "repeat": true
+        }
     }, 
     "bokeh": {
 
