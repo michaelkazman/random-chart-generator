@@ -15,7 +15,11 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # format data
     (X, y, y_errors), style = unpack_graph_object(graph_object)
-    p = figure(width=parameters.get('width'), height=parameters.get('height'))
+    p = figure(
+        width=parameters.get('width'), 
+        height=parameters.get('height'), 
+        toolbar_location=None,
+    )
 
     # plot each layer
     for y, y_error in zip(y, y_errors):
@@ -64,7 +68,8 @@ def create_altair_graph(graph_object):
         # create error bars
         errorbars = base.mark_errorbar().encode(
             x='X',
-            y='ymin:Q',
+            # y='ymin:Q',
+            y=alt.Y('ymin:Q', axis=alt.Axis(title='y')),
             y2='ymax:Q'
         )
 
@@ -115,6 +120,15 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
-    p = p9.ggplot(data=df, mapping=p9.aes(x=X, y=y_layers, color=layer_names, ymax='y_err_max', ymin='y_err_min')) + p9.geom_line() + p9.geom_point() + p9.geom_errorbar()
+    p = p9.ggplot(
+        data=df, 
+        mapping=p9.aes(
+            x=X, 
+            y=y_layers, 
+            color=layer_names, 
+            ymax='y_err_max', 
+            ymin='y_err_min',
+        )
+    ) + p9.geom_line(show_legend='None') + p9.geom_point(show_legend='None') + p9.geom_errorbar(show_legend='None')
 
     return p

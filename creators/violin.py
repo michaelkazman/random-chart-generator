@@ -31,6 +31,7 @@ def create_bokeh_graph(graph_object):
         'y': y,
     })
 
+    # create holoviews plot
     p = data.hvplot.violin(
         y='y',
         by='X',
@@ -39,6 +40,10 @@ def create_bokeh_graph(graph_object):
     ).opts(opts.Violin(
         ylim=calculate_y_lim(y, ['bokeh_height_min_threshold', 'bokeh_height_max_threshold']),
     ))
+
+    # turn plot into bokeh plot, and set toolbar to autohide
+    p = hv.render(p, backend='bokeh')
+    p.toolbar.autohide = True
 
     return p
 

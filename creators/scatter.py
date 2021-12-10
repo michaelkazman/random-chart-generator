@@ -25,7 +25,7 @@ def create_bokeh_graph(graph_object):
         width=parameters.get('width'),
         height=parameters.get('height'),
         min_border=0,
-        toolbar_location=None
+        toolbar_location=None,
     )
 
     # create glyph (symbol for plotting data points)

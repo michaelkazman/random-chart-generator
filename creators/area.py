@@ -32,8 +32,14 @@ def create_bokeh_graph(graph_object):
         height=styles.get('height'),
         x_axis_label='X',
         y_axis_label='y',
+        toolbar_location=None,
     )
-    p.varea_stack(layer_names, x='x', source=df, color=styles.get('color'))
+    p.varea_stack(
+        layer_names, 
+        x='x', 
+        source=df, 
+        color=styles.get('color'),
+    )
 
     curdoc().add_root(p)
 
@@ -54,6 +60,8 @@ def create_altair_graph(graph_object):
     y = y_layers.flatten()
     layer_names = layer_names.flatten()
 
+    print(X)
+
     # create data frame
     df = pd.DataFrame({
         'X': X,
@@ -63,9 +71,10 @@ def create_altair_graph(graph_object):
 
     # create area chart
     p = alt.Chart(df).mark_area().encode(
-        x = 'X:T',
+        # x = alt.X('X:T', axis=alt.Axis(format=str(np.amax(X)))), #'X:T' values='X:Q'
+        x = 'X:O',
         y = 'y:Q',
-        color = alt.Color('layer_names:N', legend=None)
+        color = alt.Color('layer_names:N', legend=None),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),

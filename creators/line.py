@@ -17,7 +17,11 @@ parameters = {
 def create_bokeh_graph(graph_object):
     # unpack data and create plot
     (X, y), style = unpack_graph_object(graph_object)
-    p = figure(width=parameters.get('width'), height=parameters.get('height'))
+    p = figure(
+        width=parameters.get('width'),
+        height=parameters.get('height'),
+        toolbar_location=None
+    )
     
     # draw each line individually
     for index, y_list in enumerate(y):
@@ -68,6 +72,13 @@ def create_plotnine_graph(graph_object):
     })
     
     # make plot for each layer
-    p = p9.ggplot(data=df, mapping=p9.aes(x=X, y=y_layers, color=layer_names)) + p9.geom_line()
+    p = p9.ggplot(
+        data=df, 
+        mapping=p9.aes(
+            x=X, 
+            y=y_layers, 
+            color=layer_names,
+        )
+    ) + p9.geom_line(show_legend='None')
 
     return p
