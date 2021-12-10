@@ -3,7 +3,7 @@ from sklearn.datasets import make_regression
 
 parameters = {
     'num_features' : 1, # required to ensure no negative dimensions occur
-    'sample_range' : (30, 200),
+    'sample_range' : (30, 120),
     'tail_strength_range' : (0, 0.7),
     'noise_range' : (1, 80),
     'random_noise_range' : (200, 400),
