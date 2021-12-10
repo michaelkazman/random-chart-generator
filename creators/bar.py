@@ -44,11 +44,13 @@ def create_altair_graph(graph_object):
         'y': y,
     })
 
+    print(X, y)
+
     # horizontal forces x to take the y values as quantitive
     encodings = { 'x': 'x:O', 'y': 'y:Q' } if is_vertical else { 'x': 'y:Q', 'y': 'x:O' }
     
     chart = alt.Chart(df).mark_bar().encode(
-        **encodings
+        **encodings,
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),

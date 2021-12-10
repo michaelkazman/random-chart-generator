@@ -19,8 +19,17 @@ def create_bokeh_graph(graph_object):
     right_edges = y[1:]
 
     # create plot
-    p = figure(title=None, tools='')
-    p.quad(top=X, bottom=0, left=left_edges, right=right_edges, alpha=parameters.get('alpha'))
+    p = figure(
+        title=None, 
+        toolbar_location=None,
+    )
+    p.quad(
+        top=X, 
+        bottom=0, 
+        left=left_edges, 
+        right=right_edges, 
+        alpha=parameters.get('alpha'),
+    )
 
     return p
 

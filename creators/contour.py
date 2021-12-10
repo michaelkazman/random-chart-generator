@@ -19,7 +19,10 @@ def create_bokeh_graph(graph_object):
         plot_width=parameters.get('width'),
         plot_height=parameters.get('height'),
         x_range=[X[0][0], X[-1][-1]],
-        y_range=[y[0][0], y[-1][-1]]
+        y_range=[y[0][0], y[-1][-1]],
+        x_axis_label='X',
+        y_axis_label='y',
+        toolbar_location=None,
     )
     # plot various lines (representing the contour segments)
     p.multi_line(

@@ -35,7 +35,7 @@ def create_bokeh_graph(graph_object):
     X = np.unique(df.X)
 
     # define figure
-    p = figure(x_range=X)
+    p = figure(x_range=X, toolbar_location=None)
 
     # whiskers
     p.segment(X, upper.y, X, q3.y, line_color=line_color)
