@@ -28,7 +28,7 @@ def generate_data():
     bins = np.random.randint(*parameters['bins_range'])
     
     # get data distribution (and ensure no negative y values)
-    X, y = data_distributions[distribution](size, bins)
+    y, X = data_distributions[distribution](size, bins)
     y = y.clip(0)
 
     return {
