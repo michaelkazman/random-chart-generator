@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd
+import plotnine as p9
 import matplotlib.pyplot as plt
 
 from bokeh.plotting import figure
@@ -74,4 +77,27 @@ def create_altair_graph(graph_object):
     return {}
 
 def create_plotnine_graph(graph_object):
-    return {}
+    # unpack data
+    (X, y, z), style = unpack_graph_object(graph_object)
+
+    # format data for data frame
+    X = X.flatten()
+    y = y.flatten()
+
+    # create data frame
+    df = pd.DataFrame({
+        'X': X,
+        'y': y,
+    })
+
+    # create plot
+    p = p9.ggplot(p9.aes(
+        x='X',
+        y='y',
+    ), data=df) + p9.stat_density_2d(
+        p9.aes(fill='..level..'),
+        levels=np.array([.05, 0.1, 0.15, 0.2])*0.1,
+        geom='polygon',
+    ) + p9.lims(x=(0.5, 6), y =(40, 110))
+
+    return p

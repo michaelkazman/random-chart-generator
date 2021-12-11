@@ -4,7 +4,8 @@ import plotnine as p9
 
 from bokeh.io import curdoc
 from utils.creators import unpack_graph_object
-from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, VBar, HBar
+from bokeh.plotting import figure
+from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, VBar, HBar, FixedTicker
 
 def create_bokeh_graph(graph_object):
     # format data
@@ -12,27 +13,22 @@ def create_bokeh_graph(graph_object):
     df = ColumnDataSource(dict(X=X, top=y))
 
     # create plot
-    p = Plot(
+    p = figure(
         title=None,
         width=styles.get('width'),
         height=styles.get('height'),
         min_border=0,
-        toolbar_location=None
+        toolbar_location=None,
+        x_range=X if is_vertical else None,
+        y_range=X[::-1] if not is_vertical else None,
     )
+
+    print(is_vertical)
 
     # create glyphs based on vertical or horizontal
     glyph = (VBar(x='X', top='top', bottom=0, width=styles.get('bar_width')) if is_vertical
         else HBar(y='X', right='top', left=0, height=styles.get('bar_width')))
     p.add_glyph(df, glyph)
-
-    # adjust axes
-    xaxis, yaxis = LinearAxis(), LinearAxis()
-    p.add_layout(xaxis, 'below')
-    p.add_layout(yaxis, 'left')
-
-    # cosmetic adjustments (makes graph look more elegant)
-    p.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
-    p.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
     return p
 
@@ -43,8 +39,6 @@ def create_altair_graph(graph_object):
         'x': X,
         'y': y,
     })
-
-    print(X, y)
 
     # horizontal forces x to take the y values as quantitive
     encodings = { 'x': 'x:O', 'y': 'y:Q' } if is_vertical else { 'x': 'y:Q', 'y': 'x:O' }

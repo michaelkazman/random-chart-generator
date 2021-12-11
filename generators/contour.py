@@ -1,4 +1,8 @@
 import numpy as np
+import numpy as np
+import plotnine as p9
+from plotnine.data import faithful
+
 
 parameters = {
     'start_range':  (0, 4),
@@ -25,7 +29,7 @@ def generate_data():
     z = np.sin(X) ** constant + np.cos(constant + y * X) * np.cos(X)
 
     return {
-        'X': X,
-        'y': y,
+        'X': faithful['eruptions'].to_numpy(),
+        'y': faithful['waiting'].to_numpy(),
         'z': z,
     }

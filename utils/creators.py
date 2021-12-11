@@ -26,3 +26,6 @@ def unpack_graph_object(graph_object):
         graph_object.get('styles', {}), 
     )
     return unpacked_object
+
+def convert_numbers_to_letters(numbers):
+    return [chr(int(i) + 65) for i in numbers]
