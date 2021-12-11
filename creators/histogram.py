@@ -1,5 +1,6 @@
 import pandas as pd
 import altair as alt
+import plotnine as p9
 
 from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
@@ -14,9 +15,9 @@ def create_bokeh_graph(graph_object):
     # unpack data
     (X, y), style = unpack_graph_object(graph_object)
 
-    # the x-coordinates of the left edges
-    left_edges = y[:-1]
-    right_edges = y[1:]
+    # the x-coordinates of the edges
+    left_edges = X[:-1]
+    right_edges = X[1:]
 
     # create plot
     p = figure(
@@ -24,7 +25,7 @@ def create_bokeh_graph(graph_object):
         toolbar_location=None,
     )
     p.quad(
-        top=X, 
+        top=y, 
         bottom=0, 
         left=left_edges, 
         right=right_edges, 
@@ -39,8 +40,8 @@ def create_altair_graph(graph_object):
     
     # format data
     df = pd.DataFrame({
-        'X': y[1:],
-        'y': X, # set edges to right
+        'X': X[:-1], # set edges to right
+        'y': y, 
     })
 
     # create histogram chart
@@ -51,6 +52,18 @@ def create_altair_graph(graph_object):
 
     return p
 
-
 def create_plotnine_graph(graph_object):
-    return {}
+    # unpack data, and set edges to right
+    (X, y), style = unpack_graph_object(graph_object)
+    X = X[:-1]
+
+    # format data
+    df = pd.DataFrame({
+        'X': X, 
+        'y': y, 
+    })
+
+    # create plot
+    p = p9.ggplot(df, p9.aes(x='X', y=p9.after_stat('y'))) + p9.geom_histogram(bins=X.shape[0])
+
+    return p
