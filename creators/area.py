@@ -3,14 +3,11 @@ import pandas as pd
 import altair as alt
 import plotnine as p9
 
+from utils.creators import convert_numbers_to_letters
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from utils.creators import unpack_graph_object
-
-from bokeh.themes import Theme
 from bokeh.io import curdoc
-import json
-import os
 
 def create_bokeh_graph(graph_object):
     #unpack data
@@ -53,14 +50,12 @@ def create_altair_graph(graph_object):
     # create labels to group layers by
     layer_names = np.copy(y_layers)
     for i in range(num_layers):
-        layer_names[i, :] = str(i)
+        layer_names[i, :] = i
+    layer_names = layer_names.flatten()
 
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))
     y = y_layers.flatten()
-    layer_names = layer_names.flatten()
-
-    print(X)
 
     # create data frame
     df = pd.DataFrame({
@@ -90,13 +85,11 @@ def create_plotnine_graph(graph_object):
     layer_names = np.copy(y_layers)
     for i in range(num_layers):
         layer_names[i, :] = i
+    layer_names = convert_numbers_to_letters(layer_names.flatten())
 
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))
     y_layers = y_layers.flatten()
-    layer_names = layer_names.flatten()
-
-    layer_names = [chr(int(i)+65) for i in layer_names]
 
     data = pd.DataFrame({
         'X': X,

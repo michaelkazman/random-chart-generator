@@ -1,5 +1,7 @@
 import numpy as np
 
+from utils.creators import convert_numbers_to_letters
+
 parameters = {
     'x_range': (-5, 5),
     'height_range': (0, 50),
@@ -33,8 +35,10 @@ def generate_data():
     # random chance of graph being vertical/horizontal bar chart
     is_vertical = bool(np.random.randint(2))
 
+    bar_names = convert_numbers_to_letters(range(len(X)))
+
     return {
-        'X': X,
+        'X': bar_names,
         'y': y,
         'is_vertical': is_vertical
     }

@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from utils.creators import convert_numbers_to_letters
+
 parameters = {
     'num_violins_range': (2, 7),
     'num_samples_range': (60, 120),
@@ -13,10 +15,10 @@ def generate_data():
     num_samples = np.random.randint(*parameters['num_samples_range'])
 
     # generate names for violins ('A', 'B', etc.)
-    groups= [chr(65 + i) for i in range (0, num_violins)] 
+    groups = convert_numbers_to_letters(range(num_violins))
 
     # select random normal values
-    X = [np.random.choice(groups) for _ in range(num_samples)]
+    X = sorted([np.random.choice(groups) for _ in range(num_samples)])
     y = [np.random.normal(*parameters['y_data_range']) for _ in range(num_samples)]
 
     return {

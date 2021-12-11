@@ -4,7 +4,7 @@ import altair as alt
 import plotnine as p9
 
 from bokeh.plotting import figure
-from utils.creators import unpack_graph_object
+from utils.creators import convert_numbers_to_letters, unpack_graph_object
 
 parameters = {
     'width':    400,
@@ -101,14 +101,13 @@ def create_plotnine_graph(graph_object):
         for j in range(len(y_layers[i])):
             y_err_min[i][j] = y_layers[i][j] - y_errors[i][j]
             y_err_max[i][j] = y_layers[i][j] + y_errors[i][j]
-    
+
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))
     y_layers = y_layers.flatten()
     y_err_min = y_err_min.flatten()
     y_err_max = y_err_max.flatten()
-    layer_names = layer_names.flatten()
-    layer_names = [chr(int(i)+65) for i in layer_names]
+    layer_names = convert_numbers_to_letters(layer_names.flatten())
 
     # create data frame
     df = pd.DataFrame({
@@ -116,7 +115,6 @@ def create_plotnine_graph(graph_object):
         'y': y_layers,
         'y_err_min': y_err_min,
         'y_err_max': y_err_max,
-        'layer_names': layer_names
     })
 
     # create plot

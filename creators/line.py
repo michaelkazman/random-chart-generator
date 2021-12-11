@@ -4,7 +4,7 @@ import numpy as np
 import plotnine as p9
 
 from bokeh.plotting import figure
-from utils.creators import unpack_graph_object
+from utils.creators import convert_numbers_to_letters, unpack_graph_object
 
 parameters = {
     'width':    400,
@@ -61,8 +61,7 @@ def create_plotnine_graph(graph_object):
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))
     y_layers = y_layers.flatten()
-    layer_names = layer_names.flatten()
-    layer_names = [chr(int(i)+65) for i in layer_names]
+    layer_names = convert_numbers_to_letters(layer_names.flatten())
 
     # create data frame
     df = pd.DataFrame({
