@@ -14,7 +14,7 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
     # format data
-    (X, y, y_errors), style = unpack_graph_object(graph_object)
+    (X, y, y_errors, *_), style = unpack_graph_object(graph_object)
     p = figure(
         width=parameters.get('width'), 
         height=parameters.get('height'), 
@@ -38,7 +38,7 @@ def create_bokeh_graph(graph_object):
 
 def create_altair_graph(graph_object):
     # format data
-    (X, y, y_errors), style = unpack_graph_object(graph_object)
+    (X, y, y_errors, *_), style = unpack_graph_object(graph_object)
     layered_points, layered_errorbars, layered_lines = [], [], []
 
     # create each 'line' layer
@@ -90,7 +90,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
      # format data
-    (X, y_layers, y_errors), style = unpack_graph_object(graph_object)
+    (X, y_layers, y_errors, *_), style = unpack_graph_object(graph_object)
     num_layers = len(y_layers)
 
     # create labels to group layers by, and get max and min for error bars

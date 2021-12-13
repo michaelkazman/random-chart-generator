@@ -40,6 +40,7 @@ def generate_data():
     return {
         'X': bar_names,
         'y': y,
-        'is_vertical': is_vertical
+        'is_vertical': is_vertical,
+        'correlation': correlation,
     }
 

@@ -16,7 +16,7 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
     # unpack data and create plot
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y, *_), style = unpack_graph_object(graph_object)
     p = figure(
         width=parameters.get('width'),
         height=parameters.get('height'),
@@ -32,7 +32,7 @@ def create_bokeh_graph(graph_object):
 
 def create_altair_graph(graph_object):
     # unpack data
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y, *_), style = unpack_graph_object(graph_object)
 
     # for each layer, make data frame and store its line graph
     layered_lines = []
@@ -50,7 +50,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
      # unpack data
-    (X, y_layers), style = unpack_graph_object(graph_object)
+    (X, y_layers, *_), style = unpack_graph_object(graph_object)
     num_layers = len(y_layers)
     
     # create labels to group layers by
