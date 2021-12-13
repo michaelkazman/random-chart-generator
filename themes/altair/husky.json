@@ -1,0 +1,101 @@
+{
+  "width": 450,
+  "height": 300,
+  "config": {
+    "title": {
+      "fontSize": 18,
+      "font": "EncodeSans-Regular",
+      "anchor": "start",
+      "color": "#4b2e83"
+    },
+    "axisX": {
+      "domain": true,
+      "domainColor": "#444444",
+      "domainWidth": 1,
+      "grid": true,
+      "gridColor": "#d9d9d9",
+      "gridWidth": 0.5,
+      "labelFont": "OpenSans-Regular",
+      "labelFontSize": 12,
+      "labelColor": "#444444",
+      "labelAngle": 0, 
+      "tickColor": "#444444",
+      "tickSize": 5,
+      "titleFont": "OpenSans-Bold",
+      "titleFontSize": 12
+    },
+    "axisY": {
+      "domain": true,
+      "domainColor": "#444444",
+      "grid": true,
+      "gridColor": "#d9d9d9",
+      "gridWidth": 0.5,
+      "labelFont": "OpenSans-Regular",
+      "labelFontSize": 12,
+      "labelAngle": 0, 
+      "ticks": true,
+      "titleFont": "OpenSans-Bold",
+      "titleFontSize": 12
+    },
+    "header": {
+      "labelFont": "OpenSans-Regular",
+      "labelFontSize": 16,
+      "titleFont": "OpenSans-Bold",
+      "titleFontSize": 16
+    },
+    "range": {
+      "category": ["#4b2e83", "#b7a57a", "#d9d9d9", "#85754d", "#000000", "#444444"],
+      "diverging": ["#4b2e83", "#c2a5cf", "#d9d9d9", "#b7a57a", "#85754d"]
+    },
+    "legend": {
+      "labelFont": "OpenSans-Regular",
+      "labelFontSize": 12,
+      "symbolSize": 100,
+      "titleFont": "OpenSans-Bold",
+      "titleFontSize": 12
+    },
+    "area": {
+      "fill": "#4b2e83"
+    },
+    "circle": {
+      "fill": "#4b2e83",
+      "size": 40
+    },
+    "line": {
+      "color": "#4b2e83",
+      "stroke": "#4b2e83",
+      "strokeWidth": 3
+    },
+    "trail": {
+      "color": "#4b2e83",
+      "stroke": "#4b2e83",
+      "strokeWidth": 0,
+      "size": 1
+    },
+    "path": {
+      "stroke": "#4b2e83",
+      "strokeWidth": 0.5
+    },
+    "point": {
+      "color": "#4b2e83",
+      "size": 40
+    },
+    "text": {
+      "font": "OpenSans-Regular",
+      "color": "#4b2e83",
+      "fontSize": 11,
+      "align": "right",
+      "size": 14
+    }, 
+    "bar": {
+      "size": 10,
+      "binSpacing": 1,
+      "continuousBandSize": 10,
+      "fill": "#4b2e83",
+      "stroke": false
+    },
+    "tick": {
+      "color": "#4b2e83"
+    }
+  }   
+}

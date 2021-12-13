@@ -1,187 +1,187 @@
 {
-        "width": 685,
-        "height": 400,   
-        "autosize": "fit",
-        "config": {
-           "padding": 10,
-           "geoshape": {
-               "fill": "#C0C0C0"
-           },
-           "arc": {
-               "fill": "#282828"
-           },
-           "area": {
-               "fill": "#282828"
-           },
-           "axisBand": {
-               "grid": false
-           },
-           "axisBottom": {
-               "domain": false,
-               "domainColor": "black",
-               "domainWidth": 3,
-               "grid": true,
-               "gridColor": "#C9C9C9",
-               "gridWidth": 1,
-               "labelFontSize": 20,
-               "labelFont": "Lato",
-               "labelPadding": 8,
-               "labelAngle": 0,
-               "tickColor": "#282828",
-               "tickSize": 10,
-               "titleFontSize": 16,
-               "titlePadding": 10,
-               "titleFont": "Lato",
-               "title": ""
-           },
-           "axisLeft": {
-               "domainColor": "#282828",
-               "domainWidth": 1,
-               "gridColor": "#C9C9C9",
-               "gridWidth": 1,
-               "labelFontSize": 20,
-               "labelFont": "Lato",
-               "labelPadding": 8,
-               "tickColor": "#282828",
-               "tickSize": 10,
-               "tickCount": 10,
-               "ticks": true,
-               "titleFontSize": 18,
-               "titlePadding": 10,
-               "titleFont": "Lato"
-           },
-           "axisRight": {
-               "domainColor": "#282828",
-               "domainWidth": 1,
-               "gridColor": "#C9C9C9",
-               "gridWidth": 1,
-               "labelFontSize": 12,
-               "labelFont": "Lato",
-               "labelPadding": 4,
-               "tickColor": "#282828",
-               "tickSize": 10,
-               "ticks": true,
-               "titleFontSize": 14,
-               "titlePadding": 10,
-               "titleFont": "Lato"
-           },
-           "axisTop": {
-               "domain": false,
-               "domainColor": "black",
-               "domainWidth": 3,
-               "grid": true,
-               "gridColor": "#C9C9C9",
-               "gridWidth": 1,
-               "labelFontSize": 12,
-               "labelFont": "Lato",
-               "labelPadding": 4,
-               "tickColor": "#282828",
-               "tickSize": 10,
-               "titleFontSize": 14,
-               "titlePadding": 10,
-               "titleFont": "Lato"
-           },
-           "background": "#FFFAFA",
-           "group": {
-               "fill": "#FFFAFA"
-           },
-           "legend": {
-               "labelFontSize": 30,
-               "labelFont": "Lato",
-               "labelLimit": 500,
-               "padding": 10,
-               "symbolSize": 500,
-               "symbolType": "square",
-               "titleFontSize": 30,
-               "titlePadding": 10,
-               "titleFont": "Lato"
-           },
-           "line": {
-               "color": "#282828",
-               "stroke": "#282828",
-               "strokewidth": 5
-           },
-           "trail": {
-               "color": "#282828",
-               "stroke": "#282828",
-               "strokeWidth": 0,
-               "size": 5
-           },
-           "path": {
-               "stroke": "#282828",
-               "strokeWidth": 0.5
-           },
-           "point": {
-               "filled": true
-           },
-           "rect": {
-               "fill": "#A20C4B",
-               "opacity": 0.3
-           },
-           "range": {
-               "category": ["#dc0d7a", "#02a3cd", "#e4a100", "#dc0d12", "#0DDC6F","#074a7e", "#e46800", "#aa3594", "#a20c4b"],
-               "diverging": [
-                   "#dc0d12",
-                   "#e9686b",
-                   "#fbe1e1",
-                   "#dff4f9",
-                   "#81d1e6",
-                   "#03a3cd"
-               ],
-               "heatmap": [
-                   "#fcdfef",
-                   "#f8bfde",
-                   "#f59fce",
-                   "#f180be",
-                   "#ee60ad",
-                   "#eb409d",
-                   "#e7208c",
-                   "#e4007c"
-               ]
-           },
-           "symbol": {
-               "opacity": 1,
-               "shape": "circle",
-               "size": 40,
-               "strokeWidth": 1
-           },
-           "style": {
-               "bar": {
-                   "binSpacing": 2,
-                   "fill": "#282828",
-                   "stroke": false
-               },
-               "text": {
-                   "font": "Lato",
-                   "fontSize": 10,
-                   "align": "right",
-                   "text": "Made by @ChekosWH",
-                   "href": "https://twitter.com/ChekosWH",
-                   "fontWeight": 100,
-                   "size": 10,
-                   "dx": 300
-               }
-           },
-           "title":{
-               "anchor": "start",
-               "fontSize": 12,
-               "fontWeight": 200,
-               "font": "Lato",
-               "offset": 20
-           },
-           "view": {
-               "stroke": false,
-               "padding": 15
-           },
-            "header": {
-                "fontWeight": 400,
-                "labelFontSize": 28,
-                "labelFont": "Lato",
-                "titleFontSize": 28,
-                "titleFont": "Lato",
-                "title": " ",
-                "titleBaseline": "bottom",
-                "titleOffset": -30
+    "width": 685,
+    "height": 400,   
+    "autosize": "fit",
+    "config": {
+        "padding": 10,
+        "geoshape": {
+            "fill": "#C0C0C0"
+        },
+        "arc": {
+            "fill": "#282828"
+        },
+        "area": {
+            "fill": "#282828"
+        },
+        "axisBand": {
+            "grid": false
+        },
+        "axisBottom": {
+            "domain": false,
+            "domainColor": "black",
+            "domainWidth": 3,
+            "grid": true,
+            "gridColor": "#C9C9C9",
+            "gridWidth": 1,
+            "labelFontSize": 20,
+            "labelFont": "Lato",
+            "labelPadding": 8,
+            "labelAngle": 0,
+            "tickColor": "#282828",
+            "tickSize": 10,
+            "titleFontSize": 16,
+            "titlePadding": 10,
+            "titleFont": "Lato",
+            "title": ""
+        },
+        "axisLeft": {
+            "domainColor": "#282828",
+            "domainWidth": 1,
+            "gridColor": "#C9C9C9",
+            "gridWidth": 1,
+            "labelFontSize": 20,
+            "labelFont": "Lato",
+            "labelPadding": 8,
+            "tickColor": "#282828",
+            "tickSize": 10,
+            "tickCount": 10,
+            "ticks": true,
+            "titleFontSize": 18,
+            "titlePadding": 10,
+            "titleFont": "Lato"
+        },
+        "axisRight": {
+            "domainColor": "#282828",
+            "domainWidth": 1,
+            "gridColor": "#C9C9C9",
+            "gridWidth": 1,
+            "labelFontSize": 12,
+            "labelFont": "Lato",
+            "labelPadding": 4,
+            "tickColor": "#282828",
+            "tickSize": 10,
+            "ticks": true,
+            "titleFontSize": 14,
+            "titlePadding": 10,
+            "titleFont": "Lato"
+        },
+        "axisTop": {
+            "domain": false,
+            "domainColor": "black",
+            "domainWidth": 3,
+            "grid": true,
+            "gridColor": "#C9C9C9",
+            "gridWidth": 1,
+            "labelFontSize": 12,
+            "labelFont": "Lato",
+            "labelPadding": 4,
+            "tickColor": "#282828",
+            "tickSize": 10,
+            "titleFontSize": 14,
+            "titlePadding": 10,
+            "titleFont": "Lato"
+        },
+        "background": "#FFFAFA",
+        "group": {
+            "fill": "#FFFAFA"
+        },
+        "legend": {
+            "labelFontSize": 30,
+            "labelFont": "Lato",
+            "labelLimit": 500,
+            "padding": 10,
+            "symbolSize": 500,
+            "symbolType": "square",
+            "titleFontSize": 30,
+            "titlePadding": 10,
+            "titleFont": "Lato"
+        },
+        "line": {
+            "color": "#282828",
+            "stroke": "#282828",
+            "strokewidth": 5
+        },
+        "trail": {
+            "color": "#282828",
+            "stroke": "#282828",
+            "strokeWidth": 0,
+            "size": 5
+        },
+        "path": {
+            "stroke": "#282828",
+            "strokeWidth": 0.5
+        },
+        "point": {
+            "filled": true
+        },
+        "rect": {
+            "fill": "#A20C4B",
+            "opacity": 0.3
+        },
+        "range": {
+            "category": ["#dc0d7a", "#02a3cd", "#e4a100", "#dc0d12", "#0DDC6F","#074a7e", "#e46800", "#aa3594", "#a20c4b"],
+            "diverging": [
+                "#dc0d12",
+                "#e9686b",
+                "#fbe1e1",
+                "#dff4f9",
+                "#81d1e6",
+                "#03a3cd"
+            ],
+            "heatmap": [
+                "#fcdfef",
+                "#f8bfde",
+                "#f59fce",
+                "#f180be",
+                "#ee60ad",
+                "#eb409d",
+                "#e7208c",
+                "#e4007c"
+            ]
+        },
+        "symbol": {
+            "opacity": 1,
+            "shape": "circle",
+            "size": 40,
+            "strokeWidth": 1
+        },
+        "style": {
+            "bar": {
+                "binSpacing": 2,
+                "fill": "#282828",
+                "stroke": false
+            },
+            "text": {
+                "font": "Lato",
+                "fontSize": 10,
+                "align": "right",
+                "text": "Made by @ChekosWH",
+                "href": "https://twitter.com/ChekosWH",
+                "fontWeight": 100,
+                "size": 10,
+                "dx": 300
             }
-       }
+        },
+        "title":{
+            "anchor": "start",
+            "fontSize": 12,
+            "fontWeight": 200,
+            "font": "Lato",
+            "offset": 20
+        },
+        "view": {
+            "stroke": false,
+            "padding": 15
+        },
+        "header": {
+            "fontWeight": 400,
+            "labelFontSize": 28,
+            "labelFont": "Lato",
+            "titleFontSize": 28,
+            "titleFont": "Lato",
+            "title": " ",
+            "titleBaseline": "bottom",
+            "titleOffset": -30
+        }
+    }
 }
