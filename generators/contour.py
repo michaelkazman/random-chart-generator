@@ -1,35 +1,42 @@
 import numpy as np
 import numpy as np
-import plotnine as p9
-from plotnine.data import faithful
-
+import scipy.stats as st
 
 parameters = {
-    'start_range':  (0, 4),
-    'stop_range':  (4, 10), # min should be based on start's max
-    'features_range':  (4, 100), 
-    'z_constant_range':  (5, 10),
+    "num_points": 500,
+    "origin": (0, 0),
+    "covariance_range": [-5, 5],
+    "x_range": [-2, 2],
+    "y_range": [-2, 2],
+    "smoothness": 100j,
 }
 
 def generate_data():
-    # generate random x and y
-    x_start = np.random.uniform(*parameters['start_range'])
-    x_stop = np.random.uniform(*parameters['stop_range'])
-    y_start = np.random.uniform(*parameters['start_range'])
-    y_stop = np.random.uniform(*parameters['stop_range'])
-    features = np.random.randint(*parameters['features_range'])
+    # generate random data
+    cov = [
+        np.random.uniform(parameters.get('covariance_range'), 2),
+        np.random.uniform(parameters.get('covariance_range'), 2),
+    ]
+    data = np.random.multivariate_normal(
+        parameters.get('origin'),
+        cov,
+        parameters.get('num_points'),
+        check_valid='ignore',
+    )
 
-    # generate a mesh grid (as a basis for the contour)
-    x = np.linspace(x_start, x_stop, features)
-    y = np.linspace(y_start, y_stop, features)
-    X, y = np.meshgrid(x, y)
+    # compute kernel density estimate
+    XX, yy = data[:, 0], data[:, 1]
+    X, y = np.mgrid[
+        parameters.get("x_range")[0]:parameters.get("x_range")[1]:parameters.get("smoothness"),
+        parameters.get("y_range")[0]:parameters.get("y_range")[1]:parameters.get("smoothness"),
+    ]
+    positions = np.vstack([X.ravel(), y.ravel()])
+    kernel = st.gaussian_kde(np.vstack([XX, yy]))
+    z = np.reshape(kernel(positions).T, X.shape)
+    z[z==0] = 0.01
     
-    # calculate z based on x, y and random constants
-    constant = np.random.randint(*parameters['z_constant_range'])
-    z = np.sin(X) ** constant + np.cos(constant + y * X) * np.cos(X)
-
     return {
-        'X': faithful['eruptions'].to_numpy(),
-        'y': faithful['waiting'].to_numpy(),
-        'z': z,
+        'X': X,
+        'y': y,
+        'z': z
     }
