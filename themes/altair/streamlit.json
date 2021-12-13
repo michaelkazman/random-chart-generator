@@ -1,0 +1,91 @@
+{
+  "config": {
+    "arc": {"fill": "#F63366" },
+    "area": {"fill": "#F63366" },
+    "circle": {"fill": "#F63366", "stroke": "#262730", "strokeWidth": 0.5},
+    "line": {"stroke": "#F63366" },
+    "path": {"stroke": "#F63366" },
+    "point": {"stroke": "#F63366" },
+    "rect": {"fill": "#F63366" },
+    "shape": {"stroke": "#F63366" },
+    "symbol": {"fill": "#F63366" },
+    "title": {
+      "font": "IBM Plex Mono",
+      "color": "#262730",
+      "fontSize": 20,
+      "anchor": "start"
+    },
+    "axis": {
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#262730",
+      "titleFontSize": 12.8,
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#262730",
+      "labelFontSize": 12.8,
+      "gridColor": "#f0f2f6",
+      "domainColor": "#262730",
+      "tickColor": "#fff"
+    },
+    "header": {
+      "labelFont": "IBM Plex Mono",
+      "titleFont": "IBM Plex Mono",
+      "labelFontSize": 16,
+      "titleFontSize": 16
+    },
+    "legend": {
+      "titleFont": "IBM Plex Mono",
+      "titleColor": "#262730",
+      "titleFontSize": 12.8,
+      "labelFont": "IBM Plex Mono",
+      "labelColor": "#262730",
+      "labelFontSize": 12.8
+    },
+    "range": {
+      "category": ["#f63366", "#fffd80", "#0068c9", "#ff2b2b", "#09ab3b"],
+      "diverging": [
+        "#850018",
+        "#cd1549",
+        "#f6618d",
+        "#fbafc4",
+        "#f5f5f5",
+        "#93c5fe",
+        "#5091e6",
+        "#1d5ebd",
+        "#002f84"
+      ],
+      "heatmap": [
+        "#ffb5d4",
+        "#ff97b8",
+        "#ff7499",
+        "#fc4c78",
+        "#ec245f",
+        "#d2004b",
+        "#b10034",
+        "#91001f",
+        "#720008"
+      ],
+      "ramp": [
+        "#ffb5d4",
+        "#ff97b8",
+        "#ff7499",
+        "#fc4c78",
+        "#ec245f",
+        "#d2004b",
+        "#b10034",
+        "#91001f",
+        "#720008"
+      ],
+      "ordinal": [
+        "#ffb5d4",
+        "#ff97b8",
+        "#ff7499",
+        "#fc4c78",
+        "#ec245f",
+        "#d2004b",
+        "#b10034",
+        "#91001f",
+        "#720008"
+      ]
+    }
+  }
+}

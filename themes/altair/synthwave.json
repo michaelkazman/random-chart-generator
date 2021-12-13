@@ -1,0 +1,37 @@
+{
+  "config": {
+    "view": {
+      "continuousWidth": 400,
+      "continuousHeight": 300
+    },
+    "background": "#2e2157",
+    "axis": {
+      "gridColor": "#2a3459",
+      "domainColor": null,
+      "tickColor": null,
+      "labelColor": "#d3d3d3",
+      "titleColor": "#d3d3d3"
+    },
+    "legend": {
+      "labelColor": "#d3d3d3",
+      "titleColor": "#d3d3d3"
+    },
+    "range": {
+      "category": [
+        "#2de2e6",
+        "#fe53bb",
+        "#f5d300",
+        "#00ff41",
+        "#ff6c11",
+        "#fd1d53"
+      ]
+    },
+    "area": {
+      "line": true,
+      "fillOpacity": 0.1
+    },
+    "line": {
+      "strokeWidth": 2
+    }
+  }
+}
