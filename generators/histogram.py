@@ -33,7 +33,8 @@ def generate_data():
 
     return {
         'X': X,
-        'y': y
+        'y': y,
+        'distribution': distribution,
     }
 
 # generates a normal distribution (with random mu, sigma, and size)

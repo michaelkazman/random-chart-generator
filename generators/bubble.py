@@ -57,6 +57,7 @@ def generate_data():
         'X': X,
         'y': y,
         'bubble_size': bubble_size,
+        'correlation': correlation,
     }
 
 def filter_invalid_samples(X):

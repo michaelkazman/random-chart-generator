@@ -13,7 +13,7 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
     # unpack data
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y, *_), style = unpack_graph_object(graph_object)
 
     # the x-coordinates of the edges
     left_edges = X[:-1]
@@ -36,7 +36,7 @@ def create_bokeh_graph(graph_object):
 
 def create_altair_graph(graph_object):
     # unpack data
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y, *_), style = unpack_graph_object(graph_object)
     
     # format data
     df = pd.DataFrame({
@@ -54,7 +54,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
     # unpack data, and set edges to right
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y, *_), style = unpack_graph_object(graph_object)
     X = X[:-1]
 
     # format data

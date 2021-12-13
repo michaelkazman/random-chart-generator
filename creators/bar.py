@@ -9,7 +9,7 @@ from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, VBar, HBar, F
 
 def create_bokeh_graph(graph_object):
     # format data
-    (X, y, is_vertical), styles = unpack_graph_object(graph_object)
+    (X, y, is_vertical, *_), styles = unpack_graph_object(graph_object)
     df = ColumnDataSource(dict(X=X, top=y))
 
     # create plot
@@ -34,7 +34,7 @@ def create_bokeh_graph(graph_object):
 
 def create_altair_graph(graph_object):
     # format data
-    (X, y, is_vertical), styles = unpack_graph_object(graph_object)
+    (X, y, is_vertical, *_), styles = unpack_graph_object(graph_object)
     df = pd.DataFrame({
         'x': X,
         'y': y,
@@ -53,7 +53,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
     # format data
-    (X, y, is_vertical), style = unpack_graph_object(graph_object)
+    (X, y, is_vertical, *_), style = unpack_graph_object(graph_object)
     df = pd.DataFrame({
         'X': X,
         'y': y,

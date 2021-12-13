@@ -34,6 +34,7 @@ def generate_data():
         'X': X,
         'y': y,
         'y_error': y_error,
+        'distribution': distribution,
     }
 
 def calculate_y_lim(y, threshold_name):

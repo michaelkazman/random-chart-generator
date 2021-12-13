@@ -26,4 +26,5 @@ def generate_data():
     return {
         'X': X,
         'y': y,
+        'distribution': distribution,
     }
