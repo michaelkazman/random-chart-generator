@@ -1,7 +1,4 @@
 {
-    "width": 685,
-    "height": 400,   
-    "autosize": "fit",
     "config": {
         "padding": 10,
         "geoshape": {

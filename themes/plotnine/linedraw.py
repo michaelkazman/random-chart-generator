@@ -1,6 +1,6 @@
 import plotnine as p9
 
-class theme_linedraw(p9.themes.theme_gray):
+class Theme(p9.themes.theme_gray):
     """
     A theme with only black lines of various widths on white backgrounds
 
