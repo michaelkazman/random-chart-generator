@@ -1,5 +1,7 @@
+import re
 import json
 import logging
+import numpy as np
 import holoviews as hv
 from utils.utils import get_library_class
 
@@ -42,6 +44,22 @@ def serialize_value(value):
     elif (value_type == 'list'):
         serialized_value = [serialize_value(val) for val in value]
     return serialized_value
+
+def convert_from_serializable(content):
+    serialized_content = {}
+    for key, value in content.items():
+        serialized_value = deserialize_value(value)
+        serialized_content[key] = serialized_value
+    return serialized_content
+
+def deserialize_value(value):
+    deserialized_value, value_type = value, type(value).__name__
+    if (value_type == 'list'):
+        deserialized_value = [deserialize_value(val) for val in value]
+        # don't translate hex color codes to np array
+        if(not isinstance(value[0], str) or not re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', value[0])):
+            deserialized_value = np.array(deserialized_value)
+    return deserialized_value
 
 LOG_LEVEL = 50
 def log_message(message):
