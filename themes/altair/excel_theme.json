@@ -1,6 +1,6 @@
 {
     "config": {
-        "background": "red",
+        "background": "#fff",
         "arc": {"fill": "#4572a7"},
         "area": {"fill": "#4572a7"},
         "line": {"stroke": "#4572a7", "strokeWidth": 2},

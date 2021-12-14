@@ -10,7 +10,7 @@ class Library(BaseLibrary):
         themes = get_themes('altair')
         for theme in themes:
             theme_object = get_theme_object(theme, 'altair')
-            alt.themes.register(theme, lambda: theme_object)
+            alt.themes.register(theme, lambda n=theme_object: n)
 
     def get_theme():
         theme_file_path = get_random_theme('altair')
