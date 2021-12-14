@@ -140,5 +140,5 @@ logs/
 !logs/__init__.py
 
 # Generated input
-input/*/
-!input/*/__init__.py
+ingestion/*/
+!ingestion/*/__init__.py
