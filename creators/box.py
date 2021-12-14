@@ -21,7 +21,7 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
     # unpackage and get parameters
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y), styles = unpack_graph_object(graph_object)
     df = pd.DataFrame(dict(X=X, y=y))
     limits, quartiles, outliers = calc_params(df)
 
@@ -58,7 +58,7 @@ def create_bokeh_graph(graph_object):
     
 def create_altair_graph(graph_object):
     # unpack data
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y), styles = unpack_graph_object(graph_object)
 
     # create data frame and declare local variables
     df = pd.DataFrame(dict(X=X, y=y))
@@ -133,7 +133,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
     # unpack data
-    (X, y), style = unpack_graph_object(graph_object)
+    (X, y), styles = unpack_graph_object(graph_object)
 
     # format data for data frame
     X = X.flatten()

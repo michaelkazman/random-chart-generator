@@ -1,4 +1,3 @@
-import os
 import altair as alt
 from altair_saver import save
 

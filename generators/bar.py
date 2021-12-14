@@ -1,5 +1,4 @@
 import numpy as np
-
 from utils.creators import convert_numbers_to_letters
 
 parameters = {
