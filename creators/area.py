@@ -61,14 +61,13 @@ def create_altair_graph(graph_object):
     df = pd.DataFrame({
         'X': X,
         'y': y,
-        'layer_names': layer_names
+        'layer_names': layer_names,
     })
 
     # create area chart
     p = alt.Chart(df).mark_area().encode(
-        # x = alt.X('X:T', axis=alt.Axis(format=str(np.amax(X)))), #'X:T' values='X:Q'
-        x = 'X:O',
-        y = 'y:Q',
+        x = alt.X('X', scale=alt.Scale(domain=[0, np.amax(X)], nice=False)),
+        y = alt.Y('y:Q', stack='zero'),
         color = alt.Color('layer_names:N', legend=None),
     ).properties(
         width=styles.get('width'),
