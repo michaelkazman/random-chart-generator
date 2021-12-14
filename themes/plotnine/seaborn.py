@@ -1,6 +1,6 @@
 import plotnine as p9
 
-class theme_seaborn(p9.themes.theme):
+class Theme(p9.themes.theme):
     """
     Theme for seaborn.
 

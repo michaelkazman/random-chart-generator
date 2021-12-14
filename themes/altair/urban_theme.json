@@ -1,7 +1,4 @@
 {
-    "width": 685,
-    "height": 380,   
-    "autosize": "fit",
     "config": {
         "title": {
             "anchor": "start",

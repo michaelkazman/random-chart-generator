@@ -1,6 +1,6 @@
 import plotnine as p9
 
-class theme_tufte(p9.themes.theme_bw):
+class Theme(p9.themes.theme_bw):
     """
     Tufte Maximal Data, Minimal Ink Theme
     Theme based on Chapter 6 'Data-Ink Maximization and Graphical

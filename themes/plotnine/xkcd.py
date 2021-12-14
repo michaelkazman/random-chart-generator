@@ -2,7 +2,7 @@ from copy import copy, deepcopy
 from matplotlib import patheffects
 import plotnine as p9
 
-class theme_xkcd(p9.themes.theme_gray):
+class Theme(p9.themes.theme_gray):
     """
     xkcd theme
 
