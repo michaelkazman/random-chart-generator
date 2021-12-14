@@ -1,5 +1,4 @@
 import os
-import json
 import numpy as np
 from utils.utils import json_from_file, get_files_from_dir, get_module_attr
 

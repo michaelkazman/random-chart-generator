@@ -1,4 +1,3 @@
-from altair.vegalite.v4 import theme
 import plotnine as p9
 from utils.libraries import get_random_theme, get_theme_object
 from libraries.library import Library as BaseLibrary

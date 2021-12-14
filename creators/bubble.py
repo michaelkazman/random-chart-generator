@@ -20,7 +20,7 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
     # format data
-    (X, y, bubble_size, *_), style = unpack_graph_object(graph_object)
+    (X, y, bubble_size, *_), styles = unpack_graph_object(graph_object)
 
     # create dataframe  
     df = ColumnDataSource({
@@ -51,7 +51,7 @@ def create_bokeh_graph(graph_object):
 
 def create_altair_graph(graph_object):
     # format data
-    (X, y, bubble_size, *_), style = unpack_graph_object(graph_object)
+    (X, y, bubble_size, *_), styles = unpack_graph_object(graph_object)
     df = pd.DataFrame({
         'X': X,
         'y': y,
@@ -70,7 +70,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
     # format data
-    (X, y, bubble_size, *_), style = unpack_graph_object(graph_object)
+    (X, y, bubble_size, *_), styles = unpack_graph_object(graph_object)
     df = pd.DataFrame({
         'x': X,
         'y': y,

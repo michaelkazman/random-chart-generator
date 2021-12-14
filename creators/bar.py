@@ -2,10 +2,9 @@ import pandas as pd
 import altair as alt
 import plotnine as p9
 
-from bokeh.io import curdoc
 from utils.creators import unpack_graph_object
 from bokeh.plotting import figure
-from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, VBar, HBar, FixedTicker
+from bokeh.models import ColumnDataSource, VBar, HBar
 
 def create_bokeh_graph(graph_object):
     # format data
@@ -22,8 +21,6 @@ def create_bokeh_graph(graph_object):
         x_range=X if is_vertical else None,
         y_range=X[::-1] if not is_vertical else None,
     )
-
-    print(is_vertical)
 
     # create glyphs based on vertical or horizontal
     glyph = (VBar(x='X', top='top', bottom=0, width=styles.get('bar_width')) if is_vertical
@@ -53,7 +50,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
     # format data
-    (X, y, is_vertical, *_), style = unpack_graph_object(graph_object)
+    (X, y, is_vertical, *_), styles = unpack_graph_object(graph_object)
     df = pd.DataFrame({
         'X': X,
         'y': y,

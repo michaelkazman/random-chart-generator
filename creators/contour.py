@@ -15,7 +15,7 @@ parameters = {
 
 def create_bokeh_graph(graph_object):
   # format data
-    (X, y, z), style = unpack_graph_object(graph_object)
+    (X, y, z), styles = unpack_graph_object(graph_object)
     df = get_contour_data(X, y, z)
 
     # initialize figure
@@ -56,7 +56,7 @@ def create_altair_graph(graph_object):
 
 def create_plotnine_graph(graph_object):
     # unpack / format data
-    (X, y, z), style = unpack_graph_object(graph_object)
+    (X, y, z), styles = unpack_graph_object(graph_object)
     data = get_contour_data(X, y, z)
 
     # flatten arrays
