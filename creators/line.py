@@ -20,7 +20,9 @@ def create_bokeh_graph(graph_object):
     p = figure(
         width=parameters.get('width'),
         height=parameters.get('height'),
-        toolbar_location=None
+        x_axis_label='X',
+        y_axis_label='y',
+        toolbar_location=None,
     )
     
     # draw each line individually

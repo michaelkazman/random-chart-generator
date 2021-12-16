@@ -126,7 +126,7 @@ def create_plotnine_graph(graph_object):
             color=layer_names, 
             ymax='y_err_max', 
             ymin='y_err_min',
-        )
-    ) + p9.geom_line(show_legend='None') + p9.geom_point(show_legend='None') + p9.geom_errorbar(show_legend='None')
+        ),
+    ) + p9.geom_line(show_legend='None') + p9.geom_point(show_legend='None') + p9.geom_errorbar(show_legend='None') + p9.labels.xlab('X') + p9.labels.ylab('y')
 
     return p

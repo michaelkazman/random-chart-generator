@@ -33,6 +33,8 @@ def create_bokeh_graph(graph_object):
     p = figure(
         width=parameters.get('width'),
         height=parameters.get('height'),
+        x_axis_label='X',
+        y_axis_label='y',
         toolbar_location=None,
     )
     p.scatter(
@@ -83,7 +85,7 @@ def create_plotnine_graph(graph_object):
             y='y', 
             size='size',
         )
-    ) + p9.geom_point(show_legend='None')
+    ) + p9.geom_point(show_legend='None') + p9.labels.xlab('X') + p9.labels.ylab('y')
     
     return p
 

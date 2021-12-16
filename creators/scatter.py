@@ -24,6 +24,8 @@ def create_bokeh_graph(graph_object):
         title=None,
         width=parameters.get('width'),
         height=parameters.get('height'),
+        x_axis_label='X',
+        y_axis_label='y',
         min_border=0,
         toolbar_location=None,
     )
