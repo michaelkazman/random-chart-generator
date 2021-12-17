@@ -1,3 +1,5 @@
+from utils.libraries import get_random_theme
+
 class Library():
     # occurs before any generation is run
     # used as a setup / initialization step
@@ -10,8 +12,9 @@ class Library():
         pass
     
     # retrieves the theme from the corresponding directory
-    def get_theme():
-        raise NotImplementedError
+    def get_theme(theme):
+        theme_file_path = get_random_theme(theme)
+        return theme_file_path
 
     # sets the theme 
     def set_theme(graph_type, theme):

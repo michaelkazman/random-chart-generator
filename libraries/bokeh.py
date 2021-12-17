@@ -1,14 +1,10 @@
 from bokeh.themes import Theme
 from bokeh.io import export_png, curdoc
-from utils.libraries import get_random_theme, get_theme_object
+from utils.libraries import get_theme_object
 from libraries.library import Library as BaseLibrary
 import holoviews as hv
 
 class Library(BaseLibrary):
-    def get_theme():
-        theme_file_path = get_random_theme('bokeh')
-        return theme_file_path
-
     def set_theme(graph_type, theme):
         theme_json = get_theme_object(theme, 'bokeh')
         theme_object = Theme(json=theme_json)
