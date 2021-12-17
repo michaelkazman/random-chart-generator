@@ -38,8 +38,6 @@ def create_bokeh_graph(graph_object):
         color=styles.get('color'),
     )
 
-    curdoc().add_root(p)
-
     return p
     
 def create_altair_graph(graph_object):
