@@ -76,8 +76,8 @@ def create_plotnine_graph(graph_object):
     p = p9.ggplot(
         data=df, 
         mapping=p9.aes(
-            x=X, 
-            y=y_layers, 
+            x='X', 
+            y='y', 
             color=layer_names,
         )
     ) + p9.geom_line(show_legend='None')
