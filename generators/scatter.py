@@ -9,6 +9,16 @@ parameters = {
     'tail_strength_range' : (0.3, 0.6),
 }
 
+'''
+Title: How to Generate Test Datasets in Python with scikit-learn
+Author: Jason Brownlee
+Date: 2020
+Code version: N/A
+Availability: https://machinelearningmastery.com/generate-test-datasets-python-scikit-learn/
+
+The basis for the following generation functions was taken from the above
+'''
+
 def generate_data():
     # generate hyperparameters
     noise_level = np.random.uniform(*parameters['noise_range'])

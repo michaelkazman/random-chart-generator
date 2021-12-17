@@ -83,6 +83,16 @@ def create_plotnine_graph(graph_object):
 
     return p
 
+'''
+Title: get_contour_data()
+Author: BR123
+Date: 2016
+Code version: N/A
+Availability: https://docs.bokeh.org/en/latest/docs/gallery/histogram.html
+
+The contour function below was used to plot values with matplotlib and scrape the generated plot values
+'''
+
 def get_contour_data(X, Y, Z):
     # generate matplotlib contour
     cs = plt.contour(X, Y, Z)
