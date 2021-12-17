@@ -18,6 +18,8 @@ def create_bokeh_graph(graph_object):
     p = figure(
         width=parameters.get('width'), 
         height=parameters.get('height'), 
+        x_axis_label='X',
+        y_axis_label='y',
         toolbar_location=None,
     )
 
