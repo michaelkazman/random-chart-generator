@@ -37,6 +37,16 @@ def generate_data():
         'distribution': distribution,
     }
 
+'''
+Title: histogram.py
+Author: Bokeh
+Date: 2021
+Code version: N/A
+Availability: https://docs.bokeh.org/en/latest/docs/gallery/histogram.html
+
+The basis for the following generation functions was taken from the above
+'''
+
 # generates a normal distribution (with random mu, sigma, and size)
 def generate_random_normal_distribution(size, bins):
     mu = np.random.uniform(*parameters['mu_range'])
