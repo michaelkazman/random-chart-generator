@@ -10,7 +10,7 @@ def generate_styles(graph_type, library, num_repeats):
     styles = resolve_styles(styles_merged, num_repeats)
     # add random theme (i.e. theme name) to style object
     library_class = get_library_class(library)
-    styles['theme'] = library_class.get_theme()
+    styles['theme'] = library_class.get_theme(library)
     return styles
 
 # transform json properties to usable values

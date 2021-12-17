@@ -1,7 +1,7 @@
 import altair as alt
 from altair_saver import save
 
-from utils.libraries import get_themes, get_random_theme, get_theme_object
+from utils.libraries import get_themes, get_theme_object
 from libraries.library import Library as BaseLibrary
 
 class Library(BaseLibrary):
@@ -10,10 +10,6 @@ class Library(BaseLibrary):
         for theme in themes:
             theme_object = get_theme_object(theme, 'altair')
             alt.themes.register(theme, lambda n=theme_object: n)
-
-    def get_theme():
-        theme_file_path = get_random_theme('altair')
-        return theme_file_path
 
     def set_theme(graph_type, theme):
         alt.themes.enable(theme)
