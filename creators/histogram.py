@@ -21,7 +21,9 @@ def create_bokeh_graph(graph_object):
 
     # create plot
     p = figure(
-        title=None, 
+        title=None,
+        x_axis_label='X',
+        y_axis_label='y',
         toolbar_location=None,
     )
     p.quad(

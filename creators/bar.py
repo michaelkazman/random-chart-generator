@@ -18,6 +18,8 @@ def create_bokeh_graph(graph_object):
         height=styles.get('height'),
         min_border=0,
         toolbar_location=None,
+        x_axis_label='X',
+        y_axis_label='y',
         x_range=X if is_vertical else None,
         y_range=X[::-1] if not is_vertical else None,
     )
