@@ -34,6 +34,8 @@ def generate_data():
     kernel = st.gaussian_kde(np.vstack([XX, yy]))
     z = np.reshape(kernel(positions).T, X.shape)
     z[z==0] = 0.01
+
+    print(X.shape, y.shape, z.shape)
     
     return {
         'X': X,
