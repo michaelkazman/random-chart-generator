@@ -33,6 +33,7 @@ def generate_data():
     return {
         'X': X,
         'y': y,
+        'num_repeats': len(y),
         'y_error': y_error,
         'distribution': distribution,
     }

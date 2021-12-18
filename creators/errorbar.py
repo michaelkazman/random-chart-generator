@@ -24,17 +24,17 @@ def create_bokeh_graph(graph_object):
     )
 
     # plot each layer
-    for y, y_error in zip(y, y_errors):
+    for i, (y, y_error) in enumerate(zip(y, y_errors)):
         # plot points
-        p.circle(X, y)
-        p.line(X, y)
+        p.circle(X, y, color=styles.get('color')[i], line_width=styles.get("line_thickness"))
+        p.line(X, y, color=styles.get('color')[i], line_width=styles.get("line_thickness"))
 
         # plot vertical error lines
         y_err_x, y_err_y = [], []
         for px, py, err in zip(X, y, y_error):
             y_err_x.append((px, px))
             y_err_y.append((py - err, py + err))
-        p.multi_line(y_err_x, y_err_y)
+        p.multi_line(y_err_x, y_err_y, color=styles.get('color')[i], line_width=styles.get("line_thickness"))
 
     return p
 
@@ -95,6 +95,8 @@ def create_plotnine_graph(graph_object):
     (X, y_layers, y_errors, *_), styles = unpack_graph_object(graph_object)
     num_layers = len(y_layers)
 
+    colors = np.array([[styles.get('color')[i]] * y_layers.shape[1] for i in range(y_layers.shape[0])]).flatten()
+
     # create labels to group layers by, and get max and min for error bars
     layer_names = np.copy(y_layers)
     y_err_min, y_err_max = np.copy(y_layers), np.copy(y_layers)
@@ -126,14 +128,13 @@ def create_plotnine_graph(graph_object):
             mapping=p9.aes(
                 x='X', 
                 y='y', 
-                color=layer_names, 
                 ymax='y_err_max', 
                 ymin='y_err_min',
             )
         )
-        + p9.geom_line(show_legend='None')
-        + p9.geom_point(show_legend='None')
-        + p9.geom_errorbar(show_legend='None')
+        + p9.geom_line(show_legend='None', mapping=p9.aes(fill=colors, color=colors))
+        + p9.geom_point(show_legend='None', mapping=p9.aes(fill=colors, color=colors))
+        + p9.geom_errorbar(show_legend='None', mapping=p9.aes(fill=colors, color=colors))
     )
 
     return p
