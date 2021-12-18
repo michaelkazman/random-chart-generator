@@ -1,6 +1,9 @@
 {
     "default": {
-
+        "color": {
+            "type": "color",
+            "repeat": true
+        }
     }, 
     "bokeh": {
 
