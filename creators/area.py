@@ -66,7 +66,7 @@ def create_altair_graph(graph_object):
     p = alt.Chart(df).mark_area().encode(
         x = alt.X('X', scale=alt.Scale(domain=[0, np.amax(X)], nice=False)),
         y = alt.Y('y:Q', stack='zero'),
-        color = alt.Color('layer_names:N', legend=None),
+        color = alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=None),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),
@@ -80,6 +80,8 @@ def create_plotnine_graph(graph_object):
     
     # create labels to group layers by
     layer_names = np.copy(y_layers)
+    colors = np.array([[styles.get('color')[i]] * layer_names.shape[1] for i in range(layer_names.shape[0])]).flatten()
+
     for i in range(num_layers):
         layer_names[i, :] = i
     layer_names = convert_numbers_to_letters(layer_names.flatten())
@@ -96,7 +98,7 @@ def create_plotnine_graph(graph_object):
     
     # make plot for each layer
     p = (
-        p9.ggplot(data=data, mapping=p9.aes(x=X, y=y_layers, fill=layer_names))
+        p9.ggplot(data=data, mapping=p9.aes(x=X, y=y_layers, fill=colors))
         + p9.geom_area(show_legend=False)
         + p9.labels.xlab('X')
         + p9.labels.ylab('y')
