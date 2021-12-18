@@ -2,7 +2,7 @@ import pandas as pd
 import altair as alt
 import plotnine as p9
 
-from bokeh.io import curdoc
+from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
 from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, Scatter
 
@@ -20,7 +20,7 @@ def create_bokeh_graph(graph_object):
     df = ColumnDataSource(dict(x=X, y=y))
 
     # create plot
-    p = Plot(
+    p = figure(
         title=None,
         width=parameters.get('width'),
         height=parameters.get('height'),
@@ -38,15 +38,6 @@ def create_bokeh_graph(graph_object):
         marker=parameters.get('marker_type')
     )
     p.add_glyph(df, glyph)
-
-    # adjust axes
-    xaxis, yaxis = LinearAxis(), LinearAxis()
-    p.add_layout(xaxis, 'below')
-    p.add_layout(yaxis, 'left')
-
-    # cosmetic adjustments (makes graph look more elegant)
-    p.add_layout(Grid(dimension=0, ticker=xaxis.ticker))
-    p.add_layout(Grid(dimension=1, ticker=yaxis.ticker))
 
     return p
 
