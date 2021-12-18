@@ -35,8 +35,6 @@ def generate_data():
     z = np.reshape(kernel(positions).T, X.shape)
     z[z==0] = 0.01
 
-    print(X.shape, y.shape, z.shape)
-    
     return {
         'X': X,
         'y': y,

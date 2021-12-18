@@ -18,8 +18,6 @@ def create_bokeh_graph(graph_object):
     (X, y, z), styles = unpack_graph_object(graph_object)
     df = get_contour_data(X, y, z)
 
-    print('linecolor: ', len(df['line_color']))
-
     # initialize figure
     p = figure(
         plot_width=500,
