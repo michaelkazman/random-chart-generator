@@ -33,13 +33,14 @@ def generate_data():
     
     # random chance of graph being vertical/horizontal bar chart
     is_vertical = bool(np.random.randint(2))
-
     bar_names = convert_numbers_to_letters(range(len(X)))
+    num_repeats = 1 if bool(np.random.randint(2)) else len(y)
 
     return {
         'X': bar_names,
         'y': y,
         'is_vertical': is_vertical,
         'correlation': correlation,
+        'num_repeats': num_repeats
     }
 
