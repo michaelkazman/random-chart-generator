@@ -1,14 +1,32 @@
 {
     "default": {
-
+        "color": {
+            "type": "color"
+        },
+        "fill": {
+            "type": "color"
+        },
+        "opacity": {
+            "type": "range",
+            "value": [0.3, 1],
+            "float": true
+        }
     }, 
     "bokeh": {
-
+        "stroke": {
+            "type": "range",
+            "value": [0.5, 3],
+            "float": true
+        }
     },
     "altair": {
 
     },
     "plotnine": {
-        
+        "stroke": {
+            "type": "range",
+            "value": [0.3, 0.8],
+            "float": true
+        }
     }
 }

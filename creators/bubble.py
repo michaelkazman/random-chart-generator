@@ -12,9 +12,6 @@ parameters = {
     'width': 400,
     'height': 400,
     'size': 10,
-    'opacity': 0.5,
-    'fill_color': '#084594',
-    'line_color': '#084594',
     'x_threshold': 0.05,
 }
 
@@ -41,9 +38,10 @@ def create_bokeh_graph(graph_object):
         x='x',
         y='y',
         size='bubble_size',
-        fill_alpha=parameters.get('opacity'),
-        fill_color= parameters.get('fill_color'),
-        line_color=parameters.get('line_color'),
+        fill_alpha=styles.get('opacity'),
+        fill_color=styles.get('fill'),
+        line_color=styles.get('color'),
+        line_width=styles.get('stroke'),
         source=df
     )
     
@@ -61,9 +59,12 @@ def create_altair_graph(graph_object):
     # create chart
     p = alt.Chart(df).mark_point().encode(
         x=alt.X('X', scale=alt.Scale(domain=calculate_axis_range(X, bubble_size))),
-        # x=alt.X('X', scale=alt.Scale(domain=(np.amin(X), np.amax(X)))),
         y=alt.Y('y', scale=alt.Scale(domain=calculate_axis_range(y, bubble_size))),
         size=alt.Size('size', legend=None),
+    ).configure_mark(
+        opacity=styles.get('opacity'),
+        color=styles.get('color'),
+        filled=True,
     )
 
     return p
@@ -85,7 +86,7 @@ def create_plotnine_graph(graph_object):
             y='y', 
             size='size',
         )
-    ) + p9.geom_point(show_legend='None') + p9.labels.xlab('X') + p9.labels.ylab('y')
+    ) + p9.geom_point(show_legend='None', fill=styles.get('fill'), color=styles.get('color'), stroke=styles.get('stroke'), alpha=styles.get('opacity')) + p9.labels.xlab('X') + p9.labels.ylab('y')
     
     return p
 

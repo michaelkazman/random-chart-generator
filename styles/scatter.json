@@ -1,14 +1,47 @@
 {
     "default": {
-
+        "color": {
+            "type": "color"
+        },
+        "fill": {
+            "type": "color"
+        },
+        "opacity": {
+            "type": "range",
+            "value": [0.3, 1],
+            "float": true
+        }
     }, 
     "bokeh": {
-
+        "size": {
+            "type": "value",
+            "value": 6
+        },
+        "type": {
+            "type": "value",
+            "value": "circle"
+        },
+        "stroke": {
+            "type": "range",
+            "value": [0.5, 3],
+            "float": true
+        }
     },
     "altair": {
-
+        "size": {
+            "type": "value",
+            "value": 60
+        }
     },
     "plotnine": {
-        
+        "size": {
+            "type": "value",
+            "value": 3.5
+        },
+        "stroke": {
+            "type": "range",
+            "value": [0.3, 0.8],
+            "float": true
+        }
     }
 }
