@@ -9,8 +9,6 @@ from utils.creators import convert_numbers_to_letters, unpack_graph_object
 parameters = {
     'width':    400,
     'height':   400,
-    'matplot_marker': 'o',
-    'bokeh_marker': 'dot',
     'marker_size': 25,
 }
 
@@ -26,9 +24,9 @@ def create_bokeh_graph(graph_object):
     )
     
     # draw each line individually
-    for _, y_list in enumerate(y):
-        p.line(X, y_list)
-        getattr(p, parameters['bokeh_marker'])(X, y_list, size=parameters['marker_size'])
+    for i, y_list in enumerate(y):
+        p.line(X, y_list, color=styles.get('color')[i])
+        getattr(p, styles.get('marker'))(X, y_list, color=styles.get('color')[i], size=parameters['marker_size'])
     
     return p
 
@@ -43,6 +41,7 @@ def create_altair_graph(graph_object):
         lines = alt.Chart(df).mark_line().encode(
             x='x',
             y='y',
+            color = alt.value(styles.get('color')[i]),
         )
         layered_lines.append(lines)
     

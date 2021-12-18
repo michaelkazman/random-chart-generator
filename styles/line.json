@@ -1,9 +1,20 @@
 {
     "default": {
-
+        "color": {
+            "type": "color",
+            "repeat": true
+        }
     }, 
     "bokeh": {
-
+        "marker": {
+            "type": "option",
+            "value": ["circle", "cross", "diamond", "star", "dot"]
+        },
+        "marker_size": {
+            "type": "range",
+            "value": [5, 20],
+            "float": true
+        }
     },
     "altair": {
 
