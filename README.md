@@ -64,7 +64,7 @@ The `setup/setup.sh` script can be used to automatically setup the project envir
 
 ## Research
 All information regarding research and the techniques used for data generation can be found within Chapter 3 of the report.
-This includes topics such as Midpoint Displacement, regression models, and distribution sampling amonst others.
+The aforementioned chapters includes topics such as Midpoint Displacement, regression models, Geometric Brownian Motion, and distribution sampling amonst others.
 
 </br>
 
@@ -72,6 +72,9 @@ This includes topics such as Midpoint Displacement, regression models, and distr
 Examples of generated output can be seen in the report Appendix under the Generation Output section.
 
 </br>
+
+## Additional Information
+Additional information such as the project motivation, methodology, and system procedure as well as important design decisions and a future roadmap can be found within the report document. 
 
 ## Libraries
 - Python 3
