@@ -74,17 +74,19 @@ Examples of generated output can be seen in the report Appendix under the Genera
 </br>
 
 ## Additional Information
-Additional information such as the project motivation, methodology, and system procedure as well as important design decisions and a future roadmap can be found within the report document. 
+Additional information such as the project motivation, methodology, and system procedure as well as important design decisions and a future roadmap can be found within the report document.
+
+</br>
 
 ## Libraries
 - Python 3
+- Anaconda
 - Jupyter
-- scikit-learn
 - NumPy
 - pandas
 - Altair
 - Bokeh
 - plotnine
-- Matplotlib
 - SciPy
-- Anaconda
+- Matplotlib
+- scikit-learn
