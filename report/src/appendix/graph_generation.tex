@@ -1,0 +1,75 @@
+% An appendix
+%======================================================================
+\chapter[Graph Generation]{Graph Generation}
+\label{AppendixA}
+% Tip 4: Example of how to get a shorter chapter title for the Table of Contents 
+%======================================================================
+
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true
+}
+
+\section{Data Generation}
+\begin{lstlisting}
+generated_graphs = deepcopy(graphs)
+graph_type_id, current_graph_type = 0, None
+for (graph_type, library), num_occurences in occurences.items():
+    if (current_graph_type != graph_type):
+        graph_type_id = 0
+        current_graph_type = graph_type
+        
+    graphs_list = generated_graphs[graph_type].setdefault('graphs', [])
+    for _ in range(num_occurences):
+        data = generate_data(graph_type)
+        graphs_list.append({
+            'id': graph_type_id,
+            'library': library,
+            'data': data,
+        })
+        graph_type_id += 1
+\end{lstlisting}
+
+\section{Data Stylization}
+\begin{lstlisting}
+for (graph_type, graph_object) in generated_graphs.items():
+    for graph_content in graph_object['graphs']:
+        library, num_repeats = graph_content['library'], graph_content['data'].get('num_repeats', 1)
+        graph_content['styles'] = generate_styles(graph_type, library, num_repeats)
+        graph_content['data'].pop('num_repeats', None)
+\end{lstlisting}
+
+\section{Graph Creation \& Graph Exportation}
+\begin{lstlisting}
+for (graph_type, graph_object) in generated_graphs.items():
+    for graph_content in graph_object['graphs']:
+        library = graph_content['library']
+        graph = create_graph(graph_type, library, graph_content)
+        
+        id = graph_content['id']
+        file_name = '{graph_type}_{library}_{id}'.format(graph_type=graph_type, library=library, id=id)
+        
+        export_graph_data(graph_content['data'], 'output/{path}/{file_name}.{file_type}'
+            .format(file_name=file_name, path='data', file_type='json'))
+        export_graph_styles(graph_content['styles'], 'output/{path}/{file_name}.{file_type}'
+            .format(file_name=file_name, path='styles', file_type='json'))
+        export_graph_image(graph, library, 'output/{path}/{file_name}.{file_type}'
+            .format(file_name=file_name, path='images', file_type='png'))
+\end{lstlisting}
+
+\section{Graph Regeneration}
+\begin{lstlisting}
+for graph_filepath in valid_input_graphs:
+  graph_filename = graph_filepath.split('.', maxsplit=1)[0]
+  graph_type, library, id = graph_filename.split('_', maxsplit=3)
+  graph_content = {}
+  
+  for folder in input_folders:
+    with open('{dir}/{folder}/{file_name}'.format(dir=INGESTION_DIR, folder=folder, file_name=graph_filepath)) as f:
+      graph_content[folder] = convert_from_serializable(json.load(f))
+  
+  graph = create_graph(graph_type, library, graph_content)
+  export_graph_image(graph, library, '{dir}/{path}/{file_name}.{file_type}'
+    .format(dir=INGESTION_DIR, file_name=graph_filename, path='images', file_type='png'))
+\end{lstlisting}

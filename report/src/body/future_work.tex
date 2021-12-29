@@ -1,0 +1,24 @@
+%======================================================================
+\chapter{Future Work}
+%======================================================================
+In terms of future work, the chart generation pipeline will be utilized to generate the training data of another system. On top of that, the chart regeneration will be used for determining the correctness of the aforementioned network. However, aside from future use-cases, there are still a few tasks that were unable to be completed, largely due to time constraints.
+
+\section{Data Modifiers \& Multipliers}
+Virtually all of the data generation produces values that are within a set range. When generated in vast quantities, the values will lack variance and appear to be repetitive. This can result in poor performance for succeeding systems such as a Generative Adversarial Network. The way to combat this is quite simple in nature, but was unable to be implemented as the process of manually testing all graph-types combinations is quite time consuming. Furthermore, the possible maintenance required to initially fix all existing graph creation code should not be undermined.
+
+\hfill
+
+Following the data generation step, data modifiers and multipliers could be used to alter the data in one of two ways. The first is an offset which adds a constant value to all applicable data points. For example, this could involve adding a singular value to all \(X\) values in the dataset. The second method involves transforming the data points by a modifier. This would entail multiplying the data points by a constant value. Additionally, the values could be passed into exponent or logarithmic functions, however, many edge cases must be covered in order to preserve the underlying distribution of the generated data. 
+
+\hfill
+
+The values for the offset and multiplication modifiers are intended to be random, as to provide greater variability in the graph generation. On a more technical level, this code would reside in the data generation step (\autoref{subsection:data_generation}) and could be as simple as adding a function to take in the data after generation is complete.
+
+\section{Additional Theming}
+Another aspect that was unable to be completed was the implementation of additional Bokeh themes. Both Altair and plotnine contain a sequence of 10 unique themes, while Bokeh only possesses 6. The main concern with having less stylization options is having reduced uniqueness and variability when this application is used on a larger scale. Provided with more time, this task could be easily completed by simply implementing additional themes.
+
+\section{Mini-Batching}
+The main premise of mini-batching is to separate the dataset into smaller batches for further calculation. The benefit of applying mini-batching in this project would be avoiding the hardware limitations of the system executing the pipeline. As loading in upwards of 30,000 images may result in out of memory errors, having smaller batches for the garbage collection system to dispose of images that have already been generated would be extremely beneficial. The reason this was not implemented is simply due to time constraints and is definitely something worth further examining.
+
+\section{Multimodal Histograms}
+The final aspect in terms of future work is to allow for the generation of multimodal histograms. This could be done by splicing together two or more separate distributions. A random number would be used to determine how many values should be discarded when connecting the tail of one distribution to the head of another. Similar to how area and line plots contain multiple layers, adding multimodal histograms would provide a higher degree of variability.

@@ -1,0 +1,96 @@
+%======================================================================
+\chapter{Design Decisions}
+%======================================================================
+
+%----------------------------------------------------------------------
+\section{Environment}
+The project environment is run using a Jupyter Notebook and Anaconda environment. The decision to use an Anaconda virtual environment was an obvious choice for many reasons. To begin, it allows for extreme portability as the pipeline can be re-created in almost any environment regardless of operating system, device hardware, or system architecture. Secondly, it isolates the installed dependencies to a separate environment to avoid version conflicts and any issues that may arise due to shared dependencies. Lastly, Anaconda allows specific versions of libraries to be installed, providing the maximum level of reproducibility available. 
+
+\hfill
+
+Jupyter Notebook on the other hand is an interactive Python environment that allows markdown text, persistent variables, and a multitude of other features all within a single document. It is a necessity for data science and machine learning projects due to its simplicity and ease of use. This easy-to-use simple approach was a main reason why it was selected for this project. Executing the code in separate cells with supporting documentation helps provide a sense of modularity and linearity to the pipeline, allowing for the graph generation process to be easy visualized.
+
+\section{Modularity}
+\label{section:modularity}
+The concept of modularity was heavily considered when developing this project. In order to support a multitude of graph types and libraries, modularity was essential. This principle is enforced throughout various facets of the code base, which can be seen by the architecture design and file structure. For instance, the data generation for each graph type is entirely independent of one another and resides in their own appropriately named file (i.e. \path{area.py}, \path{bar.py}, etc.). This pattern is seen throughout the generation, stylization, creation, and theming steps, as well as within the visualization library classes.
+
+\subsection{Dynamic Modules}
+As mentioned in \autoref{subsection:data_separation}, all aspects of pipeline utilize the graph types and libraries specified in the hyperparameters. This virtually eliminates any hard-coded content, thus creating a dynamic robust system. For instance, the graph generation process uses graph types to dynamically load in the corresponding file and run the data generation code. This is made possible by providing all the generation functions with the same name. Similar to these functions, the same naming convention applies for stylization, as the style objects are loaded in based on file name. In addition, this concept further applies to creation, theming, and the visualization libraries, all of which will be covered below.
+
+\hfill
+
+The same modularity that is seen in the data generation process above is also applied to style generation, as the styles for each graph are independent and named accordingly (\path{box.json}, \path{violin.json}, etc.). Graph creation is in a similar vein, however, each file includes a creation function for the available visualization libraries. These functions are executed dynamically, based on the initial library specified. In terms of libraries, each library is encapsulated in a custom Python class that inherits the base Library class. This is done in order to isolate each library, while still enforcing required functionality such as pre-creation and post-creation hooks, theme setting, and graph exportation. These classes are loaded in dynamically based on file name (i.e. \path{libraries/bokeh.py}, \path{libraries/altair.py}, etc.) which, like the above, is based on the initial library parameter. The concept of theming follows a similar principal, as each theme is defined in the \path{themes} directory in a sub-folder named after the corresponding visualization library (i.e. \path{themes/bokeh}, \path{themes/altair}, etc.). All themes present in the code base are located separately, based on library name, and can be found in either JSON (\path{.json}) or Python (\path{.py}) format accordingly. 
+
+\subsection{Graph Regeneration}
+Modularity played an incredible role in the aspect of graph regeneration. As the processes were heavily decoupled, the creation step could be entirely reused by simply reading in a set of data and style files. Since all of the values, styles, and themes are utilized within the graph creation module, the entire process becomes extremely easy to maintain and leverage, as explained in \autoref{subsection:chart_regeneration}.
+
+\section{File Structure}
+Diving deeper into the file structure, all setup files and scripts can be found in the \path{setup} directory along with any logs in the \path{logs} directory. On the other hand, the exportation process outputs data, styles, and images all in their own folders within the \path{output} directory. The data and styles used for ingestion, as well as the regenerated images are stored elsewhere in the \path{ingestion} directory.
+
+\hfill
+
+If any functionality needs to be re-used throughout the application, a \path{utils} directory exists with files corresponding to each component (i.e. \path{generators.py}, \path{styles.py}, \path{creators.py}, etc.). This creates a very simplistic and scalable file structure that is well-suited for future maintenance.
+
+\section{Future Support}
+The aspect of supporting additional libraries and graph types was a major concern when developing this project. The goal was to create a modular system with very little required maintenance all while minimizing the amount of work needed for future implementation. This is believed to be achieved as the current implementation system is extremely straightforward and flexible.
+
+\hfill
+
+The process of supporting additional graph types and libraries is relatively simple, and the corresponding steps will be documented below. In order to implement an additional graph type, the following conditions must be met:
+
+\begin{itemize}
+    \item The created generation file must meet the following conditions
+    \begin{itemize}
+        \item Contains a \path{generate_data()} function
+        \item Named \path{graph_type.py} and stored in the \path{generators} directory
+    \end{itemize}
+    \item The created stylization file must meet the following conditions
+    \begin{itemize}
+        \item Be in JSON format
+        \item Contains a default property
+        \item Contains a property named after each visualization library
+        \item Named \path{graph_type.json} and stored in the \path{styles} directory
+    \end{itemize}
+    \item The created creation file must meet the following conditions
+        \begin{itemize}
+            \item Contains a \path{create_library_graph()} function for each graphing library
+            \item Named \path{graph_type.py} and stored in the \path{creators} directory
+        \end{itemize}
+\end{itemize}
+
+A different series of steps must be followed for supporting an additional library, which can be found below:
+
+\begin{itemize}
+    \item The \path{libraries} hyperparameter must contain the library in the generation notebook
+    \item The created library class must meet the following conditions
+    \begin{itemize}
+        \item A Python file under the library's name must be made in the \path{libraries} directory
+        \item Inheritance of the base \path{Library} class from \path{libraries/library.py}
+        \item Given the name \path{Library}
+        \item Have all required methods implemented
+        \begin{itemize}
+            \item A method is classified as required if it raises an \path{NotImplementedError}
+        \end{itemize}
+    \end{itemize}
+    \item All creation files must implement multiple library creation functions
+    \begin{itemize}
+        \item Functions must be named \path{create_library_graph()} \begin{itemize}
+            \item Where \path{library} is replaced by the specified library name
+        \end{itemize}
+    \end{itemize}
+    \item Any themes must be stored in the \path{themes/library} directory
+\end{itemize}
+
+\section{Exportation}
+A crucial design decision was how to store the generated data. By storing the data in a structure like a pandas DataFrame, all rows would be required to have the same length. This would result in countless null values as certain properties such as \path{is_vertical} or \path{correlation} would not apply to a majority of the graphs. Not to mention, storing the associated styles alongside the data would have been a significant roadblock.
+
+\hfill
+
+The solution chosen for this problem was to serialize the data into separate JSON files and store them on a per-graph basis. This allows graph files to be easily imported and exported, while still maintaining maximum flexibility. This customization of what data and styles are stored has allowed graph regeneration to become an incredibly simple process.
+
+\section{Stylization \& Theming}
+Each visualization library formats graphs differently. As they all take in distinct parameters and values, there was no uniform approach amongst any visualization libraries. Tackling this problem required careful consideration, as the styles needed to be applied individually while still having a shared pool for common elements like colour, and thickness. The idea was to create a separate JSON file based on each of the graph types. By containing a separate object for each visualization library, as well as a default object, this semi-modular approach was able to seamlessly incorporate flexibility and re-usability. Theming was designed with the same ideologies in mind, for instance, having separate JSON or Python files for each theme promotes modularity and flexibility. Lastly, the decision to remove arbitrary headings, legends, toolbars, and any additional white space was done to avoid any bias that might be introduced.
+
+%----------------------------------------------------------------------
+
+

@@ -1,0 +1,64 @@
+% T I T L E   P A G E
+% -------------------
+% Last updated June 14, 2017, by Stephen Carr, IST-Client Services
+% The title page is counted as page `i' but we need to suppress the
+% page number. Also, we don't want any headers or footers.
+\pagestyle{empty}
+\pagenumbering{roman}
+
+% F R O N T   P A G E
+% -------------------------------
+\input{src/front/title-page}
+
+% The rest of the front pages should contain no headers and be numbered using Roman numerals starting with `ii'
+\pagestyle{plain}
+\setcounter{page}{2}
+
+\cleardoublepage % Ends the current page and causes all figures and tables that have so far appeared in the input to be printed.
+% In a two-sided printing style, it also makes the next page a right-hand (odd-numbered) page, producing a blank page if necessary.
+
+% D E C L A R A T I O N   P A G E
+% -------------------------------
+\begin{center}\textbf{Declaration of Authorship}\end{center}
+\input{src/front/declaration}
+
+\cleardoublepage
+
+% A B S T R A C T
+% ---------------
+\begin{center}\textbf{Abstract}\end{center}
+\input{src/front/abstract}
+
+\cleardoublepage
+
+% A C K N O W L E D G E M E N T S
+% -------------------------------
+\begin{center}\textbf{Acknowledgements}\end{center}
+\input{src/front/acknowledgements}
+
+\cleardoublepage
+
+% C O M M A N D  F O R  C E N T E R I N G  T O C  T I T L E S
+\newcommand{\centeredtitle}[1]{\hspace*{\fill}#1\hspace*{\fill}}
+
+% T A B L E   O F   C O N T E N T S
+% ---------------------------------
+\renewcommand{\contentsname}{\centeredtitle{Table of Contents}}
+\tableofcontents
+\cleardoublepage
+
+% L I S T   O F   F I G U R E S
+% -----------------------------
+\renewcommand{\listfigurename}{\centeredtitle{List of Figures}}
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+\cleardoublepage
+
+% L I S T   O F   T A B L E S
+% ---------------------------
+\renewcommand{\listtablename}{\centeredtitle{List of Tables}}
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+\cleardoublepage
+\phantomsection		% allows hyperref to link to the correct page
+

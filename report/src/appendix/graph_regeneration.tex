@@ -1,0 +1,28 @@
+% An appendix
+%======================================================================
+\chapter[Graph Regeneration]{Graph Regeneration}
+\label{AppendixB}
+% Tip 4: Example of how to get a shorter chapter title for the Table of Contents 
+%======================================================================
+
+\lstset{
+basicstyle=\small\ttfamily,
+columns=flexible,
+breaklines=true
+}
+
+\section{Graph Regeneration}
+\begin{lstlisting}
+for graph_filepath in valid_input_graphs:
+  graph_filename = graph_filepath.split('.', maxsplit=1)[0]
+  graph_type, library, id = graph_filename.split('_', maxsplit=3)
+  graph_content = {}
+  
+  for folder in input_folders:
+    with open('{dir}/{folder}/{file_name}'.format(dir=INGESTION_DIR, folder=folder, file_name=graph_filepath)) as f:
+      graph_content[folder] = convert_from_serializable(json.load(f))
+  
+  graph = create_graph(graph_type, library, graph_content)
+  export_graph_image(graph, library, '{dir}/{path}/{file_name}.{file_type}'
+    .format(dir=INGESTION_DIR, file_name=graph_filename, path='images', file_type='png'))
+\end{lstlisting}
