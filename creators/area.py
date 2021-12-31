@@ -89,7 +89,6 @@ def create_plotnine_graph(graph_object):
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))
     y_layers = y_layers.flatten()
-
     data = pd.DataFrame({
         'X': X,
         'y': y_layers,
@@ -102,6 +101,7 @@ def create_plotnine_graph(graph_object):
         + p9.geom_area(show_legend=False)
         + p9.labels.xlab('X')
         + p9.labels.ylab('y')
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
     )
         
     return p

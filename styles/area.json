@@ -2,17 +2,17 @@
     "default": {
         "width": {
             "type": "value",
-            "value": 400
+            "value": 800
         },
         "height": {
             "type": "value",
-            "value": 400
+            "value": 800
         },
         "color": {
             "type": "color",
             "repeat": true
         }
-    }, 
+    },
     "bokeh": {
 
     },
@@ -20,6 +20,13 @@
 
     },
     "plotnine": {
-        
+        "width": {
+            "type": "value",
+            "value": 9.5
+        },
+        "height": {
+            "type": "value",
+            "value": 9.5
+        }
     }
 }
