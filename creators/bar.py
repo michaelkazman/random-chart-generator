@@ -10,8 +10,8 @@ from bokeh.models import ColumnDataSource, VBar, HBar
 def create_bokeh_graph(graph_object):
     # format data
     (X, y, is_vertical, *_), styles = unpack_graph_object(graph_object)
-    colors = styles.get('color')
-    df = ColumnDataSource(dict(X=X, top=y, color=colors if len(colors) > 1 else colors * len(y)))
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
+    df = ColumnDataSource(dict(X=X, top=y, color=colors))
 
     # create plot
     p = figure(
@@ -43,10 +43,7 @@ def create_altair_graph(graph_object):
 
     # horizontal forces x to take the y values as quantitive
     encodings = { 'x': 'x:O', 'y': 'y:Q' } if is_vertical else { 'x': 'y:Q', 'y': 'x:O' }
-
-    colors = styles.get('color')
-    colors = colors if len(colors) > 1 else colors * len(y)
-    
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
     chart = alt.Chart(df).mark_bar(size=styles.get('bar_width')).encode(
         **encodings,
         color = alt.Color('y', scale=alt.Scale(range=colors), legend=None),
@@ -65,7 +62,18 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
-    p = p9.ggplot(df, p9.aes(x='X', y='y')) + p9.geom_bar(stat='identity', mapping=p9.aes(fill=styles.get('color')), show_legend=False) 
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1]
+    p = (
+        p9.ggplot(df, p9.aes(x='X', y='y'))
+        + p9.geom_bar(
+            stat='identity',
+            mapping=p9.aes(fill=colors),
+            show_legend=False,
+            width=styles.get('bar_width')
+        )
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+        + p9.scale_fill_manual(values=colors)
+    )
     if not is_vertical: p += p9.coord_flip()
 
     return p

@@ -61,6 +61,10 @@ def resolve_json(value, **_):
     with open(value) as f:
         return json.load(f)
 
+# returns a boolean as to whether the probability check passes
+def resolve_probability(value, **_):
+    return np.random.uniform() <= value
+
 # a mapping of the style type and the function to resolve it
 resolves = {
     'value': resolve_value,
@@ -69,4 +73,5 @@ resolves = {
     'range': resolve_range,
     'color': resolve_color,
     'json': resolve_json,
+    'probability': resolve_probability,
 }
