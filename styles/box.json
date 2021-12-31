@@ -2,16 +2,32 @@
     "default": {
         "width": {
             "type": "value",
-            "value": 400
+            "value": 800
         },
         "height": {
             "type": "value",
-            "value": 400
+            "value": 800
         },
         "bar_width": {
             "type": "range",
             "value": [0.5, 0.7],
             "float": true
+        },
+        "color": {
+            "type": "color",
+            "repeat": true
+        },
+        "use_random_colors": {
+            "type": "probability",
+            "value": 0.2
+        },
+        "line_color": {
+            "type": "value",
+            "value": "#000000"
+        },
+        "outlier_color": {
+            "type": "value",
+            "value": "#a9a9a9"  
         }
     }, 
     "bokeh": {
@@ -38,6 +54,13 @@
 
     },
     "plotnine": {
-        
+        "width": {
+            "type": "value",
+            "value": 9.5
+        },
+        "height": {
+            "type": "value",
+            "value": 9.5
+        }
     }
 }

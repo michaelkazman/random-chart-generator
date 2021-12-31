@@ -29,7 +29,8 @@ def create_bokeh_graph(graph_object):
     upper, lower = limits
     q1, q2, q3 = quartiles
     outx, outy = outliers
-    line_color = parameters.get('line_color')
+    line_color = styles.get('line_color')
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
 
     # get X labels
     X = np.unique(df.X)
@@ -42,19 +43,18 @@ def create_bokeh_graph(graph_object):
     p.segment(X, lower.y, X, q1.y, line_color=line_color)
 
     # boxes
-    p.vbar(X, parameters['bar_width'], q2.y, q3.y, line_color=line_color)
-    p.vbar(X, parameters['bar_width'], q1.y, q2.y, line_color=line_color)
+    p.vbar(X, styles.get('bar_width'), q2.y, q3.y, line_color=line_color, fill_color=colors)
+    p.vbar(X, styles.get('bar_width'), q1.y, q2.y, line_color=line_color, fill_color=colors)
 
     # extremes (drawing almost-0 height rects are simpler than drawing segments)
-    p.rect(X, lower.y, parameters['extreme_width_units'], parameters['extreme_width'], line_color=line_color)
-    p.rect(X, upper.y, parameters['extreme_width_units'], parameters['extreme_width'], line_color=line_color)
+    p.rect(X, lower.y, styles.get('extreme_width_units'), styles.get('extreme_width'), line_color=line_color, fill_color=colors)
+    p.rect(X, upper.y, styles.get('extreme_width_units'), styles.get('extreme_width'), line_color=line_color, fill_color=colors)
 
     # outliers
     if ((outx != None) and (outy != None)):
-        p.circle(outx, outy, size=parameters['outlier_size'], fill_alpha=parameters.get('outlier_fill_opacity'))
+        p.circle(outx, outy, size=styles.get('outlier_size'), line_color=styles.get('outlier_color'), fill_color=styles.get('outlier_color'), fill_alpha=styles.get('outlier_fill_opacity'))
 
     return p
-
     
 def create_altair_graph(graph_object):
     # unpack data
@@ -62,13 +62,15 @@ def create_altair_graph(graph_object):
 
     # create data frame and declare local variables
     df = pd.DataFrame(dict(X=X, y=y))
-    width = parameters.get('width', None)
-    height = parameters.get('height', None)
+    width = styles.get('width')
+    height = styles.get('height')
 
     # create box plot chart
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1]
     box_plot = alt.Chart(df).mark_boxplot().encode(
         x = 'X:O',
         y = 'y:Q',
+        color = alt.Color('X:O', scale=alt.Scale(range=colors), legend=None),
     ).properties(
         width=width,
         height=height,
@@ -77,8 +79,7 @@ def create_altair_graph(graph_object):
     # get extremes for each box
     df_list = [g for (_, g) in df.groupby('X')]
     _, _, outliers = calc_params(df)
-    extreme_values =[]
-    extreme_groups = []
+    extreme_values, extreme_groups = [], []
 
     for df_box in df_list:
         group = df_box.X.values[0]
@@ -120,7 +121,6 @@ def create_altair_graph(graph_object):
     ).encode(
         x='X',
         y='y:Q',
-        color=alt.value(parameters.get('alt_line_color', None))
     )
 
     # layer into main chart
@@ -146,7 +146,13 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
-    p = p9.ggplot(df) + p9.geom_boxplot(p9.aes(x='X', y='y'))
+    colors = styles.get('color')[:1]
+    p = (
+        p9.ggplot(df)
+        + p9.geom_boxplot(p9.aes(x='X', y='y', fill=colors), show_legend=False)
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+        + p9.scale_fill_manual(values=colors)
+    )
 
     return p
 
