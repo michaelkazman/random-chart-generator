@@ -13,6 +13,11 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [1.5, 8],
+            "float": true
         }
     },
     "altair": {
@@ -23,6 +28,11 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [2, 5],
+            "float": true
         }
     },
     "plotnine": {
@@ -33,6 +43,10 @@
         "height": {
             "type": "value",
             "value": 9.5
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [1, 3]
         }
     }
 }
