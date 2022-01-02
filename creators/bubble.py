@@ -76,14 +76,7 @@ def create_plotnine_graph(graph_object):
 
     # create plot
     p = (
-        p9.ggplot(
-            data=df, 
-            mapping=p9.aes(
-                x='X', 
-                y='y', 
-                size='size',
-            )
-        )
+        p9.ggplot(data=df, mapping=p9.aes(x='X', y='y', size='size'))
         + p9.geom_point(
             show_legend='None',
             fill=styles.get('fill'),

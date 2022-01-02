@@ -112,7 +112,11 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
-    p = p9.ggplot(df, p9.aes(x='X', y='y')) + p9.geom_violin() + p9.geom_boxplot(width=0.1)
+    p = (
+        p9.ggplot(df, p9.aes(x='X', y='y'))
+        + p9.geom_violin()
+        + p9.geom_boxplot(width=0.1)
+    )
 
     return p
 

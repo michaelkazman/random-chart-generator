@@ -73,6 +73,16 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
-    p = p9.ggplot(data=df, mapping=p9.aes(x='X', y='y')) + p9.geom_point(show_legend='None', fill=styles.get('fill'), color=styles.get('color'), stroke=styles.get('stroke'), size=styles.get("size"), alpha=styles.get('opacity'))
+    p = (
+        p9.ggplot(data=df, mapping=p9.aes(x='X', y='y'))
+        + p9.geom_point(
+            show_legend='None',
+            fill=styles.get('fill'),
+            color=styles.get('color'),
+            stroke=styles.get('stroke'),
+            size=styles.get('size'),
+            alpha=styles.get('opacity')
+        )
+    )
     
     return p

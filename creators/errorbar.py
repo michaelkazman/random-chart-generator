@@ -84,7 +84,15 @@ def create_altair_graph(graph_object):
         layered_lines.append(lines)
 
     # combine layers
-    p = alt.layer(*layered_points, *layered_errorbars, *layered_lines).properties(width=styles.get('width'), height=styles.get('height'))
+    p = alt.layer(
+        *layered_points,
+        *layered_errorbars,
+        *layered_lines
+    ).properties(
+        width=styles.get('width'),
+        height=styles.get('height')
+    )
+    
     return p
 
 def create_plotnine_graph(graph_object):
