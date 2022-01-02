@@ -1,10 +1,8 @@
 import pandas as pd
 import altair as alt
 import plotnine as p9
-import numpy as np
-
-from utils.creators import unpack_graph_object
 from bokeh.plotting import figure
+from utils.creators import unpack_graph_object
 from bokeh.models import ColumnDataSource, VBar, HBar
 
 def create_bokeh_graph(graph_object):

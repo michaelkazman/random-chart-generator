@@ -1,8 +1,7 @@
 import altair as alt
 from altair_saver import save
-
-from utils.libraries import get_themes, get_theme_object
 from libraries.library import Library as BaseLibrary
+from utils.libraries import get_themes, get_theme_object
 
 class Library(BaseLibrary):
     def setup_hook():

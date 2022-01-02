@@ -1,5 +1,5 @@
-import numpy as np
 import bisect 
+import numpy as np
 from utils.utils import get_module_attr
 
 def generate_data(graph_type):
