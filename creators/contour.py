@@ -19,8 +19,8 @@ def create_bokeh_graph(graph_object):
 
     # initialize figure
     p = figure(
-        plot_width=500,
-        plot_height=300,
+        width=styles.get('width'),
+        height=styles.get('height'),
         x_range=X_range,
         y_range=y_range,
         x_axis_label='X',

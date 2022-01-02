@@ -32,6 +32,8 @@ def create_bokeh_graph(graph_object):
 
     # create holoviews plot
     p = data.hvplot.violin(
+        width=styles.get('width'), 
+        height=styles.get('height'), 
         y='y',
         by='X',
         c='X',
@@ -73,6 +75,9 @@ def create_altair_graph(graph_object):
             scale=alt.Scale(nice=False, zero=False, padding=parameters.get('padding')),
             axis=alt.Axis(labels=False, values=[0], grid=False, ticks=True),
         ),
+    ).properties(
+        width=styles.get('width'),
+        height=styles.get('height')
     )
 
     # stack violin with inner boxplot
@@ -116,6 +121,7 @@ def create_plotnine_graph(graph_object):
         p9.ggplot(df, p9.aes(x='X', y='y'))
         + p9.geom_violin()
         + p9.geom_boxplot(width=0.1)
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
     )
 
     return p
