@@ -10,11 +10,11 @@ parameters = {
 
 def generate_data():
     # get features
-    features = np.random.randint(*parameters['features_range'])
+    features = np.random.randint(*parameters.get('features_range', ()))
 
     # generate x (rounded to two decimal places) and y
-    X = np.around(np.linspace(*parameters['x_range'], features), decimals=2)
-    y = [np.random.uniform(*parameters['height_range']) for _ in range (0, features)]
+    X = np.around(np.linspace(*parameters.get('x_range', ()), features), decimals=2)
+    y = [np.random.uniform(*parameters.get('height_range', ())) for _ in range (0, features)]
     
     # random chance of correlation
     correlation = np.random.choice(['none', 'positive', 'negative'])
@@ -26,7 +26,7 @@ def generate_data():
             y = y[::-1]
         
         # random noise level
-        noise = np.random.uniform(*parameters['noise_range'], len(y))
+        noise = np.random.uniform(*parameters.get('noise_range', ()), len(y))
         for i in range (0, len(y)):
             operation = np.random.choice([-1, 1])
             y[i] += operation * (y[i] * noise[i])

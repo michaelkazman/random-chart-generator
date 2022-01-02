@@ -18,7 +18,7 @@ def resolve_styles(styles, num_repeats):
     resolved_styles = {}
     for style_name, style_object in styles.items():
         # extract all fields except for type
-        style_type, should_repeat = style_object['type'], style_object.get('repeat', False)
+        style_type, should_repeat = style_object.get('type'), style_object.get('repeat', False)
         # resolve style values and append to output dict
         # calculate multiple (if style has repeat flag (as well as the repeat number))
         resolved_value = (
