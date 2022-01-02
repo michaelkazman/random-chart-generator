@@ -3,7 +3,7 @@ from copy import copy, deepcopy
 from matplotlib import patheffects
 
 class Theme(p9.themes.theme_gray):
-    """
+    '''
     xkcd theme
 
     Parameters
@@ -26,7 +26,7 @@ class Theme(p9.themes.theme_gray):
     stroke_color : str or tuple, optional
         Color of the strokes. Default is ``white``.
         For no color, use ``'none'``.
-    """
+    '''
     def __init__(self, base_size=12, scale=1, length=100, randomness=2,
                  stroke_size=4, stroke_color='white'):
         p9.themes.theme_gray.__init__(self, base_size)
@@ -62,9 +62,9 @@ class Theme(p9.themes.theme_gray):
         self._rcParams.update(d)
 
     def __deepcopy__(self, memo):
-        """
+        '''
         Deep copy support for theme_xkcd
-        """
+        '''
         cls = self.__class__
         result = cls.__new__(cls)
         memo[id(self)] = result

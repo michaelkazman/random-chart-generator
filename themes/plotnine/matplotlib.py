@@ -2,7 +2,7 @@ import plotnine as p9
 import matplotlib as mpl
 
 class Theme(p9.themes.theme):
-    """
+    '''
     The default matplotlib look and feel.
 
     The theme can be used (and has the same parameter
@@ -18,7 +18,7 @@ class Theme(p9.themes.theme):
     use_defaults : bool
         If `True` (the default) resets the plot setting
         to the (current) `matplotlib.rcParams` values
-    """
+    '''
 
     def __init__(self, rc=None, fname=None, use_defaults=True):
         p9.themes.theme.__init__(

@@ -1,7 +1,7 @@
 import plotnine as p9
 
 class Theme(p9.themes.theme_bw):
-    """
+    '''
     Tufte Maximal Data, Minimal Ink Theme
     Theme based on Chapter 6 'Data-Ink Maximization and Graphical
     Design of Edward Tufte *The Visual Display of Quantitative
@@ -27,7 +27,7 @@ class Theme(p9.themes.theme_bw):
     Information, Chapter 6.
     Translated from the R ggthemes package by hyiltiz <hyiltiz@gmail.com>.
     Released under GNU GPL v2 license or later.
-    """
+    '''
 
     def __init__(self, base_size=11, base_family=None, ticks=True):
         p9.themes.theme_bw.__init__(self, base_size, base_family)

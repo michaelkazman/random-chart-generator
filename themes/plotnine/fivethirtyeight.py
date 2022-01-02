@@ -1,7 +1,7 @@
 import plotnine as p9
 
 class Theme(p9.themes.theme_gray):
-    """
+    '''
     Theme in the likeness of fivethirtyeight.com plots
 
     Parameters
@@ -11,7 +11,7 @@ class Theme(p9.themes.theme_gray):
         the base font size. Default is 11.
     base_family : str, optional
         Base font family.
-    """
+    '''
     def __init__(self, base_size=11, base_family='DejaVu Sans'):
         p9.themes.theme_gray.__init__(self, base_size, base_family)
         bgcolor = '#F0F0F0'

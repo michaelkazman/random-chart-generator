@@ -1,7 +1,7 @@
 import plotnine as p9
 
 class Theme(p9.themes.theme_gray):
-    """
+    '''
     A theme similar to :class:`theme_linedraw` but with light grey
     lines and axes to direct more attention towards the data.
 
@@ -12,7 +12,7 @@ class Theme(p9.themes.theme_gray):
         the base font size. Default is 11.
     base_family : str, optional
         Base font family.
-    """
+    '''
 
     def __init__(self, base_size=11, base_family=None):
         p9.themes.theme_bw.__init__(self, base_size, base_family)
