@@ -3,12 +3,33 @@
 
     }, 
     "bokeh": {
-
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
+        }
     },
     "altair": {
-
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
+        }
     },
     "plotnine": {
-        
+        "width": {
+            "type": "value",
+            "value": 9.5
+        },
+        "height": {
+            "type": "value",
+            "value": 9.5
+        }
     }
 }

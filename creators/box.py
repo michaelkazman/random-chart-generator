@@ -22,7 +22,14 @@ def create_bokeh_graph(graph_object):
     X = np.unique(df.X)
 
     # define figure
-    p = figure(x_range=X, x_axis_label='X', y_axis_label='y', toolbar_location=None)
+    p = figure(
+        x_range=X,
+        x_axis_label='X',
+        y_axis_label='y',
+        toolbar_location=None,
+        width=styles.get('width'),
+        height=styles.get('height'),
+    )
 
     # whiskers
     p.segment(X, upper.y, X, q3.y, line_color=line_color)
