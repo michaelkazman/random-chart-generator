@@ -1,18 +1,5 @@
 {
     "default": {
-        "width": {
-            "type": "value",
-            "value": 800
-        },
-        "height": {
-            "type": "value",
-            "value": 800
-        },
-        "bar_width": {
-            "type": "range",
-            "value": [0.5, 0.7],
-            "float": true
-        },
         "color": {
             "type": "color",
             "repeat": true
@@ -31,6 +18,19 @@
         }
     }, 
     "bokeh": {
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
+        },
+        "bar_width": {
+            "type": "range",
+            "value": [0.5, 0.7],
+            "float": true
+        },
         "extreme_width_units": {
             "type": "range",
             "value": [0.1, 0.2],
@@ -51,7 +51,19 @@
         }
     },
     "altair": {
-
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
+        },
+        "bar_width": {
+            "type": "range",
+            "value": [0.5, 0.7],
+            "float": true
+        }
     },
     "plotnine": {
         "width": {
@@ -61,6 +73,11 @@
         "height": {
             "type": "value",
             "value": 9.5
+        },
+        "bar_width": {
+            "type": "range",
+            "value": [0.5, 0.7],
+            "float": true
         }
     }
 }
