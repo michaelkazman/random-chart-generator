@@ -1,35 +1,86 @@
 {
     "default": {
-        "width": {
-            "type": "value",
-            "value": 400
-        },
-        "height": {
-            "type": "value",
-            "value": 400
-        },
         "color": {
             "type": "color",
             "repeat": true
+        }
+    },
+    "bokeh": {
+        "width": {
+            "type": "value",
+            "value": 800
         },
-        "line_thickness": {
-            "type": "range",
-            "value": [0.3, 2],
-            "float": true
+        "height": {
+            "type": "value",
+            "value": 800
         },
         "marker_type": {
             "type": "option",
-            "value": ["dot"],
+            "value": ["dot", "circle", "circle_cross", "hex", "square", "x"]
+        },
+        "marker_size": {
+            "type": "range",
+            "value": [10, 25],
+            "float": true
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [0.5, 3],
+            "float": true
+        },
+        "error_bar_thickness": {
+            "type": "range",
+            "value": [0.3, 3],
             "float": true
         }
-    }, 
-    "bokeh": {
-
     },
     "altair": {
-
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
+        },
+        "marker_size": {
+            "type": "range",
+            "value": [75, 250]
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [0.1, 3],
+            "float": true
+        },
+        "error_bar_thickness": {
+            "type": "range",
+            "value": [0.1, 3],
+            "float": true
+        }
     },
     "plotnine": {
-        
+        "width": {
+            "type": "value",
+            "value": 9.5
+        },
+        "height": {
+            "type": "value",
+            "value": 9.5
+        },
+        "marker_size": {
+            "type": "range",
+            "value": [1, 5],
+            "float": true
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [0.2, 1.5],
+            "float": true
+        },
+        "error_bar_thickness": {
+            "type": "range",
+            "value": [0.2, 1.5],
+            "float": true
+        }
     }
 }
