@@ -1,8 +1,7 @@
-import altair as alt
-import pandas as pd
 import numpy as np
+import pandas as pd
+import altair as alt
 import plotnine as p9
-
 from bokeh.plotting import figure
 from utils.creators import convert_numbers_to_letters, unpack_graph_object
 

@@ -1,8 +1,8 @@
+import holoviews as hv
 from bokeh.themes import Theme
 from bokeh.io import export_png, curdoc
 from utils.libraries import get_theme_object
 from libraries.library import Library as BaseLibrary
-import holoviews as hv
 
 class Library(BaseLibrary):
     def set_theme(graph_type, theme):

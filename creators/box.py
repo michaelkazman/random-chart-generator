@@ -2,22 +2,8 @@ import numpy as np
 import pandas as pd
 import altair as alt
 import plotnine as p9
-
 from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
-
-# dictionary for creating graphs
-parameters = {
-    'width':    400,
-    'height':   400,
-    'line_color': 'black',
-    'alt_line_color': '#000',
-    'bar_width': 0.7,
-    'extreme_width_units': 0.2,
-    'extreme_width': 0.01,
-    'outlier_fill_opacity': 0.6,
-    'outlier_size': 6,
-}
 
 def create_bokeh_graph(graph_object):
     # unpackage and get parameters

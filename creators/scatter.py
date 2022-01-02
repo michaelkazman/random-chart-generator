@@ -1,10 +1,9 @@
 import pandas as pd
 import altair as alt
 import plotnine as p9
-
 from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
-from bokeh.models import ColumnDataSource, Grid, LinearAxis, Plot, Scatter
+from bokeh.models import ColumnDataSource, Scatter
 
 parameters = {
     'width': 300,

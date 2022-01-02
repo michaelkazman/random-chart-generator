@@ -1,6 +1,6 @@
+import plotnine as p9
 from copy import copy, deepcopy
 from matplotlib import patheffects
-import plotnine as p9
 
 class Theme(p9.themes.theme_gray):
     """

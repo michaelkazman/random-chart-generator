@@ -2,12 +2,10 @@ import numpy as np
 import pandas as pd
 import altair as alt
 import plotnine as p9
-
-from utils.creators import convert_numbers_to_letters
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
 from utils.creators import unpack_graph_object
-from bokeh.io import curdoc
+from utils.creators import convert_numbers_to_letters
 
 def create_bokeh_graph(graph_object):
     #unpack data
