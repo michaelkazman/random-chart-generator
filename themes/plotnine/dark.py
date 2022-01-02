@@ -1,7 +1,7 @@
 import plotnine as p9
 
 class Theme(p9.themes.theme_gray):
-    """
+    '''
     The dark cousin of :class:`theme_light`, with similar line
     sizes but a dark background. Useful to make thin colored
     lines pop out.
@@ -13,7 +13,7 @@ class Theme(p9.themes.theme_gray):
         the base font size. Default is 11.
     base_family : str, optional
         Base font family.
-    """
+    '''
 
     def __init__(self, base_size=11, base_family=None):
         p9.theme_gray.__init__(self, base_size, base_family)

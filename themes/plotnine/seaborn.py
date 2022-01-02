@@ -1,7 +1,7 @@
 import plotnine as p9
 
 class Theme(p9.themes.theme):
-    """
+    '''
     Theme for seaborn.
 
     Credit to Michael Waskom's seaborn:
@@ -20,7 +20,7 @@ class Theme(p9.themes.theme):
     font_scale : float, optional
         Separate scaling factor to independently scale the
         size of the font elements.
-    """
+    '''
 
     def __init__(self, style='darkgrid', context='notebook', font='sans-serif', font_scale=1):
         p9.themes.theme.__init__(self,
