@@ -82,6 +82,7 @@ def create_plotnine_graph(graph_object):
         + p9.geom_line(show_legend='None') 
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
     )
 
     return p
