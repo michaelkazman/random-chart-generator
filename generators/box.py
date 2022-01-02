@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 parameters = {
     'num_boxes_range': (2, 7),
@@ -8,8 +7,8 @@ parameters = {
 
 def generate_data():
     # generate values based on hyperparameters
-    num_boxes = np.random.randint(*parameters['num_boxes_range'])
-    num_samples = np.random.randint(*parameters['num_samples_range'])
+    num_boxes = np.random.randint(*parameters.get('num_boxes_range', ()))
+    num_samples = np.random.randint(*parameters.get('num_samples_range', ()))
 
     # create df
     groups = list(map(str, range(num_boxes)))

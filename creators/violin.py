@@ -1,10 +1,9 @@
 import numpy as np
 import pandas as pd
 import altair as alt
-import hvplot.pandas
-import holoviews as hv
 import plotnine as p9
-
+import holoviews as hv
+import hvplot.pandas # needed for rendering bokeh violin plots
 from holoviews import opts
 from utils.creators import unpack_graph_object
 

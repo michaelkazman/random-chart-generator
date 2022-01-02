@@ -21,11 +21,11 @@ The basis for the following generation functions was taken from the above
 
 def generate_data():
     # generate hyperparameters
-    noise_level = np.random.uniform(*parameters['noise_range'])
-    random_noise_level = np.random.uniform(*parameters['random_noise_range']) # for no correlation
-    num_samples = np.random.randint(*parameters['sample_range'])
-    tail_strength = np.random.uniform(*parameters['tail_strength_range'])
-    num_features = parameters['num_features']
+    noise_level = np.random.uniform(*parameters.get('noise_range', ()))
+    random_noise_level = np.random.uniform(*parameters.get('random_noise_range', ())) # for no correlation
+    num_samples = np.random.randint(*parameters.get('sample_range', ()))
+    tail_strength = np.random.uniform(*parameters.get('tail_strength_range', ()))
+    num_features = parameters.get('num_features', 1)
     correlation = np.random.choice(['none', 'positive', 'negative'])
     
     # calculate data points from random linear regression model
