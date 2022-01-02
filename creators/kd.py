@@ -15,7 +15,13 @@ def create_bokeh_graph(graph_object):
         height = styles.get('height'),
     )
     for i in range(X.shape[0]):
-        p.line(X[i], y[i], line_color=styles.get('color')[i], line_width=4, alpha=0.7)
+        p.line(
+            X[i],
+            y[i], 
+            line_color=styles.get('color')[i], 
+            line_width=styles.get('line_thickness'), 
+            alpha=0.7,
+        )
 
     p.y_range.start = 0
     p.xaxis.axis_label = 'x'
@@ -35,7 +41,8 @@ def create_altair_graph(graph_object):
         lines = alt.Chart(df).mark_line().encode(
             x='x',
             y='y',
-            color = alt.value(styles.get('color')[i]),
+            color=alt.value(styles.get('color')[i]),
+            strokeWidth=alt.value(styles.get('line_thickness')),
         ).properties(
             width=styles.get('width'),
             height=styles.get('height'),
@@ -79,7 +86,7 @@ def create_plotnine_graph(graph_object):
                 fill=layer_names,
             )
         ) 
-        + p9.geom_line(show_legend='None') 
+        + p9.geom_line(show_legend='None', size=styles.get('line_thickness')) 
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
