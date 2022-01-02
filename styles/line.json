@@ -6,20 +6,42 @@
         }
     }, 
     "bokeh": {
-        "marker": {
+        "marker_type": {
             "type": "option",
             "value": ["circle", "cross", "diamond", "star", "dot"]
         },
         "marker_size": {
             "type": "range",
-            "value": [5, 20],
+            "value": [7, 20],
             "float": true
+        },
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
         }
     },
     "altair": {
-
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
+        }
     },
     "plotnine": {
-        
+        "width": {
+            "type": "value",
+            "value": 9.5
+        },
+        "height": {
+            "type": "value",
+            "value": 9.5
+        }
     }
 }
