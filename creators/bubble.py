@@ -1,19 +1,10 @@
-import pandas as pd
-
-from bokeh.plotting import show, figure
-from bokeh.models import ColumnDataSource
-from utils.creators import unpack_graph_object
-
 import numpy as np
+import pandas as pd
 import altair as alt
 import plotnine as p9
-
-parameters = {
-    'width': 400,
-    'height': 400,
-    'size': 10,
-    'x_threshold': 0.05,
-}
+from bokeh.plotting import figure
+from bokeh.models import ColumnDataSource
+from utils.creators import unpack_graph_object
 
 def create_bokeh_graph(graph_object):
     # format data
@@ -28,8 +19,8 @@ def create_bokeh_graph(graph_object):
     
     # plot data points
     p = figure(
-        width=parameters.get('width'),
-        height=parameters.get('height'),
+        width=styles.get('width'),
+        height=styles.get('height'),
         x_axis_label='X',
         y_axis_label='y',
         toolbar_location=None,
@@ -40,8 +31,8 @@ def create_bokeh_graph(graph_object):
         size='bubble_size',
         fill_alpha=styles.get('opacity'),
         fill_color=styles.get('fill'),
-        line_color=styles.get('color'),
-        line_width=styles.get('stroke'),
+        line_color=styles.get('stroke_color'),
+        line_width=styles.get('stroke_width'),
         source=df
     )
     
@@ -61,9 +52,14 @@ def create_altair_graph(graph_object):
         x=alt.X('X', scale=alt.Scale(domain=calculate_axis_range(X, bubble_size))),
         y=alt.Y('y', scale=alt.Scale(domain=calculate_axis_range(y, bubble_size))),
         size=alt.Size('size', legend=None),
+    ).properties(
+        width=styles.get('width'),
+        height=styles.get('height'),
     ).configure_mark(
         opacity=styles.get('opacity'),
-        color=styles.get('color'),
+        fill=styles.get('fill'),
+        stroke=styles.get('stroke_color'),
+        strokeWidth=styles.get('stroke_width'),
         filled=True,
     )
 
@@ -79,22 +75,32 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
-    p = p9.ggplot(
-        data=df, 
-        mapping=p9.aes(
-            x='X', 
-            y='y', 
-            size='size',
+    p = (
+        p9.ggplot(
+            data=df, 
+            mapping=p9.aes(
+                x='X', 
+                y='y', 
+                size='size',
+            )
         )
-    ) + p9.geom_point(show_legend='None', fill=styles.get('fill'), color=styles.get('color'), stroke=styles.get('stroke'), alpha=styles.get('opacity')) + p9.labels.xlab('X') + p9.labels.ylab('y')
+        + p9.geom_point(
+            show_legend='None',
+            fill=styles.get('fill'),
+            color=styles.get('stroke_color'),
+            stroke=styles.get('stroke_width'),
+            alpha=styles.get('opacity')
+        )
+        + p9.labels.xlab('X')
+        + p9.labels.ylab('y')
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+    )
     
     return p
 
 def calculate_axis_range(X, bubble_size):
-    # percent_offset = np.amax(X) * parameters.get('x_threshold')
-    # percent_offset = np.amax(X) * np.amax(bubble_size) * parameters.get('x_threshold')
     percent_offset = np.amax(X) * (np.amax(bubble_size)/100)
-    # get height range
+
     height_range = (
         np.amin(X) - percent_offset,
         np.amax(X) + percent_offset,
