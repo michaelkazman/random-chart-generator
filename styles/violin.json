@@ -1,6 +1,13 @@
 {
     "default": {
-
+        "color": {
+            "type": "color",
+            "repeat": true
+        },
+        "use_random_colors": {
+            "type": "probability",
+            "value": 0.8
+        }
     }, 
     "bokeh": {
         "width": {
@@ -10,6 +17,14 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "min_height_threshold": {
+            "type": "value",
+            "value": 1.5
+        },
+        "max_height_threshold": {
+            "type": "value",
+            "value": 1.5
         }
     },
     "altair": {
@@ -20,6 +35,18 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "padding": {
+            "type": "value",
+            "value": 20
+        },
+        "min_height_threshold": {
+            "type": "value",
+            "value": 1
+        },
+        "max_height_threshold": {
+            "type": "value",
+            "value": 1
         }
     },
     "plotnine": {

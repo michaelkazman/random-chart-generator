@@ -5,22 +5,11 @@ import plotnine as p9
 import holoviews as hv
 import hvplot.pandas # needed for rendering bokeh violin plots
 from holoviews import opts
+from collections import Counter
 from utils.creators import unpack_graph_object
 
 # set holoviews to use bokeh
 hv.extension('bokeh')
-
-parameters = {
-    'color': 'black',
-    'orientation': 'horizontal',
-    'stack': 'center',
-    'resolve_mode': 'independent',
-    'bokeh_height_min_threshold': 1.5,
-    'bokeh_height_max_threshold': 1.5,
-    'height_min_threshold': 1,
-    'height_max_threshold': 1,
-    'padding': 20,
-}
 
 def create_bokeh_graph(graph_object):
     # format data
@@ -39,7 +28,7 @@ def create_bokeh_graph(graph_object):
         c='X',
         legend=False, 
     ).opts(opts.Violin(
-        ylim=calculate_y_lim(y, ['bokeh_height_min_threshold', 'bokeh_height_max_threshold']),
+        ylim=calculate_y_lim(y, styles.get('min_height_threshold'), styles.get('max_height_threshold')),
     ))
 
     # turn plot into bokeh plot, and set toolbar to autohide
@@ -58,7 +47,8 @@ def create_altair_graph(graph_object):
     ).properties(width=200)
 
     # create violin
-    y_limit = calculate_y_lim(y)
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
+    y_limit = calculate_y_lim(y, styles.get('min_height_threshold'), styles.get('max_height_threshold'))
     violin = alt.Chart().transform_density(
         'y',
         as_=['y', 'density'],
@@ -66,13 +56,14 @@ def create_altair_graph(graph_object):
         groupby=['X'],
     ).mark_area(orient='horizontal').encode(
         y='y:Q',
-        color=alt.Color('X:N', legend=None),
+        fill=alt.Color('X:N', scale=alt.Scale(range=colors), legend=None),
+        color=alt.Color('X:N', scale=alt.Scale(range=colors), legend=None),
         x=alt.X(
             'density:Q',
             stack='center',
             impute=None,
             title=None,
-            scale=alt.Scale(nice=False, zero=False, padding=parameters.get('padding')),
+            scale=alt.Scale(nice=False, zero=False, padding=styles.get('padding')),
             axis=alt.Axis(labels=False, values=[0], grid=False, ticks=True),
         ),
     ).properties(
@@ -117,19 +108,21 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
     p = (
-        p9.ggplot(df, p9.aes(x='X', y='y'))
-        + p9.geom_violin()
-        + p9.geom_boxplot(width=0.1)
+        p9.ggplot(df, p9.aes(x='X', y='y', fill=X))
+        + p9.geom_violin(show_legend=False)
+        + p9.geom_boxplot(width=0.1, fill='black')
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+        + p9.scale_fill_manual(values=colors)
     )
 
     return p
 
-def calculate_y_lim(y, threshold_names=['height_min_threshold', 'height_max_threshold']):
+def calculate_y_lim(y, min_threshold, max_threshold):
     # get height range
     height_range = (
-        np.min(y) * (1 + parameters.get(threshold_names[0], 0)),
-        np.max(y) * (1 + parameters.get(threshold_names[1], 0))
+        np.min(y) * (1 + min_threshold),
+        np.max(y) * (1 + max_threshold),
     )
     return height_range
