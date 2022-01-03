@@ -34,7 +34,11 @@ def create_bokeh_graph(graph_object):
         x='x', 
         source=df, 
         color=styles.get('color'),
+        legend_label=convert_numbers_to_letters(layer_names),
     )
+    
+    # legend if applicable
+    p.legend.visible = styles.get('show_legend')
 
     return p
     
@@ -47,7 +51,7 @@ def create_altair_graph(graph_object):
     layer_names = np.copy(y_layers)
     for i in range(num_layers):
         layer_names[i, :] = i
-    layer_names = layer_names.flatten()
+    layer_names = convert_numbers_to_letters(layer_names.flatten())
 
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))
@@ -78,7 +82,7 @@ def create_plotnine_graph(graph_object):
     
     # create labels to group layers by
     layer_names = np.copy(y_layers)
-    colors = np.array([[styles.get('color')[i]] * layer_names.shape[1] for i in range(layer_names.shape[0])]).flatten()
+    # colors = np.array([[styles.get('color')[i]] * layer_names.shape[1] for i in range(layer_names.shape[0])]).flatten()
 
     for i in range(num_layers):
         layer_names[i, :] = i
@@ -95,13 +99,21 @@ def create_plotnine_graph(graph_object):
     
     # make plot for each layer
     p = (
-        p9.ggplot(data=data, mapping=p9.aes(x=X, y=y_layers, fill=colors))
-        + p9.geom_area(show_legend=False)
+        p9.ggplot(
+            data=data, 
+            mapping=p9.aes(
+                x=X, 
+                y=y_layers, 
+                fill=layer_names,
+            )
+        )
+        + p9.geom_area(show_legend=styles.get('show_legend'))
         + p9.labels.xlab('X')
         + p9.labels.ylab('y')
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
+        + p9.labs(fill="Layer Names")
     )
         
     return p

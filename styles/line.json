@@ -3,6 +3,10 @@
         "color": {
             "type": "color",
             "repeat": true
+        },
+        "show_legend": {
+            "type": "value",
+            "value": true
         }
     }, 
     "bokeh": {

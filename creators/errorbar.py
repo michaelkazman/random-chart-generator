@@ -6,8 +6,12 @@ from bokeh.plotting import figure
 from utils.creators import convert_numbers_to_letters, unpack_graph_object
 
 def create_bokeh_graph(graph_object):
-    # format data
+    # unpack data
     (X, y, y_errors, *_), styles = unpack_graph_object(graph_object)
+    num_layers = len(y)    
+    layer_names = convert_numbers_to_letters([str(i) for i in range(num_layers)])
+    
+    # make figure
     p = figure(
         width=styles.get('width'), 
         height=styles.get('height'), 
@@ -20,7 +24,7 @@ def create_bokeh_graph(graph_object):
     for i, (y, y_error) in enumerate(zip(y, y_errors)):
         # plot points
         getattr(p, styles.get('marker_type'))(X, y, color=styles.get('color')[i], size=styles.get('marker_size'))
-        p.line(X, y, color=styles.get('color')[i], line_width=styles.get('line_thickness'))
+        p.line(X, y, color=styles.get('color')[i], line_width=styles.get('line_thickness'), legend_label=layer_names[i])
 
         # plot vertical error lines
         y_err_x, y_err_y = [], []
@@ -28,6 +32,9 @@ def create_bokeh_graph(graph_object):
             y_err_x.append((px, px))
             y_err_y.append((py - err, py + err))
         p.multi_line(y_err_x, y_err_y, color=styles.get('color')[i], line_width=styles.get('error_bar_thickness'))
+
+    # legend if applicable
+    p.legend.visible = styles.get('show_legend')
 
     return p
 
@@ -137,12 +144,13 @@ def create_plotnine_graph(graph_object):
                 fill=layer_names,
             ),
         )
-        + p9.geom_line(show_legend='None', size=styles.get('line_thickness'))
-        + p9.geom_point(show_legend='None', size=styles.get('marker_size'))
-        + p9.geom_errorbar(show_legend='None', size=styles.get('error_bar_thickness'))
+        + p9.geom_line(show_legend=styles.get('show_legend'), size=styles.get('line_thickness'))
+        + p9.geom_point(show_legend=False, size=styles.get('marker_size'))
+        + p9.geom_errorbar(show_legend=False, size=styles.get('error_bar_thickness'))
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
+        + p9.labs(color="Layer Names")
     )
 
     return p
