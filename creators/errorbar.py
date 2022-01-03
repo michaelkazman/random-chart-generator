@@ -44,13 +44,13 @@ def create_altair_graph(graph_object):
             'y': y_i,
             'yerr': y_error,
             'color': styles.get('color')[i],
-            'size': styles.get('marker_size')
+            'size': styles.get('marker_size'),
         })
 
         # the base chart for other charts to build upon
         base = alt.Chart(df).transform_calculate(
             ymin='datum.y-datum.yerr',
-            ymax='datum.y+datum.yerr'
+            ymax='datum.y+datum.yerr',
         )
 
         # create points
@@ -59,7 +59,7 @@ def create_altair_graph(graph_object):
             size=alt.Value(styles.get('marker_size')),
         ).encode(
             x='X',
-            y='y'
+            y='y',
         )
 
         # create error bars
@@ -67,7 +67,7 @@ def create_altair_graph(graph_object):
             x='X',
             y=alt.Y('ymin:Q', axis=alt.Axis(title='y')),
             y2='ymax:Q',
-            strokeWidth=alt.value(styles.get('error_bar_thickness'))
+            strokeWidth=alt.value(styles.get('error_bar_thickness')),
         )
 
         # link the points and lines
@@ -75,7 +75,7 @@ def create_altair_graph(graph_object):
             x='X',
             y='y',
             color=alt.Color('color', legend=None),
-            strokeWidth=alt.value(styles.get('line_thickness'))
+            strokeWidth=alt.value(styles.get('line_thickness')),
         )
 
         # store that layers points, error bars, and lines
@@ -87,10 +87,10 @@ def create_altair_graph(graph_object):
     p = alt.layer(
         *layered_points,
         *layered_errorbars,
-        *layered_lines
+        *layered_lines,
     ).properties(
         width=styles.get('width'),
-        height=styles.get('height')
+        height=styles.get('height'),
     )
     
     return p

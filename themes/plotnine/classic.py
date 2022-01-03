@@ -18,14 +18,17 @@ class Theme(p9.themes.theme_bw):
         p9.themes.theme_bw.__init__(self, base_size, base_family)
         self.add_theme(
             p9.themes.theme(panel_border=p9.themes.elements.element_blank(),
-                  axis_line=p9.themes.elements.element_line(color='black'),
-                  panel_grid_major=p9.themes.elements.element_line(),
-                  panel_grid_major_x=p9.themes.elements.element_blank(),
-                  panel_grid_major_y=p9.themes.elements.element_blank(),
-                  panel_grid_minor=p9.themes.elements.element_line(),
-                  panel_grid_minor_x=p9.themes.elements.element_blank(),
-                  panel_grid_minor_y=p9.themes.elements.element_blank(),
-                  strip_background=p9.themes.elements.element_rect(
-                      colour='black', fill='None', size=1),
-                  legend_key=p9.themes.elements.element_blank()),
-            inplace=True)
+                axis_line=p9.themes.elements.element_line(color='black'),
+                panel_grid_major=p9.themes.elements.element_line(),
+                panel_grid_major_x=p9.themes.elements.element_blank(),
+                panel_grid_major_y=p9.themes.elements.element_blank(),
+                panel_grid_minor=p9.themes.elements.element_line(),
+                panel_grid_minor_x=p9.themes.elements.element_blank(),
+                panel_grid_minor_y=p9.themes.elements.element_blank(),
+                strip_background=p9.themes.elements.element_rect(
+                    colour='black', fill='None', size=1,
+                ),
+                legend_key=p9.themes.elements.element_blank()
+            ),
+            inplace=True,
+        )

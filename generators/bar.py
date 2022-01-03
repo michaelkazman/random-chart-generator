@@ -41,6 +41,6 @@ def generate_data():
         'y': y,
         'is_vertical': is_vertical,
         'correlation': correlation,
-        'num_repeats': num_repeats
+        'num_repeats': num_repeats,
     }
 

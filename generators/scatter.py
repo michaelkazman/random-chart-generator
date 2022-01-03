@@ -33,7 +33,7 @@ def generate_data():
         n_samples=num_samples,
         n_features=num_features,
         noise=(random_noise_level if correlation == 'none' else noise_level),
-        tail_strength=tail_strength
+        tail_strength=tail_strength,
     )
 
     # y correlation is flipped if generating a negative scatter

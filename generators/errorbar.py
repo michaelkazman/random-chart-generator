@@ -19,7 +19,7 @@ def generate_data():
     # pick a random distribution type
     data_distributions = {
         'midpoint': generate_midpoint_displacement,
-        'random': generate_random_distribution
+        'random': generate_random_distribution,
     }
     distribution = np.random.choice(list(data_distributions.keys()))
 

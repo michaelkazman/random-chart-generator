@@ -25,8 +25,23 @@ def create_bokeh_graph(graph_object):
     )
 
     # create glyphs based on vertical or horizontal
-    glyph = (VBar(x='X', top='top', bottom=0, width=styles.get('bar_width'), fill_color='color', line_width=styles.get('bar_width')) if is_vertical
-        else HBar(y='X', right='top', left=0, height=styles.get('bar_width'), fill_color='color', line_width=styles.get('bar_width')))
+    glyph = (
+        VBar(
+            x='X',
+            top='top',
+            bottom=0,
+            width=styles.get('bar_width'),
+            fill_color='color',
+            line_width=styles.get('bar_width'),
+        ) if is_vertical else HBar(
+            y='X',
+            right='top',
+            left=0,
+            height=styles.get('bar_width'),
+            fill_color='color',
+            line_width=styles.get('bar_width'),
+        )
+    )
     p.add_glyph(df, glyph)
 
     return p
@@ -44,7 +59,8 @@ def create_altair_graph(graph_object):
     colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
     chart = alt.Chart(df).mark_bar(size=styles.get('bar_width')).encode(
         **encodings,
-        color = alt.Color('y', scale=alt.Scale(range=colors), legend=None),
+        color=alt.Color('y', scale=alt.Scale(range=colors), legend=None),
+        size=styles.get('bar_width'),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),
@@ -67,7 +83,7 @@ def create_plotnine_graph(graph_object):
             stat='identity',
             mapping=p9.aes(fill=colors),
             show_legend=False,
-            width=styles.get('bar_width')
+            width=styles.get('bar_width'),
         )
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
         + p9.scale_fill_manual(values=colors)

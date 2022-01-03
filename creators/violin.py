@@ -54,7 +54,7 @@ def create_altair_graph(graph_object):
     
     # create boxplot
     boxplot = alt.Chart().mark_boxplot(color='black').encode(
-        alt.Y('y:Q')
+        alt.Y('y:Q'),
     ).properties(width=200)
 
     # create violin
@@ -63,7 +63,7 @@ def create_altair_graph(graph_object):
         'y',
         as_=['y', 'density'],
         extent=y_limit,
-        groupby=['X']
+        groupby=['X'],
     ).mark_area(orient='horizontal').encode(
         y='y:Q',
         color=alt.Color('X:N', legend=None),
@@ -77,18 +77,18 @@ def create_altair_graph(graph_object):
         ),
     ).properties(
         width=styles.get('width'),
-        height=styles.get('height')
+        height=styles.get('height'),
     )
 
     # stack violin with inner boxplot
     facet = lambda data: alt.layer(
         violin,
         boxplot,
-        data=data
+        data=data,
     ).facet(
         column='X:N',
     ).resolve_scale(
-        x=alt.ResolveMode('independent')
+        x=alt.ResolveMode('independent'),
     )
 
 
@@ -99,7 +99,7 @@ def create_altair_graph(graph_object):
         spacing=0,
     ).configure_header(
         titleOrient='bottom',
-        labelOrient='bottom'
+        labelOrient='bottom',
     ).configure_view(
         stroke=None,
     )

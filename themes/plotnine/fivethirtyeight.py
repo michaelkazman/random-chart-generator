@@ -24,9 +24,13 @@ class Theme(p9.themes.theme_gray):
                 panel_background=p9.themes.elements.element_rect(fill=bgcolor),
                 panel_border=p9.themes.elements.element_blank(),
                 panel_grid_major=p9.themes.elements.element_line(
-                    color='#D5D5D5', linetype='solid', size=1),
+                    color='#D5D5D5', linetype='solid', size=1,
+                ),
                 panel_grid_minor=p9.themes.elements.element_blank(),
                 plot_background=p9.themes.elements.element_rect(
-                    fill=bgcolor, color=bgcolor, size=1),
-                strip_background=p9.themes.elements.element_rect(size=0)),
-            inplace=True)
+                    fill=bgcolor, color=bgcolor, size=1,
+                ),
+                strip_background=p9.themes.elements.element_rect(size=0)
+            ),
+            inplace=True,
+        )

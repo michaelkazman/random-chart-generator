@@ -14,7 +14,7 @@ def create_bokeh_graph(graph_object):
         'x_text': x_text,
         'y_text': y_text,
         'color': styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color')),
-        'text_color': [styles.get('text_color')] * len(styles.get('color'))
+        'text_color': [styles.get('text_color')] * len(styles.get('color')),
     }
 
     # initialize figure
@@ -34,7 +34,7 @@ def create_bokeh_graph(graph_object):
         ys='y',
         line_color='color',
         line_width=styles.get('line_thickness'),
-        source=df
+        source=df,
     )
 
     # plot contour values

@@ -45,7 +45,14 @@ def create_bokeh_graph(graph_object):
 
     # outliers
     if ((outx != None) and (outy != None)):
-        p.circle(outx, outy, size=styles.get('outlier_size'), line_color=styles.get('outlier_color'), fill_color=styles.get('outlier_color'), fill_alpha=styles.get('outlier_fill_opacity'))
+        p.circle(
+            outx,
+            outy,
+            size=styles.get('outlier_size'),
+            line_color=styles.get('outlier_color'),
+            fill_color=styles.get('outlier_color'),
+            fill_alpha=styles.get('outlier_fill_opacity'),
+        )
 
     return p
     

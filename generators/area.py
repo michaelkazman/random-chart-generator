@@ -16,5 +16,5 @@ def generate_data():
     return {
         'X': X,
         'y': y,
-        'num_repeats': y.shape[0]
+        'num_repeats': y.shape[0],
     }

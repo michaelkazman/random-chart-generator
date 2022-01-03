@@ -29,13 +29,13 @@ class Theme(p9.themes.theme):
             legend_key=p9.themes.elements.element_rect(fill='None', colour='None'),
             legend_key_size=16,
             panel_spacing=0.1,
-            
             panel_background=p9.themes.elements.element_rect(fill='#FFFFFF'),
             plot_background=p9.themes.elements.element_rect(fill='#FFFFFF'),
-
             strip_background=p9.themes.elements.element_rect(
-                fill='#D9D9D9', color='#D9D9D9', size=1),
-            complete=True)
+                fill='#D9D9D9', color='#D9D9D9', size=1,
+            ),
+            complete=True
+        )
 
         if use_defaults:
             _copy = mpl.rcParams.copy()
