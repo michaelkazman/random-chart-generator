@@ -100,6 +100,8 @@ def create_plotnine_graph(graph_object):
         + p9.labels.xlab('X')
         + p9.labels.ylab('y')
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+        + p9.scale_color_manual(values=styles.get('color'))
+        + p9.scale_fill_manual(values=styles.get('color'))
     )
         
     return p
