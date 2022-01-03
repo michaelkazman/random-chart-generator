@@ -22,4 +22,5 @@ def generate_data():
     return {
         'X': X,
         'y': y,
+        'num_repeats': num_violins,
     }
