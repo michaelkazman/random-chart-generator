@@ -27,5 +27,5 @@ def generate_data():
         'X': X,
         'y': y,
         'distribution': distribution,
-        'num_repeats': y.shape[0]
+        'num_repeats': y.shape[0],
     }

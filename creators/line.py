@@ -64,7 +64,7 @@ def create_plotnine_graph(graph_object):
     df = pd.DataFrame({
         'X': X,
         'y': y_layers,
-        'layer_names': layer_names
+        'layer_names': layer_names,
     })
     
     # make plot for each layer

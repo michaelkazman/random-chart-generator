@@ -32,33 +32,34 @@ class Theme(p9.themes.theme_gray):
         p9.themes.theme_gray.__init__(self, base_size)
         self.add_theme(
             p9.themes.theme(
-                text=p9.themes.elements.element_text(
-                    family=['xkcd', 'Humor Sans', 'Comic Sans MS']),
+                text=p9.themes.elements.element_text(family=['xkcd', 'Humor Sans', 'Comic Sans MS']),
                 axis_ticks=p9.themes.elements.element_line(color='black', size=1.5),
                 axis_ticks_minor=p9.themes.elements.element_blank(),
                 axis_ticks_direction='in',
                 axis_ticks_length_major=6,
-                legend_background=p9.themes.elements.element_rect(
-                    color='black', fill='None'),
+                legend_background=p9.themes.elements.element_rect(color='black', fill='None'),
                 legend_key=p9.themes.elements.element_rect(fill='None'),
                 panel_border=p9.themes.elements.element_rect(color='black', size=1.5),
                 panel_grid=p9.themes.elements.element_blank(),
                 panel_background=p9.themes.elements.element_rect(fill='white'),
-                strip_background=p9.themes.elements.element_rect(
-                    color='black', fill='white'),
+                strip_background=p9.themes.elements.element_rect(color='black', fill='white'),
                 strip_background_x=p9.themes.elements.element_rect(width=2/3.),
                 strip_background_y=p9.themes.elements.element_rect(height=2/3.),
                 strip_margin=-0.5,
             ),
-            inplace=True)
+            inplace=True,
+        )
 
-        d = {'axes.unicode_minus': False,
-             'path.sketch':  (scale, length, randomness),
-             'path.effects':  [
-                 patheffects.withStroke(
-                     linewidth=stroke_size,
-                     foreground=stroke_color)]
-             }
+        d = {
+            'axes.unicode_minus': False,
+            'path.sketch':  (scale, length, randomness),
+            'path.effects':  [
+                patheffects.withStroke(
+                    linewidth=stroke_size,
+                    foreground=stroke_color,
+                ),
+            ],
+        }
         self._rcParams.update(d)
 
     def __deepcopy__(self, memo):

@@ -33,7 +33,7 @@ def create_bokeh_graph(graph_object):
         fill_color=styles.get('fill'),
         line_color=styles.get('stroke_color'),
         line_width=styles.get('stroke_width'),
-        source=df
+        source=df,
     )
     
     return p
@@ -82,7 +82,7 @@ def create_plotnine_graph(graph_object):
             fill=styles.get('fill'),
             color=styles.get('stroke_color'),
             stroke=styles.get('stroke_width'),
-            alpha=styles.get('opacity')
+            alpha=styles.get('opacity'),
         )
         + p9.labels.xlab('X')
         + p9.labels.ylab('y')

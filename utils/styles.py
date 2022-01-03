@@ -52,7 +52,7 @@ def resolve_color(**_):
     colors = (
         np.random.randint(0, 255), 
         np.random.randint(0, 255),
-        np.random.randint(0, 255)
+        np.random.randint(0, 255),
     )
     return '#%02x%02x%02x' % colors
 
