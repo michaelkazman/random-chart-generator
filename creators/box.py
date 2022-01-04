@@ -68,9 +68,9 @@ def create_altair_graph(graph_object):
     # create box plot chart
     colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1]
     box_plot = alt.Chart(df).mark_boxplot().encode(
-        x = 'X:O',
-        y = 'y:Q',
-        color = alt.Color('X:O', scale=alt.Scale(range=colors), legend=None),
+        x='X:O',
+        y='y:Q',
+        color=alt.Color('X:O', scale=alt.Scale(range=colors), legend=None),
     ).properties(
         width=width,
         height=height,
