@@ -42,9 +42,12 @@ def create_altair_graph(graph_object):
     # format data
     (X, y, y_errors, *_), styles = unpack_graph_object(graph_object)
     layered_points, layered_errorbars, layered_lines = [], [], []
-
+    legend = alt.Legend(title='Layers', orient=styles.get('legend_position')) if styles.get('show_legend') else None
+    
     # create each 'line' layer
     for i, (y_i, y_error) in enumerate(zip(y, y_errors)):
+        layer_names = convert_numbers_to_letters([i] * len(y_i))
+
         # set up data frame
         df = pd.DataFrame({
             'X': X,
@@ -52,6 +55,7 @@ def create_altair_graph(graph_object):
             'yerr': y_error,
             'color': styles.get('color')[i],
             'size': styles.get('marker_size'),
+            'layer_names': layer_names
         })
 
         # the base chart for other charts to build upon
@@ -81,7 +85,7 @@ def create_altair_graph(graph_object):
         lines = base.mark_line().encode(
             x='X',
             y='y',
-            color=alt.Color('color', legend=None),
+            color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
             strokeWidth=alt.value(styles.get('line_thickness')),
         )
 
