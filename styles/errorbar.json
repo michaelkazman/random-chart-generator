@@ -7,6 +7,10 @@
         "show_legend": {
             "type": "value",
             "value": true
+        },
+        "legend_title": {
+            "type": "value",
+            "value": "Layers"
         }
     },
     "bokeh": {
@@ -89,6 +93,10 @@
             "type": "range",
             "value": [0.2, 1.5],
             "float": true
+        },
+        "legend_position": {
+            "type": "value",
+            "value": [1, 0.8]
         }
     }
 }

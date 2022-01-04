@@ -26,6 +26,7 @@ def create_bokeh_graph(graph_object):
         getattr(p, styles.get('marker_type'))(X, y_list, color=styles.get('color')[i], size=styles.get('marker_size'))
     
     # legend if applicable
+    p.legend.title = styles.get('legend_title')
     p.legend.visible = styles.get('show_legend')
     
     return p
@@ -53,13 +54,13 @@ def create_altair_graph(graph_object):
     })
 
     # assign legend if applicable 
-    legend = alt.Legend(orient=styles.get('legend_position')) if styles.get('show_legend') else None
+    legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
 
     # create line chart
     p = alt.Chart(df).mark_line().encode(
         x=alt.X('X', scale=alt.Scale(domain=[0, np.amax(X)], nice=False)),
         y=alt.Y('y:Q'),
-        color= alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
+        color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),
@@ -101,10 +102,10 @@ def create_plotnine_graph(graph_object):
             ),
         ) 
         + p9.geom_line(show_legend=styles.get('show_legend'))
-        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')), legend_position=tuple(styles.get('legend_position')))
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
-        + p9.labs(color='Layers')
+        + p9.labs(color=styles.get('legend_title'))
     )
 
     return p
