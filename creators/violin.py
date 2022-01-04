@@ -20,15 +20,17 @@ def create_bokeh_graph(graph_object):
     })
 
     # create holoviews plot
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
     p = data.hvplot.violin(
-        width=styles.get('width'), 
-        height=styles.get('height'), 
         y='y',
         by='X',
         c='X',
         legend=False, 
     ).opts(opts.Violin(
+        width=styles.get('width'),
+        height=styles.get('height'),
         ylim=calculate_y_lim(y, styles.get('min_height_threshold'), styles.get('max_height_threshold')),
+        cmap=colors
     ))
 
     # turn plot into bokeh plot, and set toolbar to autohide
@@ -67,8 +69,8 @@ def create_altair_graph(graph_object):
             axis=alt.Axis(labels=False, values=[0], grid=False, ticks=True),
         ),
     ).properties(
-        width=styles.get('width'),
-        height=styles.get('height'),
+        width=(styles.get('width') / len(styles.get('color'))),
+        height=(styles.get('height')),
     )
 
     # stack violin with inner boxplot
