@@ -34,6 +34,7 @@ def create_bokeh_graph(graph_object):
         p.multi_line(y_err_x, y_err_y, color=styles.get('color')[i], line_width=styles.get('error_bar_thickness'))
 
     # legend if applicable
+    p.legend.title = styles.get('legend_title')
     p.legend.visible = styles.get('show_legend')
 
     return p
@@ -42,7 +43,7 @@ def create_altair_graph(graph_object):
     # format data
     (X, y, y_errors, *_), styles = unpack_graph_object(graph_object)
     layered_points, layered_errorbars, layered_lines = [], [], []
-    legend = alt.Legend(title='Layers', orient=styles.get('legend_position')) if styles.get('show_legend') else None
+    legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
     
     # create each 'line' layer
     for i, (y_i, y_error) in enumerate(zip(y, y_errors)):
@@ -151,10 +152,10 @@ def create_plotnine_graph(graph_object):
         + p9.geom_line(show_legend=styles.get('show_legend'), size=styles.get('line_thickness'))
         + p9.geom_point(show_legend=False, size=styles.get('marker_size'))
         + p9.geom_errorbar(show_legend=False, size=styles.get('error_bar_thickness'))
-        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')), legend_position=tuple(styles.get('legend_position')))
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
-        + p9.labs(color='Layers')
+        + p9.labs(color=styles.get('legend_title'))
     )
 
     return p

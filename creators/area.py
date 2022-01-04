@@ -38,6 +38,7 @@ def create_bokeh_graph(graph_object):
     )
     
     # legend if applicable
+    p.legend.title = styles.get('legend_title')
     p.legend.visible = styles.get('show_legend')
 
     return p
@@ -65,7 +66,7 @@ def create_altair_graph(graph_object):
     })
 
     # assign legend if applicable 
-    legend = alt.Legend(orient=styles.get('legend_position')) if styles.get('show_legend') else None
+    legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
 
     # create area chart
     p = alt.Chart(df).mark_area().encode(
@@ -113,9 +114,9 @@ def create_plotnine_graph(graph_object):
         + p9.geom_area(show_legend=styles.get('show_legend'))
         + p9.labels.xlab('X')
         + p9.labels.ylab('y')
-        + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
+        + p9.theme(figure_size=(styles.get('width'), styles.get('height')), legend_position=tuple(styles.get('legend_position')))
         + p9.scale_fill_manual(values=styles.get('color'))
-        + p9.labs(fill='Layers')
+        + p9.labs(fill=styles.get('legend_title'))
     )
         
     return p
