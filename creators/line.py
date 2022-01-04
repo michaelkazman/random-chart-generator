@@ -33,23 +33,38 @@ def create_bokeh_graph(graph_object):
 def create_altair_graph(graph_object):
     # unpack data
     (X, y, *_), styles = unpack_graph_object(graph_object)
+    num_layers = len(y)
 
-    # for each layer, make data frame and store its line graph
-    layered_lines = []
-    for i in range(0, len(y)):
-        df = pd.DataFrame({'x': X, 'y': y[i]})
-        lines = alt.Chart(df).mark_line().encode(
-            x='x',
-            y='y',
-            color = alt.value(styles.get('color')[i]),
-        ).properties(
-            height = styles.get('height'),
-            width = styles.get('width'),
-        )
-        layered_lines.append(lines)
-    
-    # make final chart by layering
-    p = alt.layer(*layered_lines)
+    # create labels to group layers by
+    layer_names = np.copy(y)
+    for i in range(num_layers):
+        layer_names[i, :] = i
+    layer_names = convert_numbers_to_letters(layer_names.flatten())
+
+    # format data to be appropriate for a data frame
+    X = np.append(X, [X] * (num_layers - 1))
+    y = y.flatten()
+
+    # create data frame
+    df = pd.DataFrame({
+        'X': X,
+        'y': y,
+        'layer_names': layer_names,
+    })
+
+    # assign legend if applicable 
+    legend = alt.Legend(orient=styles.get('legend_position')) if styles.get('show_legend') else None
+
+    # create line chart
+    p = alt.Chart(df).mark_line().encode(
+        x=alt.X('X', scale=alt.Scale(domain=[0, np.amax(X)], nice=False)),
+        y=alt.Y('y:Q'),
+        color= alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
+    ).properties(
+        width=styles.get('width'),
+        height=styles.get('height'),
+    )
+
     return p
 
 def create_plotnine_graph(graph_object):

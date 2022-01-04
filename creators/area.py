@@ -64,11 +64,14 @@ def create_altair_graph(graph_object):
         'layer_names': layer_names,
     })
 
+    # assign legend if applicable 
+    legend = alt.Legend(orient=styles.get('legend_position')) if styles.get('show_legend') else None
+
     # create area chart
     p = alt.Chart(df).mark_area().encode(
         x = alt.X('X', scale=alt.Scale(domain=[0, np.amax(X)], nice=False)),
         y = alt.Y('y:Q', stack='zero'),
-        color = alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=None),
+        color = alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),

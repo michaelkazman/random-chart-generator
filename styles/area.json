@@ -27,6 +27,10 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "legend_position": {
+            "type": "value",
+            "value": "right"
         }
     },
     "plotnine": {
