@@ -35,7 +35,7 @@
         },
         "bar_width": {
             "type": "range",
-            "value": [20, 45],
+            "value": [20, 65],
             "float": true
         }
     },

@@ -57,10 +57,10 @@ def create_altair_graph(graph_object):
     # horizontal forces x to take the y values as quantitive
     encodings = { 'x': 'x:O', 'y': 'y:Q' } if is_vertical else { 'x': 'y:Q', 'y': 'x:O' }
     colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
-    chart = alt.Chart(df).mark_bar(size=styles.get('bar_width')).encode(
+    chart = alt.Chart(df).mark_bar().encode(
         **encodings,
         color=alt.Color('y', scale=alt.Scale(range=colors), legend=None),
-        size=styles.get('bar_width'),
+        size=alt.value(styles.get('bar_width')),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),
