@@ -20,10 +20,11 @@ The `setup/setup.sh` script can be used to automatically setup the project envir
     ```
 1. *Select created kernel*
 
-    As seen in the following image, switch the kernel to
+    As seen in the following image, select the corresponding kernel using the dropdown selected in red
     ```
     random-graph-generator-kernel
     ```
+    ![Switch kernel](static/select-kernel.png)
 </details>
 
 </br> 
@@ -53,10 +54,11 @@ The `setup/setup.sh` script can be used to automatically setup the project envir
     ````
 1. *Select created kernel*
 
-    As seen in the following image, switch the kernel to
+    As seen in the following image, select the corresponding kernel using the dropdown selected in red
     ```
     random-graph-generator-kernel
     ```
+    ![Switch kernel](static/select-kernel.png)
 </details>
 
 </br>
