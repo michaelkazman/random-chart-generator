@@ -79,6 +79,7 @@ def create_altair_graph(graph_object):
             x='X',
             y=alt.Y('ymin:Q', axis=alt.Axis(title='y')),
             y2='ymax:Q',
+            color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=None),
             strokeWidth=alt.value(styles.get('error_bar_thickness')),
         )
 
