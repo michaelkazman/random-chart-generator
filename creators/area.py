@@ -4,15 +4,14 @@ import altair as alt
 import plotnine as p9
 from bokeh.plotting import figure
 from bokeh.models import ColumnDataSource
-from utils.creators import unpack_graph_object
-from utils.creators import convert_numbers_to_letters
+from utils.creators import convert_numbers_to_letters, unpack_graph_object, generate_indices_list
 
 def create_bokeh_graph(graph_object):
     #unpack data
     (X, y), styles = unpack_graph_object(graph_object)
-    y = y.tolist()
     num_layers = len(y)    
-    layer_names = [str(i) for i in range(num_layers)]
+    layer_names = convert_numbers_to_letters(range(num_layers))
+
 
     # format dict with x and y such that y layers is labelled with ['y1', 'y2', ...]
     layers = { 'x': X }
@@ -29,15 +28,18 @@ def create_bokeh_graph(graph_object):
         y_axis_label='y',
         toolbar_location=None,
     )
+
+    # stack layers
+    layer_indices = [str(i) for i in range(num_layers)]
     p.varea_stack(
-        layer_names, 
+        layer_indices, 
         x='x', 
         source=df, 
         color=styles.get('color'),
-        legend_label=convert_numbers_to_letters(layer_names),
+        legend_label=layer_names,
     )
     
-    # legend if applicable
+    # render legend if applicable
     p.legend.title = styles.get('legend_title')
     p.legend.visible = styles.get('show_legend')
 
@@ -49,10 +51,7 @@ def create_altair_graph(graph_object):
     num_layers = len(y_layers)
 
     # create labels to group layers by
-    layer_names = np.copy(y_layers)
-    for i in range(num_layers):
-        layer_names[i, :] = i
-    layer_names = convert_numbers_to_letters(layer_names.flatten())
+    layer_names = convert_numbers_to_letters(generate_indices_list(y_layers))
 
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))
@@ -65,7 +64,7 @@ def create_altair_graph(graph_object):
         'layer_names': layer_names,
     })
 
-    # assign legend if applicable 
+    # render legend if applicable 
     legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
 
     # create area chart
@@ -85,12 +84,7 @@ def create_plotnine_graph(graph_object):
     num_layers = len(y_layers)
     
     # create labels to group layers by
-    layer_names = np.copy(y_layers)
-    # colors = np.array([[styles.get('color')[i]] * layer_names.shape[1] for i in range(layer_names.shape[0])]).flatten()
-
-    for i in range(num_layers):
-        layer_names[i, :] = i
-    layer_names = convert_numbers_to_letters(layer_names.flatten())
+    layer_names = convert_numbers_to_letters(generate_indices_list(y_layers))
 
     # format data to be appropriate for a data frame
     X = np.append(X, [X] * (num_layers - 1))

@@ -3,13 +3,13 @@ import pandas as pd
 import altair as alt
 import plotnine as p9
 from bokeh.plotting import figure
-from utils.creators import convert_numbers_to_letters, unpack_graph_object
+from utils.creators import convert_numbers_to_letters, unpack_graph_object, generate_indices_list
 
 def create_bokeh_graph(graph_object):
     # unpack data
     (X, y, *_), styles = unpack_graph_object(graph_object)
     num_layers = len(y)    
-    layer_names = convert_numbers_to_letters([str(i) for i in range(num_layers)])
+    layer_names = convert_numbers_to_letters(range(num_layers))
 
     # create plot
     p = figure(
@@ -25,7 +25,7 @@ def create_bokeh_graph(graph_object):
         p.line(X, y_list, color=styles.get('color')[i], line_width=styles.get('line_thickness'), legend_label=layer_names[i])
         getattr(p, styles.get('marker_type'))(X, y_list, color=styles.get('color')[i], size=styles.get('marker_size'))
     
-    # legend if applicable
+    # render legend if applicable
     p.legend.title = styles.get('legend_title')
     p.legend.visible = styles.get('show_legend')
     
@@ -36,13 +36,8 @@ def create_altair_graph(graph_object):
     (X, y, *_), styles = unpack_graph_object(graph_object)
     num_layers = len(y)
 
-    # create labels to group layers by
-    layer_names = np.copy(y)
-    for i in range(num_layers):
-        layer_names[i, :] = i
-    layer_names = convert_numbers_to_letters(layer_names.flatten())
-
     # format data to be appropriate for a data frame
+    layer_names = convert_numbers_to_letters(generate_indices_list(y))
     X = np.append(X, [X] * (num_layers - 1))
     y = y.flatten()
 
@@ -53,7 +48,7 @@ def create_altair_graph(graph_object):
         'layer_names': layer_names,
     })
 
-    # assign legend if applicable 
+    # render legend if applicable 
     legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
 
     # base chart
@@ -95,16 +90,11 @@ def create_plotnine_graph(graph_object):
      # unpack data
     (X, y_layers, *_), styles = unpack_graph_object(graph_object)
     num_layers = len(y_layers)
-    
-    # create labels to group layers by
-    layer_names = np.copy(y_layers)
-    for i in range(num_layers):
-        layer_names[i, :] = i
 
     # format data to be appropriate for a data frame
+    layer_names = convert_numbers_to_letters(generate_indices_list(y_layers))
     X = np.append(X, [X] * (num_layers - 1))
     y_layers = y_layers.flatten()
-    layer_names = convert_numbers_to_letters(layer_names.flatten())
 
     # create data frame
     df = pd.DataFrame({

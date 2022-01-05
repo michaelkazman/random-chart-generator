@@ -1,3 +1,4 @@
+import numpy as np
 from utils.utils import get_module_attr, get_library_class
 
 def create_graph(graph_type, library, graph_object):
@@ -29,3 +30,6 @@ def unpack_graph_object(graph_object):
 
 def convert_numbers_to_letters(numbers):
     return [chr(int(i) + 65) for i in numbers]
+
+def generate_indices_list(list_of_values):
+    return np.hstack([[i] * len(values) for i, values in enumerate(list_of_values)])

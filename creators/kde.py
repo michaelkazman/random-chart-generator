@@ -4,13 +4,13 @@ import plotnine as p9
 import altair as alt
 from utils.creators import unpack_graph_object
 from bokeh.plotting import figure
-from utils.creators import convert_numbers_to_letters, unpack_graph_object
+from utils.creators import convert_numbers_to_letters, unpack_graph_object, generate_indices_list
 
 def create_bokeh_graph(graph_object):
     # unpack data
     (X, y, *_), styles = unpack_graph_object(graph_object)
     num_layers = len(y)    
-    layer_names = convert_numbers_to_letters([str(i) for i in range(num_layers)])
+    layer_names = convert_numbers_to_letters(range(num_layers))
 
     # create plot
     p = figure(
@@ -33,7 +33,7 @@ def create_bokeh_graph(graph_object):
     p.yaxis.axis_label = 'Pr(x)'
     p.grid.grid_line_color="white"
 
-    # legend if applicable
+    # render legend if applicable
     p.legend.title = styles.get('legend_title')
     p.legend.visible = styles.get('show_legend')
 
@@ -44,7 +44,7 @@ def create_altair_graph(graph_object):
     (X, y, *_), styles = unpack_graph_object(graph_object)
 
     # create labels to group layers by
-    layer_names = convert_numbers_to_letters(np.hstack([[i] * len(y_i) for i, y_i in enumerate(y)]))
+    layer_names = convert_numbers_to_letters(generate_indices_list(y))
 
     # format data to be appropriate for a data frame
     X = X.flatten()
@@ -57,7 +57,7 @@ def create_altair_graph(graph_object):
         'layer_names': layer_names,
     })
 
-    # assign legend if applicable 
+    # render legend if applicable 
     legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
 
     # create line chart
@@ -76,17 +76,11 @@ def create_altair_graph(graph_object):
 def create_plotnine_graph(graph_object):
      # unpack data
     (X, y, *_), styles = unpack_graph_object(graph_object)
-    num_layers = X.shape[0]
     
-    # create labels to group layers by
-    layer_names = np.copy(y)
-    for i in range(num_layers):
-        layer_names[i, :] = i    
-
     # format data to be appropriate for a data frame
+    layer_names = convert_numbers_to_letters(generate_indices_list(y))
     X = X.flatten()
     y = y.flatten()
-    layer_names = convert_numbers_to_letters(layer_names.flatten())
 
     # create data frame
     df = pd.DataFrame({

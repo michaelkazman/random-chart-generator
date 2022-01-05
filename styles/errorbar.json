@@ -24,7 +24,7 @@
         },
         "marker_type": {
             "type": "option",
-            "value": ["dot", "circle", "circle_cross", "hex", "square", "x"]
+            "value": ["dot", "circle", "hex", "square", "x"]
         },
         "marker_size": {
             "type": "range",
@@ -50,6 +50,10 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "marker_type": {
+            "type": "option",
+            "value": ["point", "square", "circle", null]
         },
         "marker_size": {
             "type": "range",
@@ -78,6 +82,10 @@
         "height": {
             "type": "value",
             "value": 9.5
+        },
+        "marker_type": {
+            "type": "option",
+            "value": [".", "o", "s", "d", null]
         },
         "marker_size": {
             "type": "range",
