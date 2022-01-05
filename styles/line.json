@@ -14,6 +14,14 @@
         }
     }, 
     "bokeh": {
+        "width": {
+            "type": "value",
+            "value": 800
+        },
+        "height": {
+            "type": "value",
+            "value": 800
+        },
         "marker_type": {
             "type": "option",
             "value": ["circle", "cross", "diamond", "star", "dot"]
@@ -22,14 +30,6 @@
             "type": "range",
             "value": [7, 20],
             "float": true
-        },
-        "width": {
-            "type": "value",
-            "value": 800
-        },
-        "height": {
-            "type": "value",
-            "value": 800
         },
         "line_thickness": {
             "type": "range",
@@ -45,6 +45,14 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "marker_type": {
+            "type": "option",
+            "value": ["point", "square", "circle", null]
+        },
+        "marker_size": {
+            "type": "range",
+            "value": [75, 250]
         },
         "line_thickness": {
             "type": "range",
@@ -64,6 +72,14 @@
         "height": {
             "type": "value",
             "value": 9.5
+        },
+        "marker_type": {
+            "type": "option",
+            "value": [".", "o", "s", "d", null]
+        },
+        "marker_size": {
+            "type": "range",
+            "value": [2, 8]
         },
         "line_thickness": {
             "type": "range",

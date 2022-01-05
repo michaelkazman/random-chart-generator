@@ -56,12 +56,34 @@ def create_altair_graph(graph_object):
     # assign legend if applicable 
     legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
 
-    # create line chart
-    p = alt.Chart(df).mark_line().encode(
+    # base chart
+    base = alt.Chart(df)
+
+    # create points
+    points = alt.LayerChart()
+    if styles.get('marker_type') != None:
+        marker = getattr(base, 'mark_{marker_type}'.format(marker_type=styles.get('marker_type')))
+        points = marker(
+            filled=True,
+            size=alt.Value(styles.get('marker_size')),
+        ).encode(
+            x='X',
+            y='y',
+            color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color'))),
+        )
+
+    # create lines
+    lines = base.mark_line().encode(
         x=alt.X('X', scale=alt.Scale(domain=[np.amin(X), np.amax(X)], nice=False)),
         y=alt.Y('y:Q'),
         color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
         strokeWidth=alt.value(styles.get('line_thickness')),
+    )
+
+    # merge graphs
+    p = alt.layer(
+        lines,
+        points
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),
@@ -108,5 +130,8 @@ def create_plotnine_graph(graph_object):
         + p9.scale_fill_manual(values=styles.get('color'))
         + p9.labs(color=styles.get('legend_title'))
     )
+
+    if styles.get('marker_type') != None:
+        p += p9.geom_point(show_legend=False, size=styles.get('marker_size'), shape=styles.get('marker_type'))
 
     return p
