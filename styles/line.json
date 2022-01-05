@@ -30,6 +30,11 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [0.8, 3.5],
+            "float": true
         }
     },
     "altair": {
@@ -40,6 +45,11 @@
         "height": {
             "type": "value",
             "value": 800
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [0.1, 5],
+            "float": true
         },
         "legend_position": {
             "type": "value",
@@ -54,6 +64,11 @@
         "height": {
             "type": "value",
             "value": 9.5
+        },
+        "line_thickness": {
+            "type": "range",
+            "value": [0.2, 1.5],
+            "float": true
         },
         "legend_position": {
             "type": "value",

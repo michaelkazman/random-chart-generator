@@ -63,10 +63,10 @@ def create_altair_graph(graph_object):
 
     # create line chart
     p = alt.Chart(df).mark_line().encode(
-        # x = 'X',
         x=alt.X('X', scale=alt.Scale(domain=[np.amin(X), np.amax(X)], nice=False)),
         y=alt.Y('y:Q'),
         color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
+        strokeWidth=alt.value(styles.get('line_thickness')),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),

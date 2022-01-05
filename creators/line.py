@@ -22,7 +22,7 @@ def create_bokeh_graph(graph_object):
     
     # draw each line individually
     for i, y_list in enumerate(y):
-        p.line(X, y_list, color=styles.get('color')[i], legend_label=layer_names[i])
+        p.line(X, y_list, color=styles.get('color')[i], line_width=styles.get('line_thickness'), legend_label=layer_names[i])
         getattr(p, styles.get('marker_type'))(X, y_list, color=styles.get('color')[i], size=styles.get('marker_size'))
     
     # legend if applicable
@@ -61,6 +61,7 @@ def create_altair_graph(graph_object):
         x=alt.X('X', scale=alt.Scale(domain=[np.amin(X), np.amax(X)], nice=False)),
         y=alt.Y('y:Q'),
         color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=legend),
+        strokeWidth=alt.value(styles.get('line_thickness')),
     ).properties(
         width=styles.get('width'),
         height=styles.get('height'),
@@ -101,7 +102,7 @@ def create_plotnine_graph(graph_object):
                 fill=layer_names,
             ),
         ) 
-        + p9.geom_line(show_legend=styles.get('show_legend'))
+        + p9.geom_line(show_legend=styles.get('show_legend'), size=styles.get('line_thickness'), strokeWidth=alt.value(styles.get('line_thickness')))
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')), legend_position=tuple(styles.get('legend_position')))
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
