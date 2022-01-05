@@ -45,7 +45,6 @@ def create_altair_graph(graph_object):
 
     # create labels to group layers by
     layer_names = convert_numbers_to_letters(np.hstack([[i] * len(y_i) for i, y_i in enumerate(y)]))
-    print(len(layer_names), len(X), len(y))
 
     # format data to be appropriate for a data frame
     X = X.flatten()
