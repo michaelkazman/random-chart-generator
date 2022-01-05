@@ -43,7 +43,7 @@ def create_altair_graph(graph_object):
     # format data
     (X, y, y_errors, *_), styles = unpack_graph_object(graph_object)
     layered_points, layered_errorbars, layered_lines = [], [], []
-    legend = alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
+    legend=alt.Legend(title=styles.get('legend_title'), orient=styles.get('legend_position')) if styles.get('show_legend') else None
     
     # create each 'line' layer
     for i, (y_i, y_error) in enumerate(zip(y, y_errors)):
@@ -79,7 +79,7 @@ def create_altair_graph(graph_object):
             x='X',
             y=alt.Y('ymin:Q', axis=alt.Axis(title='y')),
             y2='ymax:Q',
-            color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color')), legend=None),
+            color=alt.Color('layer_names:N', scale=alt.Scale(range=styles.get('color'))),
             strokeWidth=alt.value(styles.get('error_bar_thickness')),
         )
 
