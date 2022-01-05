@@ -86,7 +86,7 @@
         },
         "line_thickness": {
             "type": "range",
-            "value": [0.5, 5],
+            "value": [0.5, 3.5],
             "float": true
         },
         "error_bar_thickness": {
