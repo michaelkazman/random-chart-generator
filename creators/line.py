@@ -102,7 +102,7 @@ def create_plotnine_graph(graph_object):
                 fill=layer_names,
             ),
         ) 
-        + p9.geom_line(show_legend=styles.get('show_legend'), size=styles.get('line_thickness'), strokeWidth=alt.value(styles.get('line_thickness')))
+        + p9.geom_line(show_legend=styles.get('show_legend'), size=styles.get('line_thickness'))
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')), legend_position=tuple(styles.get('legend_position')))
         + p9.scale_color_manual(values=styles.get('color'))
         + p9.scale_fill_manual(values=styles.get('color'))
