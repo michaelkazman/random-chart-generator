@@ -3,6 +3,14 @@
         "color": {
             "type": "color",
             "repeat": true
+        },
+        "show_legend": {
+            "type": "value",
+            "value": true
+        },
+        "legend_title": {
+            "type": "value",
+            "value": "Layers"
         }
     }, 
     "bokeh": {
@@ -33,6 +41,10 @@
             "type": "range",
             "value": [2, 5],
             "float": true
+        },
+        "legend_position": {
+            "type": "value",
+            "value": "right"
         }
     },
     "plotnine": {
@@ -47,6 +59,10 @@
         "line_thickness": {
             "type": "range",
             "value": [1, 3]
+        },
+        "legend_position": {
+            "type": "value",
+            "value": [1, 0.8]
         }
     }
 }
