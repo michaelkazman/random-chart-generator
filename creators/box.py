@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import altair as alt
 import plotnine as p9
+from collections import Counter
 from bokeh.plotting import figure
 from utils.creators import unpack_graph_object
 
@@ -146,10 +147,10 @@ def create_plotnine_graph(graph_object):
     })
 
     # create plot
-    colors = styles.get('color')[:1]
+    colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
     p = (
         p9.ggplot(df)
-        + p9.geom_boxplot(p9.aes(x='X', y='y', fill=colors), show_legend=False)
+        + p9.geom_boxplot(p9.aes(x='X', y='y', fill='X'), show_legend=False)
         + p9.theme(figure_size=(styles.get('width'), styles.get('height')))
         + p9.scale_fill_manual(values=colors)
     )
