@@ -14,7 +14,7 @@ def create_bokeh_graph(graph_object):
 
 
     # format dict with x and y such that y layers is labelled with ['y1', 'y2', ...]
-    layers = { 'x': X }
+    layers = { 'X': X }
     layers.update(dict([(str(index), layer) for index, layer in enumerate(y)]))
     
     # create source
@@ -33,7 +33,7 @@ def create_bokeh_graph(graph_object):
     layer_indices = [str(i) for i in range(num_layers)]
     p.varea_stack(
         layer_indices, 
-        x='x', 
+        x='X', 
         source=df, 
         color=styles.get('color'),
         legend_label=layer_names,

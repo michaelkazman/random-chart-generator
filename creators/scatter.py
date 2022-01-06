@@ -8,7 +8,7 @@ from bokeh.models import ColumnDataSource, Scatter
 def create_bokeh_graph(graph_object):
     # format data
     (X, y, *_), styles = unpack_graph_object(graph_object)
-    df = ColumnDataSource(dict(x=X, y=y))
+    df = ColumnDataSource(dict(X=X, y=y))
 
     # create plot
     p = figure(
@@ -23,7 +23,7 @@ def create_bokeh_graph(graph_object):
 
     # create glyph (symbol for plotting data points)
     glyph = Scatter(
-        x='x',
+        x='X',
         y='y',
         size=styles.get('size'),
         marker=styles.get('type'),

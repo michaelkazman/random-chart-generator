@@ -18,8 +18,8 @@ def create_bokeh_graph(graph_object):
         height=styles.get('height'),
         min_border=0,
         toolbar_location=None,
-        x_axis_label='X',
-        y_axis_label='y',
+        x_axis_label='X' if is_vertical else 'y',
+        y_axis_label='y' if is_vertical else 'X',
         x_range=X if is_vertical else None,
         y_range=X[::-1] if not is_vertical else None,
     )
@@ -50,12 +50,12 @@ def create_altair_graph(graph_object):
     # format data
     (X, y, is_vertical, *_), styles = unpack_graph_object(graph_object)
     df = pd.DataFrame({
-        'x': X,
+        'X': X,
         'y': y,
     })
 
     # horizontal forces x to take the y values as quantitive
-    encodings = { 'x': 'x:O', 'y': 'y:Q' } if is_vertical else { 'x': 'y:Q', 'y': 'x:O' }
+    encodings = { 'x': 'X:O', 'y': 'y:Q' } if is_vertical else { 'x': 'y:Q', 'y': 'X:O' }
     colors = styles.get('color') if styles.get('use_random_colors') else styles.get('color')[:1] * len(styles.get('color'))
     chart = alt.Chart(df).mark_bar().encode(
         **encodings,

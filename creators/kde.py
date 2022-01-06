@@ -29,8 +29,8 @@ def create_bokeh_graph(graph_object):
         )
 
     p.y_range.start = 0
-    p.xaxis.axis_label = 'x'
-    p.yaxis.axis_label = 'Pr(x)'
+    p.xaxis.axis_label = 'X'
+    p.yaxis.axis_label = 'y'
     p.grid.grid_line_color="white"
 
     # render legend if applicable

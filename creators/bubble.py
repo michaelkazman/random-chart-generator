@@ -12,7 +12,7 @@ def create_bokeh_graph(graph_object):
 
     # create dataframe  
     df = ColumnDataSource({
-        'x': X,
+        'X': X,
         'y': y,
         'bubble_size': bubble_size,
     })
@@ -26,7 +26,7 @@ def create_bokeh_graph(graph_object):
         toolbar_location=None,
     )
     p.scatter(
-        x='x',
+        x='X',
         y='y',
         size='bubble_size',
         fill_alpha=styles.get('opacity'),
